@@ -74,6 +74,195 @@ namespace IRERP_RestAPI.Tests
             if (!rtn.Result)
                 throw rtn.Error;
         }
+        public static void jahad(Group admingroup)
+        {
+
+            MenuItem mnu;
+            MenuItem mnuModu;
+            GroupMenu gpmn;
+
+            mnuModu = new MenuItem() { EnName = "jahad", Title = "jahad" };
+            mnuModu.Save();
+            gpmn = new GroupMenu() { Menu = mnuModu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Auidunce",
+                EnName = "Auidunce",
+                MethodToCall = "\"AddTab('Auidunce','/jahad/jahad/Auidunce')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "FilmSystemType",
+                EnName = "FilmSystemType",
+                MethodToCall = "\"AddTab('FilmSystemType','/jahad/jahad/FilmSystemType')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "MagNo",
+                EnName = "MagNo",
+                MethodToCall = "\"AddTab('MagNo','/jahad/jahad/MagNo')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "MagazineType",
+                EnName = "MagazineType",
+                MethodToCall = "\"AddTab('MagazineType','/jahad/jahad/MagazineType')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Matter",
+                EnName = "Matter",
+                MethodToCall = "\"AddTab('Matter','/jahad/jahad/Matter')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "PictureFormat",
+                EnName = "PictureFormat",
+                MethodToCall = "\"AddTab('PictureFormat','/jahad/jahad/PictureFormat')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "PictureType",
+                EnName = "PictureType",
+                MethodToCall = "\"AddTab('PictureType','/jahad/jahad/PictureType')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Resulation",
+                EnName = "Resulation",
+                MethodToCall = "\"AddTab('Resulation','/jahad/jahad/Resulation')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Size",
+                EnName = "Size",
+                MethodToCall = "\"AddTab('Size','/jahad/jahad/Size')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "State",
+                EnName = "State",
+                MethodToCall = "\"AddTab('State','/jahad/jahad/State')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Subject",
+                EnName = "Subject",
+                MethodToCall = "\"AddTab('Subject','/jahad/jahad/Subject')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "TVRD",
+                EnName = "TVRD",
+                MethodToCall = "\"AddTab('TVRD','/jahad/jahad/TVRD')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Title",
+                EnName = "Title",
+                MethodToCall = "\"AddTab('Title','/jahad/jahad/Title')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Year",
+                EnName = "Year",
+                MethodToCall = "\"AddTab('Year','/jahad/jahad/Year')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "FilmEducationalGoal",
+                EnName = "FilmEducationalGoal",
+                MethodToCall = "\"AddTab('FilmEducationalGoal','/jahad/jahad/FilmEducationalGoal')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+            mnu = new MenuItem()
+            {
+                ParentID = mnuModu.id,
+                Title = "Film",
+                EnName = "Film",
+                MethodToCall = "\"AddTab('Film','/jahad/jahad/Film')\""
+            };
+            mnu.Save();
+            gpmn = new GroupMenu() { Menu = mnu, Group = admingroup };
+            gpmn.Save();
+
+        }
         public static void fillTables()
         {
             User admin = new User() { Username = "admin", Password = "admin" };
@@ -104,8 +293,11 @@ namespace IRERP_RestAPI.Tests
             groupmenu.Save();
             GroupMenu groupmenuGP = new GroupMenu() { Group = admingroup, Menu = groupmenu };
             groupmenuGP.Save();
-
-
+            
+            MenuItem mnu;
+            MenuItem mnuModu;
+            GroupMenu gpmn;
+            jahad(admingroup);
             gmenuadmins.RunTransaction(null
                 );
 
