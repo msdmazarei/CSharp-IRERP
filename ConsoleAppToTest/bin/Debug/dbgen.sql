@@ -100,11 +100,11 @@ alter table jah__FilmContentlist  drop foreign key FKEBF3417B78CA35F0
 
 
     
-alter table jah__Film_Actors  drop foreign key FK44847B7A7DD459C
+alter table jah__Film_Actors  drop foreign key FK44847B7A78CA35F0
 
 
     
-alter table jah__Film_Directors  drop foreign key FK1D6B105A7DD459C
+alter table jah__Film_Directors  drop foreign key FK1D6B105A78CA35F0
 
 
     
@@ -112,23 +112,243 @@ alter table jah__Film_EducationalGoals  drop foreign key FK57F802EE78CA35F0
 
 
     
-alter table jah__Film_Executives  drop foreign key FK6F6C65E97DD459C
+alter table jah__Film_Executives  drop foreign key FK6F6C65E978CA35F0
 
 
     
-alter table jah__Film_Senarists  drop foreign key FKA4AC0B647DD459C
+alter table jah__Film_Senarists  drop foreign key FKA4AC0B6478CA35F0
 
 
     
-alter table jah__Film_Speakers  drop foreign key FK3C823E97DD459C
+alter table jah__Film_Speakers  drop foreign key FK3C823E978CA35F0
 
 
     
-alter table jah__Film_TechnicalExperts  drop foreign key FK4A03E9147DD459C
+alter table jah__Film_TechnicalExperts  drop foreign key FK4A03E91478CA35F0
 
 
     
-alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
+alter table jah__Film_Writers  drop foreign key FK725C756A78CA35F0
+
+
+    
+alter table jah__MagazineVersion  drop foreign key FK1E8DC4595FCF2364
+
+
+    
+alter table jah__MagazineVersion_Ghate  drop foreign key FK452E1D22708B0C42
+
+
+    
+alter table jah__MagazineVersion_modirmasoul  drop foreign key FK1C673DF2708B0C42
+
+
+    
+alter table jah__MagazineVersion_mokhatab  drop foreign key FK25BDC52A708B0C42
+
+
+    
+alter table jah__MagazineVersion_nevisandeh  drop foreign key FK254DB964708B0C42
+
+
+    
+alter table jah__Magazine_mozuaat  drop foreign key FK36138B2D5FCF2364
+
+
+    
+alter table jah__Media_mozuaat  drop foreign key FK6F202CB36B9DB9E8
+
+
+    
+alter table jah__Media_ostan  drop foreign key FK4028B77E6B9DB9E8
+
+
+    
+alter table jah__Media_sathe_mokhatab  drop foreign key FK99E799AF6B9DB9E8
+
+
+    
+alter table jah__PlayShowContentlist  drop foreign key FKE741D6B6AD56CEFB
+
+
+    
+alter table jah__PlayShow_Actors  drop foreign key FK3F00E8C8AD56CEFB
+
+
+    
+alter table jah__PlayShow_Audiences  drop foreign key FK8C5508F2AD56CEFB
+
+
+    
+alter table jah__PlayShow_Directors  drop foreign key FKCB0E633BAD56CEFB
+
+
+    
+alter table jah__PlayShow_EducationalGoals  drop foreign key FK6EE6FFFAAD56CEFB
+
+
+    
+alter table jah__PlayShow_Producers  drop foreign key FK3B517C84AD56CEFB
+
+
+    
+alter table jah__PlayShow_Speakers  drop foreign key FK2CBAE455AD56CEFB
+
+
+    
+alter table jah__PlayShow_TechnicalExperts  drop foreign key FKEC293583AD56CEFB
+
+
+    
+alter table jah__PlayShow_Writers  drop foreign key FKBB06266EAD56CEFB
+
+
+    
+alter table jah__RadioSchool_Audiences  drop foreign key FK5A663459200C77
+
+
+    
+alter table jah__RadioSchool_BookBinders  drop foreign key FKF254B72959200C77
+
+
+    
+alter table jah__RadioSchool_Editors  drop foreign key FKBC5075BB59200C77
+
+
+    
+alter table jah__RadioSchool_EducationalGoals  drop foreign key FK3B454EC259200C77
+
+
+    
+alter table jah__RadioSchool_Graphists  drop foreign key FK8225D5FC59200C77
+
+
+    
+alter table jah__RadioSchool_LitoGraphists  drop foreign key FK6AA415E759200C77
+
+
+    
+alter table jah__RadioSchool_PageStylists  drop foreign key FK85BFF09A59200C77
+
+
+    
+alter table jah__RadioSchool_Publishers  drop foreign key FK4BB9AD559200C77
+
+
+    
+alter table jah__RadioSchool_RadioPrints  drop foreign key FK3389D7DE59200C77
+
+
+    
+alter table jah__RadioSchool_TechnicalExperts  drop foreign key FK173A53F059200C77
+
+
+    
+alter table jah__RadioSchool_TechnicalSupervisors  drop foreign key FK2775878859200C77
+
+
+    
+alter table jah__RadioSchool_TypeSetters  drop foreign key FK64D973DC59200C77
+
+
+    
+alter table jah__RadioSchool_Writers  drop foreign key FKABAE91ED59200C77
+
+
+    
+alter table jah__section  drop foreign key FKA1FEA4426B9DB9E8
+
+
+    
+alter table jah__Section_karshenas  drop foreign key FKB36E06D6A0FE4996
+
+
+    
+alter table jah__Section_sardabir  drop foreign key FK175934EFA0FE4996
+
+
+    
+alter table jah__SlideVision_Audiences  drop foreign key FK87D2A0C5C35AA6BC
+
+
+    
+alter table jah__SlideVision_Directors  drop foreign key FKEA718916C35AA6BC
+
+
+    
+alter table jah__SlideVision_EducationalGoals  drop foreign key FK97531355C35AA6BC
+
+
+    
+alter table jah__SlideVision_PhotoGraphists  drop foreign key FK58C810F8C35AA6BC
+
+
+    
+alter table jah__SlideVision_Senarists  drop foreign key FK9E93526AC35AA6BC
+
+
+    
+alter table jah__SlideVision_Speakers  drop foreign key FK87381554C35AA6BC
+
+
+    
+alter table jah__SlideVision_TechnicalExperts  drop foreign key FK287B819BC35AA6BC
+
+
+    
+alter table jah__TVSchool_Audiences  drop foreign key FK61B6C598D409EC7C
+
+
+    
+alter table jah__TVSchool_BookBinders  drop foreign key FK726A6670D409EC7C
+
+
+    
+alter table jah__TVSchool_Editors  drop foreign key FK1ACAB80BD409EC7C
+
+
+    
+alter table jah__TVSchool_EducationalGoals  drop foreign key FKDD818F7BD409EC7C
+
+
+    
+alter table jah__TVSchool_Graphists  drop foreign key FKCBABAEAD409EC7C
+
+
+    
+alter table jah__TVSchool_LitoGraphists  drop foreign key FKBC0AD039D409EC7C
+
+
+    
+alter table jah__TVSchool_PageStylists  drop foreign key FK150856CFD409EC7C
+
+
+    
+alter table jah__TVSchool_Preparators  drop foreign key FK872308BDD409EC7C
+
+
+    
+alter table jah__TVSchool_Publishers  drop foreign key FK1AEF73ABD409EC7C
+
+
+    
+alter table jah__TVSchool_TechnicalExperts  drop foreign key FK8977A078D409EC7C
+
+
+    
+alter table jah__TVSchool_TechnicalSupervisors  drop foreign key FK954A2AEDD409EC7C
+
+
+    
+alter table jah__TVSchool_TVPrints  drop foreign key FK1B814B58D409EC7C
+
+
+    
+alter table jah__TVSchool_TypeSetters  drop foreign key FKA70D6288D409EC7C
+
+
+    
+alter table jah__TVSchool_Writers  drop foreign key FK869299B7D409EC7C
 
 
     drop table if exists irerp__bases__CallInfoLog_Tb
@@ -261,9 +481,27 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
 
     drop table if exists jah__Film_Writers
 
+    drop table if exists jah__Magazine
+
+    drop table if exists jah__MagazineLog
+
     drop table if exists jah__MagazineType
 
     drop table if exists jah__MagazineTypeLog
+
+    drop table if exists jah__MagazineVersion
+
+    drop table if exists jah__MagazineVersionLog
+
+    drop table if exists jah__MagazineVersion_Ghate
+
+    drop table if exists jah__MagazineVersion_modirmasoul
+
+    drop table if exists jah__MagazineVersion_mokhatab
+
+    drop table if exists jah__MagazineVersion_nevisandeh
+
+    drop table if exists jah__Magazine_mozuaat
 
     drop table if exists jah__MagNo
 
@@ -273,21 +511,121 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
 
     drop table if exists jah__MatterLog
 
+    drop table if exists jah__Media
+
+    drop table if exists jah__MediaLog
+
+    drop table if exists jah__Media_bakhshha
+
+    drop table if exists jah__Media_mozuaat
+
+    drop table if exists jah__Media_ostan
+
+    drop table if exists jah__Media_sathe_mokhatab
+
     drop table if exists jah__PictureFormat
 
     drop table if exists jah__PictureFormatLog
+
+    drop table if exists jah__picture
+
+    drop table if exists jah__pictureLog
 
     drop table if exists jah__PictureType
 
     drop table if exists jah__PictureTypeLog
 
+    drop table if exists jah__PlayShowContentlist
+
+    drop table if exists jah__PlayShowContentlistLog
+
+    drop table if exists jah__PlayShow
+
+    drop table if exists jah__PlayShowLog
+
+    drop table if exists jah__PlayShow_Actors
+
+    drop table if exists jah__PlayShow_Audiences
+
+    drop table if exists jah__PlayShow_Directors
+
+    drop table if exists jah__PlayShow_EducationalGoals
+
+    drop table if exists jah__PlayShow_Producers
+
+    drop table if exists jah__PlayShow_Speakers
+
+    drop table if exists jah__PlayShow_TechnicalExperts
+
+    drop table if exists jah__PlayShow_Writers
+
+    drop table if exists jah__RadioSchool
+
+    drop table if exists jah__RadioSchoolLog
+
+    drop table if exists jah__RadioSchool_Audiences
+
+    drop table if exists jah__RadioSchool_BookBinders
+
+    drop table if exists jah__RadioSchool_Editors
+
+    drop table if exists jah__RadioSchool_EducationalGoals
+
+    drop table if exists jah__RadioSchool_Graphists
+
+    drop table if exists jah__RadioSchool_LitoGraphists
+
+    drop table if exists jah__RadioSchool_PageStylists
+
+    drop table if exists jah__RadioSchool_Publishers
+
+    drop table if exists jah__RadioSchool_PublishersLog
+
+    drop table if exists jah__RadioSchool_RadioPrints
+
+    drop table if exists jah__RadioSchool_TechnicalExperts
+
+    drop table if exists jah__RadioSchool_TechnicalSupervisors
+
+    drop table if exists jah__RadioSchool_TypeSetters
+
+    drop table if exists jah__RadioSchool_Writers
+
+    drop table if exists jah__RadioSchool_WritersLog
+
     drop table if exists jah__Resulation
 
     drop table if exists jah__ResulationLog
 
+    drop table if exists jah__section
+
+    drop table if exists jah__sectionLog
+
+    drop table if exists jah__Section_karshenas
+
+    drop table if exists jah__Section_sardabir
+
     drop table if exists jah__Size
 
     drop table if exists jah__SizeLog
+
+    drop table if exists jah__SlideVision
+
+    drop table if exists jah__SlideVisionLog
+
+    drop table if exists jah__SlideVision_Audiences
+
+    drop table if exists jah__SlideVision_Directors
+
+    drop table if exists jah__SlideVision_EducationalGoals
+
+    drop table if exists jah__SlideVision_PhotoGraphists
+
+    drop table if exists jah__SlideVision_Senarists
+
+    drop table if exists jah__SlideVision_Speakers
+
+    drop table if exists jah__SlideVision_TechnicalExperts
 
     drop table if exists jah__State
 
@@ -304,6 +642,38 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
     drop table if exists jah__TVRD
 
     drop table if exists jah__TVRDLog
+
+    drop table if exists jah__TVSchool
+
+    drop table if exists jah__TVSchoolLog
+
+    drop table if exists jah__TVSchool_Audiences
+
+    drop table if exists jah__TVSchool_BookBinders
+
+    drop table if exists jah__TVSchool_Editors
+
+    drop table if exists jah__TVSchool_EducationalGoals
+
+    drop table if exists jah__TVSchool_Graphists
+
+    drop table if exists jah__TVSchool_LitoGraphists
+
+    drop table if exists jah__TVSchool_PageStylists
+
+    drop table if exists jah__TVSchool_Preparators
+
+    drop table if exists jah__TVSchool_Publishers
+
+    drop table if exists jah__TVSchool_TechnicalExperts
+
+    drop table if exists jah__TVSchool_TechnicalSupervisors
+
+    drop table if exists jah__TVSchool_TVPrints
+
+    drop table if exists jah__TVSchool_TypeSetters
+
+    drop table if exists jah__TVSchool_Writers
 
     drop table if exists jah__Year
 
@@ -1191,7 +1561,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1205,7 +1575,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1233,7 +1603,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1247,7 +1617,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1261,7 +1631,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1275,7 +1645,7 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
     )
 
@@ -1289,8 +1659,37 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        Film VARCHAR(40),
-       CharacterID VARCHAR(40),
+       Character__ VARCHAR(40),
        primary key (id)
+    )
+
+    create table jah__Magazine (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       onvan VARCHAR(40),
+       noe_majale VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MagazineLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       onvan VARCHAR(40),
+       noe_majale VARCHAR(40),
+       primary key (Logid)
     )
 
     create table jah__MagazineType (
@@ -1318,6 +1717,109 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        primary key (Logid)
+    )
+
+    create table jah__MagazineVersion (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       shomare VARCHAR(255),
+       tirajh INTEGER,
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Magazine VARCHAR(40),
+       year VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MagazineVersionLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       shomare VARCHAR(255),
+       tirajh INTEGER,
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Magazine VARCHAR(40),
+       year VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__MagazineVersion_Ghate (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       MagazineVersion VARCHAR(40),
+       Size VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MagazineVersion_modirmasoul (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       MagazineVersion VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MagazineVersion_mokhatab (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       MagazineVersion VARCHAR(40),
+       Auidunce VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MagazineVersion_nevisandeh (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       MagazineVersion VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__Magazine_mozuaat (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Magazine VARCHAR(40),
+       Matter VARCHAR(40),
+       primary key (id)
     )
 
     create table jah__MagNo (
@@ -1374,6 +1876,95 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        primary key (Logid)
     )
 
+    create table jah__Media (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       tedad_barnameh INTEGER,
+       shomareh VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       onvan VARCHAR(40),
+       tv_rd VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__MediaLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       tedad_barnameh INTEGER,
+       shomareh VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       onvan VARCHAR(40),
+       tv_rd VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__Media_bakhshha (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       Section VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__Media_mozuaat (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       Matter VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__Media_ostan (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       State VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__Media_sathe_mokhatab (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       Auidunce VARCHAR(40),
+       primary key (id)
+    )
+
     create table jah__PictureFormat (
         id VARCHAR(40) not null,
        Version BIGINT not null,
@@ -1398,6 +1989,51 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        Name VARCHAR(255),
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__picture (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       piccode VARCHAR(255),
+       shotdate VARCHAR(255),
+       Location VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       client VARCHAR(40),
+       title VARCHAR(40),
+       Size VARCHAR(40),
+       resulation VARCHAR(40),
+       Photographer VARCHAR(40),
+       pictype VARCHAR(40),
+       picformat VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__pictureLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       piccode VARCHAR(255),
+       shotdate VARCHAR(255),
+       Location VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       client VARCHAR(40),
+       title VARCHAR(40),
+       Size VARCHAR(40),
+       resulation VARCHAR(40),
+       Photographer VARCHAR(40),
+       pictype VARCHAR(40),
+       picformat VARCHAR(40),
        primary key (Logid)
     )
 
@@ -1428,6 +2064,439 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        primary key (Logid)
     )
 
+    create table jah__PlayShowContentlist (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       ContentTitle VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShowContentlistLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       ContentTitle VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__PlayShow (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       PlayShowTime VARCHAR(255),
+       Center VARCHAR(255),
+       PlayShowCode VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Title VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShowLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       PlayShowTime VARCHAR(255),
+       Center VARCHAR(255),
+       PlayShowCode VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Title VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__PlayShow_Actors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_Audiences (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Auidunce VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_Directors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_EducationalGoals (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       FilmEducationalGoal VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_Producers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_Speakers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_TechnicalExperts (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__PlayShow_Writers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       PlayShow VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       RadioSchoolName VARCHAR(255),
+       PublicationNo VARCHAR(255),
+       PublicationCode VARCHAR(255),
+       PublicationDate VARCHAR(255),
+       DistributionDate VARCHAR(255),
+       Tirajh VARCHAR(255),
+       Address VARCHAR(255),
+       Tel VARCHAR(255),
+       Fax VARCHAR(255),
+       PublicationPeriod VARCHAR(255),
+       CenterName VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchoolLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       RadioSchoolName VARCHAR(255),
+       PublicationNo VARCHAR(255),
+       PublicationCode VARCHAR(255),
+       PublicationDate VARCHAR(255),
+       DistributionDate VARCHAR(255),
+       Tirajh VARCHAR(255),
+       Address VARCHAR(255),
+       Tel VARCHAR(255),
+       Fax VARCHAR(255),
+       PublicationPeriod VARCHAR(255),
+       CenterName VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__RadioSchool_Audiences (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Audiences VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_BookBinders (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_Editors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_EducationalGoals (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       EducationalGoals VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_Graphists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_LitoGraphists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_PageStylists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_Publishers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_PublishersLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__RadioSchool_RadioPrints (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_TechnicalExperts (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_TechnicalSupervisors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_TypeSetters (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_Writers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__RadioSchool_WritersLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       RadioSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (Logid)
+    )
+
     create table jah__Resulation (
         id VARCHAR(40) not null,
        Version BIGINT not null,
@@ -1455,6 +2524,69 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        primary key (Logid)
     )
 
+    create table jah__section (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       nobat VARCHAR(255),
+       Pakhsh VARCHAR(255),
+       enteshar VARCHAR(255),
+       tirajh VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__sectionLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       nobat VARCHAR(255),
+       Pakhsh VARCHAR(255),
+       enteshar VARCHAR(255),
+       tirajh VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Media VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__Section_karshenas (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Section VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__Section_sardabir (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Section VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
     create table jah__Size (
         id VARCHAR(40) not null,
        Version BIGINT not null,
@@ -1480,6 +2612,145 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        primary key (Logid)
+    )
+
+    create table jah__SlideVision (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       SlideVisionTime VARCHAR(255),
+       ProductionDate VARCHAR(255),
+       Montage VARCHAR(255),
+       SlideVisionCode VARCHAR(255),
+       ProductedIn VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Title VARCHAR(40),
+       ProductionFormat VARCHAR(40),
+       Client VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVisionLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       SlideVisionTime VARCHAR(255),
+       ProductionDate VARCHAR(255),
+       Montage VARCHAR(255),
+       SlideVisionCode VARCHAR(255),
+       ProductedIn VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       Title VARCHAR(40),
+       ProductionFormat VARCHAR(40),
+       Client VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__SlideVision_Audiences (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Auidunce VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_Directors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_EducationalGoals (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       FilmEducationalGoal VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_PhotoGraphists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_Senarists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_Speakers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__SlideVision_TechnicalExperts (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       SlideVision VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
     )
 
     create table jah__State (
@@ -1588,6 +2859,251 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
        AddedBy VARCHAR(40),
        ModifyBy VARCHAR(40),
        primary key (Logid)
+    )
+
+    create table jah__TVSchool (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       TVSchoolName VARCHAR(255),
+       TVTitle VARCHAR(255),
+       PublicationNo VARCHAR(255),
+       PublicationCode VARCHAR(255),
+       PublicationDate VARCHAR(255),
+       DistributionDate VARCHAR(255),
+       Tirajh VARCHAR(255),
+       Address VARCHAR(255),
+       Tel VARCHAR(255),
+       Fax VARCHAR(255),
+       PublicationPeriod VARCHAR(255),
+       CenterName VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchoolLog (
+        Logid VARCHAR(40) not null,
+       id VARCHAR(40),
+       Version BIGINT,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       TVSchoolName VARCHAR(255),
+       TVTitle VARCHAR(255),
+       PublicationNo VARCHAR(255),
+       PublicationCode VARCHAR(255),
+       PublicationDate VARCHAR(255),
+       DistributionDate VARCHAR(255),
+       Tirajh VARCHAR(255),
+       Address VARCHAR(255),
+       Tel VARCHAR(255),
+       Fax VARCHAR(255),
+       PublicationPeriod VARCHAR(255),
+       CenterName VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       primary key (Logid)
+    )
+
+    create table jah__TVSchool_Audiences (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Auidunce VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_BookBinders (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_Editors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_EducationalGoals (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       FilmEducationalGoal VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_Graphists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_LitoGraphists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_PageStylists (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_Preparators (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_Publishers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_TechnicalExperts (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_TechnicalSupervisors (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_TVPrints (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_TypeSetters (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
+    )
+
+    create table jah__TVSchool_Writers (
+        id VARCHAR(40) not null,
+       Version BIGINT not null,
+       IsDeleted TINYINT(1),
+       AddDate DATETIME,
+       LastModifyDate DATETIME,
+       Description VARCHAR(255),
+       AddedBy VARCHAR(40),
+       ModifyBy VARCHAR(40),
+       TVSchool VARCHAR(40),
+       Character__ VARCHAR(40),
+       primary key (id)
     )
 
     create table jah__Year (
@@ -1789,15 +3305,15 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
         references jah__Film (id)
 
     alter table jah__Film_Actors 
-        add index (CharacterID), 
-        add constraint FK44847B7A7DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK44847B7A78CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_Directors 
-        add index (CharacterID), 
-        add constraint FK1D6B105A7DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK1D6B105A78CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_EducationalGoals 
@@ -1807,31 +3323,361 @@ alter table jah__Film_Writers  drop foreign key FK725C756A7DD459C
         references jah__Film (id)
 
     alter table jah__Film_Executives 
-        add index (CharacterID), 
-        add constraint FK6F6C65E97DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK6F6C65E978CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_Senarists 
-        add index (CharacterID), 
-        add constraint FKA4AC0B647DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FKA4AC0B6478CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_Speakers 
-        add index (CharacterID), 
-        add constraint FK3C823E97DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK3C823E978CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_TechnicalExperts 
-        add index (CharacterID), 
-        add constraint FK4A03E9147DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK4A03E91478CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
 
     alter table jah__Film_Writers 
-        add index (CharacterID), 
-        add constraint FK725C756A7DD459C 
-        foreign key (CharacterID) 
+        add index (Film), 
+        add constraint FK725C756A78CA35F0 
+        foreign key (Film) 
         references jah__Film (id)
+
+    alter table jah__MagazineVersion 
+        add index (Magazine), 
+        add constraint FK1E8DC4595FCF2364 
+        foreign key (Magazine) 
+        references jah__Magazine (id)
+
+    alter table jah__MagazineVersion_Ghate 
+        add index (MagazineVersion), 
+        add constraint FK452E1D22708B0C42 
+        foreign key (MagazineVersion) 
+        references jah__MagazineVersion (id)
+
+    alter table jah__MagazineVersion_modirmasoul 
+        add index (MagazineVersion), 
+        add constraint FK1C673DF2708B0C42 
+        foreign key (MagazineVersion) 
+        references jah__MagazineVersion (id)
+
+    alter table jah__MagazineVersion_mokhatab 
+        add index (MagazineVersion), 
+        add constraint FK25BDC52A708B0C42 
+        foreign key (MagazineVersion) 
+        references jah__MagazineVersion (id)
+
+    alter table jah__MagazineVersion_nevisandeh 
+        add index (MagazineVersion), 
+        add constraint FK254DB964708B0C42 
+        foreign key (MagazineVersion) 
+        references jah__MagazineVersion (id)
+
+    alter table jah__Magazine_mozuaat 
+        add index (Magazine), 
+        add constraint FK36138B2D5FCF2364 
+        foreign key (Magazine) 
+        references jah__Magazine (id)
+
+    alter table jah__Media_mozuaat 
+        add index (Media), 
+        add constraint FK6F202CB36B9DB9E8 
+        foreign key (Media) 
+        references jah__Media (id)
+
+    alter table jah__Media_ostan 
+        add index (Media), 
+        add constraint FK4028B77E6B9DB9E8 
+        foreign key (Media) 
+        references jah__Media (id)
+
+    alter table jah__Media_sathe_mokhatab 
+        add index (Media), 
+        add constraint FK99E799AF6B9DB9E8 
+        foreign key (Media) 
+        references jah__Media (id)
+
+    alter table jah__PlayShowContentlist 
+        add index (PlayShow), 
+        add constraint FKE741D6B6AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Actors 
+        add index (PlayShow), 
+        add constraint FK3F00E8C8AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Audiences 
+        add index (PlayShow), 
+        add constraint FK8C5508F2AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Directors 
+        add index (PlayShow), 
+        add constraint FKCB0E633BAD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_EducationalGoals 
+        add index (PlayShow), 
+        add constraint FK6EE6FFFAAD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Producers 
+        add index (PlayShow), 
+        add constraint FK3B517C84AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Speakers 
+        add index (PlayShow), 
+        add constraint FK2CBAE455AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_TechnicalExperts 
+        add index (PlayShow), 
+        add constraint FKEC293583AD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__PlayShow_Writers 
+        add index (PlayShow), 
+        add constraint FKBB06266EAD56CEFB 
+        foreign key (PlayShow) 
+        references jah__PlayShow (id)
+
+    alter table jah__RadioSchool_Audiences 
+        add index (RadioSchool), 
+        add constraint FK5A663459200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_BookBinders 
+        add index (RadioSchool), 
+        add constraint FKF254B72959200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_Editors 
+        add index (RadioSchool), 
+        add constraint FKBC5075BB59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_EducationalGoals 
+        add index (RadioSchool), 
+        add constraint FK3B454EC259200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_Graphists 
+        add index (RadioSchool), 
+        add constraint FK8225D5FC59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_LitoGraphists 
+        add index (RadioSchool), 
+        add constraint FK6AA415E759200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_PageStylists 
+        add index (RadioSchool), 
+        add constraint FK85BFF09A59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_Publishers 
+        add index (RadioSchool), 
+        add constraint FK4BB9AD559200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_RadioPrints 
+        add index (RadioSchool), 
+        add constraint FK3389D7DE59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_TechnicalExperts 
+        add index (RadioSchool), 
+        add constraint FK173A53F059200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_TechnicalSupervisors 
+        add index (RadioSchool), 
+        add constraint FK2775878859200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_TypeSetters 
+        add index (RadioSchool), 
+        add constraint FK64D973DC59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__RadioSchool_Writers 
+        add index (RadioSchool), 
+        add constraint FKABAE91ED59200C77 
+        foreign key (RadioSchool) 
+        references jah__RadioSchool (id)
+
+    alter table jah__section 
+        add index (Media), 
+        add constraint FKA1FEA4426B9DB9E8 
+        foreign key (Media) 
+        references jah__Media (id)
+
+    alter table jah__Section_karshenas 
+        add index (Section), 
+        add constraint FKB36E06D6A0FE4996 
+        foreign key (Section) 
+        references jah__section (id)
+
+    alter table jah__Section_sardabir 
+        add index (Section), 
+        add constraint FK175934EFA0FE4996 
+        foreign key (Section) 
+        references jah__section (id)
+
+    alter table jah__SlideVision_Audiences 
+        add index (SlideVision), 
+        add constraint FK87D2A0C5C35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_Directors 
+        add index (SlideVision), 
+        add constraint FKEA718916C35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_EducationalGoals 
+        add index (SlideVision), 
+        add constraint FK97531355C35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_PhotoGraphists 
+        add index (SlideVision), 
+        add constraint FK58C810F8C35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_Senarists 
+        add index (SlideVision), 
+        add constraint FK9E93526AC35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_Speakers 
+        add index (SlideVision), 
+        add constraint FK87381554C35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__SlideVision_TechnicalExperts 
+        add index (SlideVision), 
+        add constraint FK287B819BC35AA6BC 
+        foreign key (SlideVision) 
+        references jah__SlideVision (id)
+
+    alter table jah__TVSchool_Audiences 
+        add index (TVSchool), 
+        add constraint FK61B6C598D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_BookBinders 
+        add index (TVSchool), 
+        add constraint FK726A6670D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_Editors 
+        add index (TVSchool), 
+        add constraint FK1ACAB80BD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_EducationalGoals 
+        add index (TVSchool), 
+        add constraint FKDD818F7BD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_Graphists 
+        add index (TVSchool), 
+        add constraint FKCBABAEAD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_LitoGraphists 
+        add index (TVSchool), 
+        add constraint FKBC0AD039D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_PageStylists 
+        add index (TVSchool), 
+        add constraint FK150856CFD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_Preparators 
+        add index (TVSchool), 
+        add constraint FK872308BDD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_Publishers 
+        add index (TVSchool), 
+        add constraint FK1AEF73ABD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_TechnicalExperts 
+        add index (TVSchool), 
+        add constraint FK8977A078D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_TechnicalSupervisors 
+        add index (TVSchool), 
+        add constraint FK954A2AEDD409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_TVPrints 
+        add index (TVSchool), 
+        add constraint FK1B814B58D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_TypeSetters 
+        add index (TVSchool), 
+        add constraint FKA70D6288D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)
+
+    alter table jah__TVSchool_Writers 
+        add index (TVSchool), 
+        add constraint FK869299B7D409EC7C 
+        foreign key (TVSchool) 
+        references jah__TVSchool (id)

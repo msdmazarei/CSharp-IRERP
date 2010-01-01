@@ -17567,6 +17567,13 @@
     <Content Include="Areas\jahad\Views\jahad\TVRD.cshtml" />
     <Content Include="Areas\jahad\Views\jahad\Year.cshtml" />
     <Content Include="Areas\jahad\Views\jahad\Film.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\Magazine.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\Media.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\Picture.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\PlayShow.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\RadioSchool.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\SlideVision.cshtml" />
+    <Content Include="Areas\jahad\Views\jahad\TVSchool.cshtml" />
     <None Include="Properties\PublishProfiles\MIS.pubxml" />
     <None Include="Service References\MelatWebService\configuration91.svcinfo" />
     <None Include="Service References\MelatWebService\configuration.svcinfo" />
