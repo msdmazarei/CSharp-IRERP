@@ -1,0 +1,46 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+var Information = new IRERP_SM_VLayout(){members=new IRERPControlBase[]{
+    
+    new IRERP_SM_DynamicForm()
+    {
+        width = "100%",
+        height = "50%",
+        numCols = 2,
+        items = new IRERP_SM_FormItem[]{
+          new IRERP_SM_StaticTextItem(){title="",defaultValue="کاربر گرامی سعیده عباسی خوش آمدید.",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="سرویس مورد استفاده  ",defaultValue="PNA-3",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_HeaderItem(){defaultValue=""},
+          new IRERP_SM_StaticTextItem(){title="روزهای باقی مانده ",defaultValue="52 ",hint=new IRERPControlTypes_HTMLString("روز"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="ترافیک باقی مانده ",defaultValue="6589258",hint=new IRERPControlTypes_HTMLString("گیگابایت"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="میزان اعتبار ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="اعتبار سرویس تلفن بین المللی ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="نام کاربری ",defaultValue="abbasi.s@yahoo.com",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="رمز عبور ",defaultValue="23125",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="آدرس سرور ",defaultValue="voip.petiak.com",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title=" پرتکل ارتباطی ",defaultValue="SIP",type=IRERPControlTypes_FormItemType.StaticTextItem},
+         new IRERP_SM_DateItem(){title="از تاریخ",type=IRERPControlTypes_FormItemType.date},
+            new IRERP_SM_DateItem(){title="تا تاریخ",type=IRERPControlTypes_FormItemType.date},
+          
+          
+             new IRERP_SM_ButtonItem(){title="جستجو"}
+
+           }},
+           new IRERP_SM_HLayout(){
+  
+               members=new IRERPControlBase[]{
+               new IRERP_SM_Label(){width="10%"},
+           new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("دریافت 200مگا بایت ترافیک رایگان"),margin=10,height="15%",width="15%"},
+           new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("خرید الکترونیکی"),margin=10,height="15%",width="15%"},
+           new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تغییر رمز"),margin=10,height="15%",width="15%"},
+           new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("لینک دریافت نرم افزار تلفن بین المللی"),margin=10,height="15%",width="15%"},
+               new IRERP_SM_Label(){width="10%"}
+           
+           }}  
+        }
+    };
+    }
+@Html.Raw(Information.ToStringAsMemberOfOther())

@@ -1,0 +1,282 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.MetaModel;
+@{
+    ViewBag.Title = "Sample";
+    Layout = "~/Views/Shared/SmartClient_Layout.cshtml";
+}
+<link href="~/css/login-win8skin.css" rel="stylesheet" />
+<script type="text/javascript" src="~/Scripts/win8portal/win8portal.js"></script>
+<script type="text/javascript" src="~/Scripts/win8portal/Win8Function.js"></script>
+<script type="text/javascript">
+    var dta = null;
+
+</script>
+<script charset="utf8" type="text/javascript">
+    @{
+        var TraficGrafProtlet = new IRERP_SM_Portlet()
+        {
+            showEdges = false,
+            showHeader = false,
+            items = new IRERPControlBase[]{
+             new IRERP_SM_Chart()
+             {
+                 ID="chartid",
+                 width="100%",height="100%"
+             }   
+            }
+        };
+
+        var PColRight = new IRERP_SM_Portlets()
+        {
+            Portlets = new IRERPControlBase[]{ 
+                
+            IRERP_SM_Portlets.GetRow( new IRERP_SM_FromString(
+                    Html.Partial("Portlets/petiakArm")
+                    ),new IRERP_SM_FromString(
+                    Html.Partial("Portlets/Date")
+                    )) ,
+           
+           
+                      IRERP_SM_Portlets.GetRow( new IRERP_SM_FromString(
+                    Html.Partial("Portlets/Waiting")
+                    ) , new IRERP_SM_FromString(
+                    Html.Partial("Portlets/SMS")
+                    ) ),
+                    
+                    new IRERP_SM_FromString(
+                    Html.Partial("Portlets/ServiceValidBond")
+                    )
+         }
+        };
+        var PColCenter = new IRERP_SM_Portlets()
+        {
+            Portlets = new IRERPControlBase[]{
+               
+                new IRERP_SM_FromString(
+                    Html.Partial("Portlets/UserCurrentService")
+                    )
+        ,
+            IRERP_SM_Portlets.GetRow( new IRERP_SM_FromString(
+                    Html.Partial("Portlets/Balans")
+                    ),  new IRERP_SM_FromString(
+                    Html.Partial("Portlets/ReminingTrafic")
+                    ),new IRERP_SM_FromString(
+                    Html.Partial("Portlets/ReminingDay")
+                    ) ),
+           new IRERP_SM_FromString(
+                    Html.Partial("Portlets/UserPropertis")
+                    )
+                
+            }
+        };
+        var PColLeft = new IRERP_SM_Portlets()
+        {
+            Portlets = new IRERPControlBase[]{
+                 
+                   TraficGrafProtlet ,new IRERP_SM_FromString(
+                    Html.Partial("Portlets/Opinion")
+                    ),
+                     IRERP_SM_Portlets.GetRow( new IRERP_SM_FromString(
+                    Html.Partial("Portlets/BuyService")
+                    ),  new IRERP_SM_FromString(
+                    Html.Partial("Portlets/BuyCapacity")
+                    ),new IRERP_SM_FromString(
+                    Html.Partial("Portlets/FinancialRecord")
+                    ) ),
+                    
+             }
+        };
+        var portal = new IRERP_SM_PortalLayout()
+        {
+            showColumnMenus = false,
+            width = "100%",
+            height = "100%",
+            ID = "mainPortal",
+            canResizeColumns = false,
+            showResizeBar = false,
+            preventColumnUnderflow = false,
+            columnBorder = 0,
+            margin = 10
+        };
+        portal.portlets = IRERP_SM_Portlets.GetRow(PColRight, PColCenter, PColLeft);
+
+
+        //Page Spliter
+        string TopSectionBackGroundColor = "#EFEFEF";
+
+        var PetiakLabel_TOP = new IRERP_SM_Label()
+        {
+            contents = new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "PetiakSystem")),
+            width = "25%",
+            backgroundColor = TopSectionBackGroundColor,
+            baseStyle = "Brand",
+            shadowDepth = 5,
+            height = "100%",
+            padding = 10
+
+        };
+        var CustomerPage = new IRERP_SM_Label()
+        {
+            contents = new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "CustomerPage")),
+            width = "25%",
+            height = "100%",
+            backgroundColor = TopSectionBackGroundColor,
+            baseStyle = "slogan",
+            align = IRERPControlTypes_Alignment.center,
+            padding = 10
+
+        };
+
+        var ToolBarMenus =
+            /*new IRERP_SM_ToolStrip()
+            {
+                members = new IRERPControlBase[]{
+                    new IRERP_SM_ToolStripButton(){actionType=IRERPControlTypes_SelectionType.button,title = new IRERPControlTypes_HTMLString("پیشخوان"),height="80%",baseStyle="toolstrip_dis",hoverStyle="toolstrip_ena"},
+                    new IRERP_SM_ToolStripButton(){actionType=IRERPControlTypes_SelectionType.button,title = new IRERPControlTypes_HTMLString("گزارش ها"),height="80%",baseStyle="toolstrip_dis"},
+                    new IRERP_SM_ToolStripButton(){actionType=IRERPControlTypes_SelectionType.button,title = new IRERPControlTypes_HTMLString("افزایش اعتبار"),height="80%",baseStyle="toolstrip_dis"},
+                    new IRERP_SM_ToolStripButton(){actionType=IRERPControlTypes_SelectionType.button,title = new IRERPControlTypes_HTMLString("خروج"),height="80%",baseStyle="toolstrip_dis"},
+                },
+                height="100%"
+            };*/
+            new IRERP_SM_Label()
+            {
+
+                contents = new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "TellPetiak")),
+                width = "25%",
+                height = "100%",
+                backgroundColor = TopSectionBackGroundColor,
+                align = IRERPControlTypes_Alignment.center,
+                baseStyle = "slogan",
+
+            };
+        var UserPicture =
+            new IRERP_SM_Label()
+            {
+                contents = new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "PetiakSystem")),
+                width = "25%",
+                height = "100%",
+                backgroundColor = TopSectionBackGroundColor,
+
+
+            };
+
+        var top =
+            new IRERP_SM_HLayout()
+            {
+                members = new IRERPControlBase[] {
+                    PetiakLabel_TOP,CustomerPage,ToolBarMenus,UserPicture
+                },
+                width = "100%",
+                height = "50px",
+                showShadow = true,
+                shadowDepth = 5
+
+            };
+        var bottom =
+               new IRERP_SM_Label()
+               {
+                   contents = new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "AddressPetiak"))
+                   ,
+                   height = "10",
+                   overflow = IRERPControlTypes_Overflow.visible
+                   ,
+                   align = IRERPControlTypes_Alignment.center,
+                   baseStyle = "portletlabel"
+               };
+
+
+
+        var waitinglbl = new IRERP_SM_Img() { src = "/images/ajax-loader.gif", imageType = IRERPControlTypes_imageType.center, width = "100%", height = "100%", ID = "lblwaiting" };
+
+        var mainLayout = new IRERP_SM_VLayout()
+        {
+            ID = "mainLayout",
+            members = new IRERPControlBase[]{
+                top,portal,waitinglbl
+                ,bottom
+            },
+            height = "95%",
+            width = "100%"
+
+
+        };
+
+
+
+
+        var body = mainLayout;
+
+        CustomerPortal_MetaModel model = Model;
+        var SmsDs = model.GenDS(
+
+            x => x.User.SMSes,
+            ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+            ID: "SmsDs",
+            SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.General
+            );
+
+        var UsrAccDs = model.GenDS(
+            x => x.User.ACC,
+            ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+            ID: "UserAccDs"
+            );
+        var UsrConHst = model.GenDS(x => x.User.ConnectionHistory,
+                 ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+             ID: "UserConHst"
+                 );
+
+        var UsrServiceInvoice = model.GenDS(x => x.User.InvoiceService,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: "UserServiceInvice"
+      );
+
+
+        var UsrInvoices = model.GenDS(x => x.User.Invoices,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      ID: "UsrInvoices", SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.Invoice_OverView
+      );
+
+        var UsrAllService = model.GenDS(x => x.AllServices,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID: "UserAllService"
+    );
+                
+    }
+
+
+    @Html.Raw(SmsDs)
+    @Html.Raw(UsrAccDs)
+    @Html.Raw(UsrConHst)
+    @Html.Raw(UsrServiceInvoice)
+    @Html.Raw(UsrInvoices)
+    @Html.Raw(UsrAllService)
+    @Html.Raw( body.ToString() + "lblwaiting.hide();");
+
+
+
+    chartid.dataRenderer = function () {
+        var _rtn = [[], []];
+        for (var i = 0; i < 30; i++) {
+            if (chartid.dta != null) {
+                var dat = chartid.dta[i].DateInserted;
+                dat = dat.replace('T', ' ');
+                _rtn[0].push([dat, chartid.dta[i].BytesOut]);
+                _rtn[1].push([dat, chartid.dta[i].BytesIn]);
+            }
+            else
+                _rtn[0].push([0, 0]);
+        }
+        return _rtn;
+    }
+    UserConHst.fetchData(
+        null,
+        function (dsResponse, data, dsRequest) {
+            var res = dsResponse;
+            chartid.dta = data;
+            chartid.replot();
+        });
+
+</script>

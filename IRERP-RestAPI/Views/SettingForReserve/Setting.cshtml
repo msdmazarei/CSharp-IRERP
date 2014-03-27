@@ -1,0 +1,152 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+  IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    var UsrSupportDs = model.GenDS(
+x => x.AllUsers,
+SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserSupportDs")
+);
+            
+    var AllReservation = model.GenDS(
+    x => x.AllUninstallItem,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID: this.CID("AllReservationDs")
+    );
+     PageDataSources.Add(AllReservation);
+     PageDataSources.Add(UsrSupportDs);
+
+     var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ReservationForm"), data: new IRERP_SM_FromString(AllReservation.ID));
+     var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(AllReservation.ID), ID: this.CID("ReservationGrid"), _CanEdit: false);
+     Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.ReservationId) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.lastuser.DisplayName) }, 
+      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x =>x.Address)},
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Knowing),valueMap=@"{""15"":""همکاران"",""14"":""جابجایی"",""13"":""اکسس پوینت "",""11"":""سایر"",""10"":""دنیای آموزش"",""9"":""پیام کوتاه "",""8"":""دوستان "",""4"":""تراکت"",""3"":""قاصدک شهرک "",""2"":""پیک برتر "",""1"":""گوگل ""}" }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Description) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Unit) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.AddDate),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.persianADDllDate) }, 
+            
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.CustomerStatus), valueMap=@"{""7"":"" درانتظار"",""6"":""پيگيري"",""5"":""اکسس پوینت"",""4"":""لغو شده"",""3"":""عدم سرویس"",""2"":""منتظر تماس"",""0"":""متقاضی خاص "",""1"":""متقاضی عام""}" }, 
+    };
+
+
+     var Hourses = AbbasiAdmin.GetGenetalwindow(this.CID("Hourswindow"),"hourse","50%","50%",new IRERPControlBase[]{
+         AbbasiAdmin.GetGenetalDynamicForm(this.CID("HourseForm"),"100%","100%",new IRERP_SM_FormItem[]{
+         new IRERP_SM_StaticTextItem(){title="تنظیم زمان نصب ",defaultValue=InstanceStatics.LoggedUser.DisplayName,type=IRERPControlTypes_FormItemType.StaticTextItem},
+     new IRERP_SM_TextItem(){title="تنظیم روز نصب"},
+     new IRERP_SM_ButtonItem(){title="لغو روز نصب"},
+      new IRERP_SM_TextItem(){title="تنظیم ساعت"},
+     new IRERP_SM_ButtonItem(){title="لغو ساعت نصب"},
+         }),
+     new IRERP_SM_HLayout(){width="100%",height="100%" ,
+         members=new IRERPControlBase[]{
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تایید")},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("بازگشت"),click= new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("Hourswindow") + @")"" ", true)},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تنظیم نصاب")}
+     
+     }}
+     });
+     
+     var installer = AbbasiAdmin.GetGenetalwindow(this.CID("installerwindow"), "hourse", "50%", "50%", new IRERPControlBase[]{
+         AbbasiAdmin.GetGenetalDynamicForm(this.CID("installerForm"),"100%","100%",new IRERP_SM_FormItem[]{
+         new IRERP_SM_StaticTextItem(){title="انتخاب نصاب",defaultValue=InstanceStatics.LoggedUser.DisplayName,type=IRERPControlTypes_FormItemType.StaticTextItem},
+         AbbasiAdmin.GGSelectItem<PetiakWifiReservation, User>(this.CID("selectuser"), 
+      x => x.lastuser.UserID, "User", x => x.Email, x => x.UserID, null, this.CID("UserSupportDs"), true, true,
+      x => x.DisplayName,
+      x => x.Email),
+     new IRERP_SM_ButtonItem(){title="لغو نصاب"},
+         },2,10,new IRERP_SM_FromString(AllReservation.ID)),
+     new IRERP_SM_HLayout(){width="100%",height="100%" ,
+         members=new IRERPControlBase[]{
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تایید")},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("بازگشت"),click= new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("installerwindow") + @")"" ", true)},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تنظیم ساعت")}
+     
+     }}
+     });
+     var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid, 
+         new IRERP_SM_ToolStripButton[]{
+          AbbasiAdmin.GetGenetalToolStripButton( "hourse", "تنظیم ساعت", new IRERPControlTypes_StringMethods(@" ""OpenWindow(" + this.CID("Hourswindow") + @")"" ", true)),
+          AbbasiAdmin.GetGenetalToolStripButton( "installer", "تنظیم نصاب", new IRERPControlTypes_StringMethods(@" ""OpenWindow(" + this.CID("installerwindow") + @")"" ", true))
+          
+      },hasInsert:false,hasDelete:false);
+
+     MasterDVS.PageTitle = "تنظیمات ";
+
+     CurPage = MasterDVS;
+
+     string dses = "";
+     PageDataSources.ForEach(x => dses += x.ToString());
+     CurPage.OtherObjects = dses + CurPage.OtherObjects;
+     CurPage.OtherObjects += Hourses.ToString();
+     CurPage.OtherObjects += installer.ToString();
+     CurPage.Commands += this.CID("Hourswindow") + ".hide();" + this.CID("installerwindow") + ".hide();";
+
+
+    //var SearchData = new IRERP_SM_DynamicForm() { 
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //        new IRERP_SM_TextItem(){title="نام درخواست کننده "},
+    //  AbbasiAdmin.GGSelectItem<User,PetiakWifiAccount>("cbotest13",x=>x.UserID,"نام نصاب",x=>x.user.DisplayName,x=>x.OwnerId,null,this.CID("UserAccountDs"),true,true,x=>x.user.DisplayName),
+
+    //        new IRERP_SM_TextItem(){title="آدرس"},
+    //                     new IRERP_SM_ComboBoxItem(){title="وضعیت",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a1\":\"همه\",\"b1\":\"رزروشده\",\"c1\":\"نصب شده\",\"D1\":\"عدم رویت\"}",false)
+    //                    },
+    //                    new IRERP_SM_ButtonItem(){title="جستجو"},
+    //                    new IRERP_SM_ButtonItem(){title="رزرو نصب"},
+
+    //    }
+
+    //};
+
+    //var tabs=  new IRERP_SM_FromString(
+    //                Html.Partial("SettingReservTabs")
+    //                );
+
+
+
+    //var secction = new IRERP_SM_SectionStack()
+    //{
+    //    ID = "sectionStack2",
+    //    visibilityMode = IRERPControlTypes_visibilityMode.multiple,
+    //    sections = new IRERP_SM_SectionStackSection[]{
+    //            new IRERP_SM_SectionStackSection{
+    //                 title="معرفی",
+    //                        expanded=true,
+    //                         resizeable=false,
+    //                         items=SearchData},
+    //                         new IRERP_SM_SectionStackSection
+    //                         {
+    //                             title= "مشخصات",
+    //                             expanded= true,
+    //                             resizeable= false,
+    //                             items=
+
+
+    //        }
+    //    }
+    //};
+
+
+
+    //var body = new IRERP_SM_VLayout() { 
+    //    width="100%",
+    //    height="100%",
+    //members=new IRERPControlBase[]{
+    //   ProfileSupport,tabs
+    //}};   
+ }
+@Html.Raw(CurPage)

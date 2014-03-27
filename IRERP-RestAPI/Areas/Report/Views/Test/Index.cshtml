@@ -1,0 +1,25 @@
+﻿@using Stimulsoft.Report.MvcDesign;
+@using Stimulsoft.Report.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/ReportDesigner.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@Html.Stimulsoft().StiMvcDesigner(new StiMvcDesignerOptions() {
+        Controller ="Report/Test",
+        ActionGetReportTemplate = "GetReportTemplate",
+        ActionSaveReportTemplate = "SaveReportTemplate",
+        ActionGetReportSnapshot = "GetReportSnapshot",
+        ActionExportReport = "ExportReport", 
+        ActionGetLocalization="GetLocalization",
+        ActionExitDesigner = "ExitDesigner",
+        ActionDataProcessing = "DataProcessing",
+        ActionGoogleDocs = "GoogleDocs",
+        LocalizationDirectory = Server.MapPath("~/Content/Localization/"), // Necessary to get a list of available localization files
+        Width = System.Web.UI.WebControls.Unit.Percentage(100),
+        Height = System.Web.UI.WebControls.Unit.Pixel(800)
+})

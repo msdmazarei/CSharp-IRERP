@@ -1,0 +1,120 @@
+﻿@using IRERP_RestAPI.Areas.Report.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/SmartClient_Layout.cshtml";
+}
+
+<h2>Admin</h2>
+<script type="text/javascript">
+@{
+    Report_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    var DS = model.GenDS<ReportRepository>(x => x.ReportRepositories,ID:this.CID("RRDS"),
+         ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl
+         );
+ /*   var DSMD= model.GenDS<ReportModel>(x=>x.ReportModels,ID:this.CID("RRMDS"),
+            ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl
+         );*/
+    PageDataSources.Add(DS);
+  //  PageDataSources.Add(DSMD);
+                 
+    IRERPPageString CurPage = new IRERPPageString();
+    var form = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("RRForm"),datasource:DS);
+    form.ChangeFormItemByName(
+        IRERPApplicationUtilities.GPN<ReportRepository>(x=>x.TargetModel),
+            y=>{var q=AbbasiAdmin.GGSelectItem<ReportRepository, ReportModel>(y.ID,x => x.TargetModel,y.title,x => x.Name,x => x.fullname,null,this.CID("RRMDS"),true,true,x => x.Name,x => x.NameSpace);
+                q.pickListWidth = 300;
+                return q;
+            }
+            );
+          
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(DS.ID), ID: this.CID("RRIDGrid"));
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, form, Grid);
+    MasterDVS.PageTitle = "منابع گزارش";
+    
+    var DsFields = model.GenDS<ReportRepositoryField>(x=>x.SelectedReportRepository.Fields,ID:this.CID("Fields"),
+         ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl
+         );
+    PageDataSources.Add(DsFields);
+    var dsModelRepository = model.GenDS<ReportModelProperty>(x => x.SelectedReportRepository.TargetModel.Properties,
+    ID: this.CID("DSTargetModelProperties"),
+     ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+     SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.Detail
+     
+    );
+
+    dsModelRepository.ChangeFieldByName(
+        IRERPApplicationUtilities.GPN<ReportModelProperty>(x => x.ParentPath),
+        x =>
+        {
+            x.foreignKey = dsModelRepository.ID + "." + IRERPApplicationUtilities.GPN<ReportModelProperty>(y => y.fullpath);
+            return x;
+        }
+            );
+    PageDataSources.Add(dsModelRepository);
+
+      var FieldForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmField"), datasource:DsFields);
+    /*
+    FieldForm.ChangeFormItemByName(
+        IRERPApplicationUtilities.GPN<ReportRepositoryField>(x => x.Name),
+        y =>
+        {
+            return new IRERP_SM_IRERPPickTreeItem()
+            {
+                canSelectParentItems = true,
+                dataSource = new IRERP_SM_FromString(dsModelRepository.ID, false),
+                name = y.name,
+                emptyMenuMessage = "No Selected Value",
+                displayField = IRERPApplicationUtilities.GPN<ReportModelProperty>(x => x.Name),
+                valueField = IRERPApplicationUtilities.GPN<ReportModelProperty>(x => x.fullpath),
+                
+            };
+        }
+        );*/
+        
+    var FieldGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(DsFields.ID), ID: this.CID("grdFields"));
+    IRERPPageString DetailDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, FieldForm, FieldGrid);
+    DetailDVS.PageTitle = "فیلدهای منبع";
+
+      
+   
+
+    
+
+    CurPage = AbbasiAdmin.GetGeneralMasterDetail(MasterDVS, DetailDVS);
+    string dses = "";
+    PageDataSources.ForEach(x => dses+= x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+   
+    
+    /////////////////// Client Evenets 
+    CurPage.Commands += @""+Grid.ID+@".selectionChanged = function(record,state) 
+            {
+                   grid = "+Grid.ID+";fieldgrid="+FieldGrid.ID+";"+"criteria="+
+                            "{_" + IRERPApplicationUtilities.GPN<Report_MetaModel>(x => x.SelectedReportRepository.id).ToClientDsFieldName() + ":record.id};" +
+                            "fieldform="+FieldForm.ID+";"+
+                            @"
+                 GeneralMasterDetail(grid,fieldgrid,criteria);
+                 //fieldform.getField('Name').setCriteria(criteria);
+                 fieldform.irerpRequestParams= criteria;
+                 fieldgrid.irerpRequestParams= criteria;
+                                 " + @"
+            }
+    ";   
+    /////////////////////////////////////
+}
+@Html.Raw(CurPage)
+
+
+    </script>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>hasmanyrelation</Title>
+      <Author>Mazarei</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>irerpManyRelation</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>TYPE</ID>
+          <ToolTip>TYPE</ToolTip>
+          <Default>TYPE</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>VARNAME</ID>
+          <ToolTip>VARNAME</ToolTip>
+          <Default>VARNAME</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>MASTERTYPE</ID>
+          <ToolTip>MASTERTYPE</ToolTip>
+          <Default>MASTERTYPE</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>MASTER</ID>
+          <ToolTip>MASTER</ToolTip>
+          <Default>MASTER</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[ LoadableVar<IList<$TYPE$>> _$VARNAME$ = new LoadableVar<IList<$TYPE$>>();
+        public virtual IList<$TYPE$> _____$VARNAME$ { get; set; }
+        public virtual IList<$TYPE$> $VARNAME$
+        {
+            get
+            {
+                return
+                    LoadNHRelation<$TYPE$, Guid>(ref _$VARNAME$, x => x._____$VARNAME$,
+                    ModelRepositories.$TYPE$_Repository.GetAllBy$MASTER$ID<$MASTERTYPE$>,
+                    x => x.id,
+                    (x, y) =>
+                    {
+
+                        y.$MASTER$ = x; return y.Save();
+
+
+                    },
+                    (x, y) => { return y.Remove(CommitTransaction: false); }
+               );
+             
+            }
+
+            set { SetRelationProperty(x => x.$VARNAME$, x => x._____$VARNAME$, _$VARNAME$, value); }
+        }
+
+///////////////// Add sBelow Lines To GetAssociation
+//   if (_GPN(x => x.$VARNAME$) == PropertyPath)
+//                return new Tuple<string, NHibernate.SqlCommand.JoinType, NHibernate.Criterion.ICriterion>(_GPN(x => x._____$VARNAME$), NHibernate.SqlCommand.JoinType.LeftOuterJoin, null);
+//add below line to mapping 
+//HasMany<$TYPE$>(x => x._____$VARNAME$).LazyLoad().Cascade.None().KeyColumn("$MASTERTYPE$id").NotFound.Ignore();
+
+//////////////Add Below lines to Repository of target
+  //public static IRERPVList<$TYPE$, $TYPE$Filter> GetAllBy$MASTER$ID<TParent>(Guid id)
+    //    where TParent: MsdLib.CSharp.DALCore.ModelBase
+        
+    //{
+      //  var filter = new $TYPE$Filter() { };
+//filter.AddSimpleCriteria(x => x.$MASTER$.id, MsdLib.CSharp.BLLCore.MsdCriteriaOperator.equals, id.ToString());
+        //return GetVList<TParent>(filter);
+       //
+    //}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

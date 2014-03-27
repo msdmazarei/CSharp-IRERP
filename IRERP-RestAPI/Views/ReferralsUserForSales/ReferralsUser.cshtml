@@ -1,0 +1,175 @@
+﻿
+
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var UserMaraf= model.GenDS(
+   x => x.AllUserMaraf,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserMarafDs")
+);
+
+    PageDataSources.Add(UserMaraf);
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ReferralsForm"), data: new IRERP_SM_FromString(UserMaraf.ID));
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("ReferralsGrid"), _CanEdit: false, Datasource: new IRERP_SM_FromString(UserMaraf.ID));
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] { 
+    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserMaraf>(x => x.User.DisplayName)}, 
+    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserMaraf>(x => x.Commission)}, 
+ new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserMaraf>(x => x.User.LastACC.Balance)}, 
+    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserMaraf>(x => x.PersianStartDate)}, 
+    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserMaraf>(x => x.StartDate),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+    
+    
+    
+    
+    
+    };
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid,
+         new IRERP_SM_ToolStripButton[]{
+          AbbasiAdmin.GetGenetalToolStripButton("factor", "تنظیمات"),
+         },
+         hasInsert: false, hasDelete: false, hasHilit: false, hasFormula: false, hasMenu: false,hasEdit:false);
+
+    MasterDVS.PageTitle = "معرفی مشترکین";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //    AbbasiAdmin.GGSelectItem<User,UserRole>("cbotest12",x=>x.UserID,"نام همکار",x=>x.User.DisplayName,x=>x.User.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.User.DisplayName),
+            
+    //           //new IRERP_SM_ComboBoxItem(){title=" نام همکار",valueMap=new IRERP_SM_FromString(
+    //           //        "{\"a4\":\"همه\",\"b4\":\"عباسی\",\"c4\":\"احمدی\"}",false)
+    //           //         },
+    //                    new IRERP_SM_HeaderItem(){defaultValue="موجودی"},
+    //                    new IRERP_SM_TextItem(){title="از"},
+    //                    new IRERP_SM_TextItem(){title="تا"},
+                        
+    //         new IRERP_SM_ButtonItem(){title="جستجو"},
+             
+    //    }
+    //};
+
+//    var AccountInformation =
+//        new IRERP_SM_FromString(@"
+//                isc.ListGrid.create({
+//                    ID: ""countryList1"",
+//                    width:""100%"", height:""100%"",
+//alternateRecordStyles :false,membersMargin :0,
+//    canEdit:false,  showHeader :true, 
+//    data: [
+//{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},{
+//    name:""عباسی"",
+//    percent:""5%"",
+//    receive:""344343"",
+//    date:""1392.2.30"",
+//   
+//},
+//    ],
+//    fields:[
+//{name:""name"",title:""نام ""},
+//{name:""percent"",title:""میزان""},
+//{name:""receive"",title:""موجودی""},
+//{name:""date"",title:""تاریخ همکاری""},
+//
+//
+//
+//
+//]
+//
+//            })
+//                   
+//               ", false);
+
+
+    //var footer = new IRERP_SM_HLayout() { members=new IRERPControlBase[]{
+    //new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("تنظیمات")},
+  
+    
+    //}};
+
+    //var body = new IRERP_SM_VLayout() {members=new IRERPControlBase[]{information,AccountInformation,footer} };
+    //CurPage.OtherObjects += UsrRoleSupportDtDs.ToString();
+
+    //CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+ }
+@Html.Raw(CurPage)

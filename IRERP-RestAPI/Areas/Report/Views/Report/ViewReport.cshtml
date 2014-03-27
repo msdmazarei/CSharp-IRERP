@@ -1,0 +1,15 @@
+﻿
+@using Stimulsoft.Report.MvcDesign;
+@using Stimulsoft.Report.Mvc;
+
+
+@{
+    ViewBag.Title = "ViewReport";
+    Layout = "~/Views/Shared/ReportViewer.cshtml";
+}
+
+@Html.Stimulsoft().StiMvcViewerFx(Model)
+
+
+@*Html.Stimulsoft().RenderMvcViewerScripts()
+@Html.Stimulsoft().StiMvcViewer(Model)*@

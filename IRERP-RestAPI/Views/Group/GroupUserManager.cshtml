@@ -1,0 +1,83 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.MetaModel;
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var GroupDs = model.GenDS(
+      x => x.AllGroup,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      ID: this.CID("UserGroupDs")
+      );
+    var UsrGroupUserDs = model.GenDS(
+      x => x.AllGroupUser,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      ID: this.CID("UserGroupUserDs")
+      );
+    var UsrSupportDs = model.GenDS(
+    x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+ ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ ID: this.CID("UserSupportDs")
+ );
+
+    PageDataSources.Add(GroupDs);
+    PageDataSources.Add(UsrGroupUserDs);
+    PageDataSources.Add(UsrSupportDs);
+
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("GroupuserForm"), data: new IRERP_SM_FromString(UsrGroupUserDs.ID));
+
+    DyForm.fields = new IRERP_SM_FormItem[] {
+        new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue="شما در حال تعریف  گروه برای کاربر جدید می باشید." },
+                     AbbasiAdmin.GGSelectItem<GroupUser,User>(
+                     this.CID("cbousr"),
+                     x=>x.User.id,
+                     "نام مشترک",
+                     x=>x.Username,
+                     x=>x.id,
+                     null,
+                     this.CID("UserSupportDs"),
+                     true,true,x=>x.Username,x=>x.Username),
+                     
+                    AbbasiAdmin.GGSelectItem<GroupUser,Group>(
+                    this.CID("cbogroup"),
+                    x=>x.Group.id,
+                    "نام گروه",
+                    x=>x.GroupName,
+                    x=>x.id,
+                    null,
+                    this.CID("UserGroupDs")            true,true,x=>x.GroupName),
+                     };
+
+
+
+
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UsrGroupUserDs.ID), ID: this.CID("GroupUserGrid"), _CanEdit: false);
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+             new IRERPControlTypes_ListGridFiled() {   name = this.FN<IRERP_RestAPI.Models.GroupUser>(x=>x.User.Username) }, 
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<GroupUser>(x=>x.Group.GroupName) } 
+    };           
+
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+
+    MasterDVS.PageTitle = "تعیین کاربران منوها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+ }
+
+@Html.Raw(CurPage)

@@ -1,0 +1,159 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var addUserofficalinfo = model.GenDS(
+x => x.AllUserOfficialInfo,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("addUserofficalinfoDS")
+);
+
+    var addUserHouseholdinfo = model.GenDS(
+x => x.AllUserHouseholdInfo,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("addUserHouseholdinfoDS")
+);
+
+    PageDataSources.Add(addUserofficalinfo);
+    PageDataSources.Add(addUserHouseholdinfo);
+    
+    
+//    var DyFormSelectCustomer = AbbasiAdmin.GetGenetalDynamicForm(this.CID("SelectCustomer")/*, data: new IRERP_SM_FromString(UsrMenuDs.ID)*/);
+
+//    DyFormSelectCustomer.fields = new IRERP_SM_FormItem[] { 
+//          new IRERP_SM_HeaderItem(){defaultValue="فرم درخواست اشتراک اینترنت"},
+//          new IRERP_SM_HeaderItem(){defaultValue="كامل كردن مواردي كه با * مشخص شده اند الزامي است"},
+//          new IRERP_SM_HeaderItem(){defaultValue="مشخصات شخص درخواست کننده اینترنت"},
+//        new IRERP_SM_SelectItem(){
+//            name="SelectItem",
+//           valueMap=new IRERP_SM_FromString(
+//                       "{\"real\":\"حقیقی\",\"Legal\":\"حقوقی\"}",false),
+//                 changed=new IRERPControlTypes_StringMethods("function(form,item,rec){if(item.getValue()=='legal'){"+this.CID("LegalUser")+@".show();"+this.CID("RealUser")+@".hide();}
+//               else 
+//                   {"+this.CID("RealUser")+@".show();"+this.CID("LegalUser")+@".hide();}
+//                     alert(item.getValue());}",true),
+                 
+//               }  
+//                     };
+
+
+//==================================realUser=========================================
+    var DyFormRealUser = AbbasiAdmin.GetGenetalDynamicForm(this.CID("RealUser"), _numcols: 4, data: new IRERP_SM_FromString(addUserHouseholdinfo
+        .ID));
+
+    DyFormRealUser.fields = new IRERP_SM_FormItem[] { 
+           new IRERP_SM_HeaderItem(){defaultValue="مشترک حقیقی" },
+           new IRERP_SM_TextItem(){title=" نام ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.FirstName)},
+           new IRERP_SM_TextItem(){title="  نام  خانوادگی ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.LastName)},
+           new IRERP_SM_RadioGroupItem(){ title="جنسیت",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.Gender),
+                       type=IRERPControlTypes_FormItemType.radioGroup,
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"khanom\":\"خانم\",\"Agha\":\"آقا\"}",false)
+                        },
+           new IRERP_SM_TextItem(){title=" شماره شناسنامه ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.PersonalIdentity)},
+           new IRERP_SM_TextItem(){title="تاریخ تولد ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.BornDate)},
+           new IRERP_SM_TextItem(){title="میزان تحصیلات ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.Education)},
+           new IRERP_SM_TextItem(){title=" شماره تلفن همراه",hint=new IRERPControlTypes_HTMLString("+98"),name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.UserInformation.Cell)},
+           new IRERP_SM_TextAreaItem(){title=" آدرس ",type=IRERPControlTypes_FormItemType.textArea,width=500,height=50,name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.UserInformation.Address)},
+           new IRERP_SM_TextItem(){title=" كدپستي",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.UserInformation.PostalCode)},
+           new IRERP_SM_StaticTextItem(){title="شناسه مودم  ",defaultValue="31321",type=IRERPControlTypes_FormItemType.StaticTextItem},
+           new IRERP_SM_TextItem(){title="کدملی ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.PersonalCode)},
+           new IRERP_SM_TextItem(){title="نام پدر ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.FatherName)},
+           new IRERP_SM_TextItem(){title="محل صدور ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.RegisteredOffice)},
+           new IRERP_SM_TextItem(){title="شغل ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.Career)},
+           new IRERP_SM_TextItem(){title=" آدرس پست الکترونیک",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.Email)},
+           new IRERP_SM_TextItem(){title="شماره تماس ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.UserInformation.Tel)},
+           new IRERP_SM_TextItem(){title="  شماره دورنگار",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserHouseholdInfo>(x => x.User.UserInformation.Fax)},
+           new IRERP_SM_StaticTextItem(){title=" شناسه اتصال ",defaultValue="3135",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          
+                     };
+
+    var insertReal = AbbasiAdmin.GetGenetalwindow(this.CID("insertRealUser"), "insert", "50%", "70%", new IRERPControlBase[] { DyFormRealUser,
+           
+             new IRERP_SM_HLayout(){
+                    width="100%",height="100%",
+                    members=new IRERPControlBase[]{
+           AbbasiAdmin.GetGenetalButton("ذخیره اطلاعات",  new IRERPControlTypes_StringMethods(@" ""GeneralSave(" + this.CID("insertRealUser") + "," + this.CID("RealUser") + "," +  this.CID("UserGrid") + @")"" ", true)),
+                        
+                  AbbasiAdmin.GetGenetalButton("بازگشت", new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("insertRealUser") + @")"" ", true)),
+    
+                } } 
+    
+    });
+
+    
+    //=======================================legaluser=====================
+    var DyFormLegalUser = AbbasiAdmin.GetGenetalDynamicForm(this.CID("LegalUser"), _numcols: 4, data: new IRERP_SM_FromString(addUserofficalinfo.ID));
+
+    DyFormLegalUser.fields = new IRERP_SM_FormItem[] {    new IRERP_SM_HeaderItem(){defaultValue="مشترک حقوقی"},
+           new IRERP_SM_TextItem(){title="  نام شرکت/موسسه " ,name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.OfficeName)},
+           new IRERP_SM_TextItem(){title="نام و نام خانوادگی مدیرعامل",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.ManagerName)},
+           new IRERP_SM_TextItem(){title="محل ثبت",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.RegisteredOffice)},
+           new IRERP_SM_TextItem(){title=" سمت نماینده",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.AgentPosition)},
+          // new IRERP_SM_TextItem(){title=" شماره تلفن همراه",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Tel)},
+          // new IRERP_SM_TextItem(){title=" آدرس پست الکترونیک",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.Email)},
+          // new IRERP_SM_TextAreaItem(){title=" آدرس ",type=IRERPControlTypes_FormItemType.textArea,width=500,height=50,name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Address)},
+          // new IRERP_SM_TextItem(){title=" كدپستي",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.PostalCode)},
+           new IRERP_SM_TextItem(){title=" شماره ثبت ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.RegisteredNumber)},
+           new IRERP_SM_TextItem(){title="نام  و  نام خانوادگی  نماینده",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.AgentName)},
+           new IRERP_SM_TextItem(){title="نوع فعالیت",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.ActivityType)},
+          // new IRERP_SM_TextItem(){title="شماره تماس ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Cell)},
+         //  new IRERP_SM_TextItem(){title="شماره دورنگار",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Fax)},
+           new IRERP_SM_TextItem(){title="كد اقتصادي شركت ",name=this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.ComercialCode)},
+                     };
+    var insertLegal = AbbasiAdmin.GetGenetalwindow(this.CID("insertLegalUser"), "insert", "50%", "70%", new IRERPControlBase[] { DyFormLegalUser, 
+        new IRERP_SM_HLayout(){
+                    width="100%",height="100%",
+                    members=new IRERPControlBase[]{
+         AbbasiAdmin.GetGenetalButton("ذخیره اطلاعات",  new IRERPControlTypes_StringMethods(@" ""GeneralSave(" + this.CID("insertLegalUser") + "," + this.CID("LegalUser") + "," +  this.CID("UserGrid") + @")"" ", true)),
+                        
+                  AbbasiAdmin.GetGenetalButton("بازگشت", new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("insertLegalUser") + @")"" ", true)),
+    
+                } } 
+    });
+
+
+    
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("UserGrid"), _CanEdit: false, Datasource: new IRERP_SM_FromString(addUserofficalinfo.ID));
+ //   Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+ //        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.DisplayName) },
+ //     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.Email) }, 
+ //  new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Tel)},
+ //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Cell) },
+ //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiUserOfficialInfo>(x => x.User.UserInformation.Address) },
+
+  
+ //};
+    var buttons = new IRERP_SM_ToolStripButton[]{ 
+          AbbasiAdmin.GetGenetalToolStripButton( "InsertLegal1", "درج مشترک حقوقی", new IRERPControlTypes_StringMethods(@" ""GeneralAdd(" + this.CID("insertLegalUser") + "," + this.CID("LegalUser") + "," +  this.CID("UserGrid") + @")"" ", true)),
+          AbbasiAdmin.GetGenetalToolStripButton( "InsertReal2", "درج مشترک حقیقی ", new IRERPControlTypes_StringMethods(@" ""GeneralAdd(" + this.CID("insertRealUser") + "," + this.CID("RealUser") + "," +  this.CID("UserGrid") + @")"" ", true))
+            
+        };
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyFormLegalUser, Grid, buttons,
+        hasDelete: false, hasEdit: false, hasHilit: false, hasFormula: false, hasMenu: false, hasInsert: false);
+
+    MasterDVS.PageTitle = "ثبت مشترک";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    CurPage.OtherObjects += insertLegal.ToString();
+    CurPage.OtherObjects += insertReal.ToString();
+
+    CurPage.Commands += this.CID("insertRealUser") + ".hide();" + this.CID("insertLegalUser") + ".hide();";
+   
+    
+ }
+@Html.Raw(CurPage)

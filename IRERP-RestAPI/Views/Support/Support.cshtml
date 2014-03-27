@@ -1,0 +1,175 @@
+﻿
+
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@{
+    ViewBag.Title = "TestSC";
+    Layout = "~/Views/Shared/SupportLayout.cshtml";
+}
+
+<link href="~/css/login-win8skin.css" rel="stylesheet" />    
+
+<script charset="utf8" type="text/javascript" >
+    @{
+        
+        string[] propnames = new string[] { "a", "b", "c" };
+        var form = Html.DynamicForm("testform");
+        form.IsInInitializeTime = true;
+        List<IRERP_SM_FormItem> fields = new List<IRERP_SM_FormItem>();
+        foreach (var f in propnames)
+        {
+            var i = new IRERP_SM_FormItem();
+            i.IsInInitializeTime = true;
+            i.name = f;
+            fields.Add(i);
+        }
+          
+        form.fields = fields.ToArray();
+
+        var lbl1 = AbbasiAdmin.GetGenetalDynamicForm(this.CID("Message"),"30%","10%",new IRERP_SM_FormItem[]{
+        new IRERP_SM_StaticTextItem(){title="نام",defaultValue= InstanceStatics.LoggedUser.Username,type=IRERPControlTypes_FormItemType.StaticTextItem},
+        new IRERP_SM_StaticTextItem(){title="تاریخ ورود",defaultValue=(InstanceStatics.LoggedUser.Username).ToString(),type=IRERPControlTypes_FormItemType.StaticTextItem},
+        new IRERP_SM_StaticTextItem(){title="ایمیل",defaultValue= InstanceStatics.LoggedUser.Username,type=IRERPControlTypes_FormItemType.StaticTextItem},
+        
+        },2,20);
+
+
+        var listGrid = new IRERP_SM_ListGrid()
+        {
+            autoFitData = IRERPControlTypes_Autofit.horizontal,
+            autoFetchData = true
+        };
+
+        //================tasklist
+
+        var InsertTaskButton = new IRERP_SM_Button() { title=new IRERPControlTypes_HTMLString("درج اطلاعات")};
+        var taskgrid = new IRERP_SM_ListGrid() {
+            showAllRecords= true,  
+           canResizeFields= true,
+
+    showRecordComponents= true,    
+    showRecordComponentsByCell= true,  
+    canRemoveRecords= true,  
+    filterOnKeypress=true,
+      dataSource=null,
+        };
+        var Task = new IRERP_SM_VLayout() { members=new IRERPControlBase[]{InsertTaskButton,taskgrid}};
+     
+        //============================
+        
+        
+        
+        var secction = new IRERP_SM_SectionStack()
+        {
+            ID = "sectionStack",
+            visibilityMode = IRERPControlTypes_visibilityMode.multiple,
+            sections= new IRERP_SM_SectionStackSection[]{
+         
+                
+                new IRERP_SM_SectionStackSection{
+                     title="Section1",
+                            expanded=true,
+                             resizeable=true,
+                             items=new IRERP_SM_Label{
+                                 contents=new IRERPControlTypes_HTMLString("Detail2")
+                             }},
+                             new IRERP_SM_SectionStackSection
+                             {
+                                 title= "Section2",
+                                 expanded= true,
+                                 resizeable= true,
+                                 
+                                 items=Task
+            }
+        }};
+        
+        var tabset = new IRERP_SM_TabSet()
+        {
+            ID = "TabsetTest",
+            tabBarPosition = IRERPControlTypes_Side.top,
+            tabBarAlign = IRERPControlTypes_Side.right,
+            canEditTabTitles = true,
+            titleEditEvent = IRERPControlTypes_TabTitleEditEvent.doubleClick,
+            titleEditorTopOffset = 2,
+            tabs = new IRERP_SM_Tab[]{ } };
+        var MenuRight = new IRERP_SM_VLayout()
+        {
+            showResizeBar = true,
+            
+            
+            members =new IRERPControlBase[] { lbl1, secction },
+            width = "25%",
+            height = "100%"
+        };
+
+        var Center = new IRERP_SM_VLayout()
+        {    
+             width = "100%",
+            height = "100%",
+            showResizeBar = true,
+            members = new IRERPControlBase[]{
+                tabset
+            }
+        };
+    
+        var main = new IRERP_SM_HLayout()
+        {
+           
+            members = new IRERPControlBase[] { MenuRight, Center },
+            width = "100%",
+            height = "100%",
+           
+        };
+        
+
+
+        var body = new IRERP_SM_VLayout()
+        {
+
+            members = new IRERPControlBase[] {  new IRERP_SM_FromString(Html.
+                Partial("ManagerView/MenuTop")
+                 ), main },
+            width = "100%",
+            height = "100%"
+
+        };
+
+
+        var str = body.ToString();      
+  }
+    
+    @Html.Raw(str);
+   
+
+</script>
+<!--
+<script type="text/javascript">
+    /*
+    cbotest.changed = function (form, item, value)
+    {
+        var selectedRecord = item.getSelectedRecord();
+        @Html.Raw(this.CID("frmDetail"))
+        /*.fetchData(
+            {
+                criteria: { fieldName: "UserID", operator: "exactmatch", value: value }
+            }
+            );
+
+        lstConnections.fetchData(
+                { _SelectedUser___UserID: value }
+        );
+        
+        lstConnections.filterEditorSubmit = function (crit) {
+            
+            var crits = lstConnections.getCriteria();
+            lstConnections.setCriteria({});
+            lstConnections.filterData(crits);
+        }
+
+    }*/
+</script>
+-->

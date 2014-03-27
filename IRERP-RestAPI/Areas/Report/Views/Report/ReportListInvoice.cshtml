@@ -1,0 +1,53 @@
+﻿@using IRERP_RestAPI.Areas.Report.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+<h2>InvoiceableUser</h2>
+<script type="text/javascript">
+@{
+   Report_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+
+    var AllReportDs = model.GenDS(x => x.Reports,
+ ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ ID: this.CID("ReportDs")
+ );
+ 
+ PageDataSources.Add(AllReportDs);
+
+  IRERPPageString CurPage = new IRERPPageString();
+
+  var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ReportForm"), "100%", "100%", data: new IRERP_SM_FromString(AllReportDs.ID));
+  DyForm.fields = new IRERP_SM_FormItem[]
+  {
+      new IRERP_SM_TextAreaItem(){title="Description",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<Report>(x => x.Description)},
+      
+      new IRERP_SM_TextItem(){title="ReportName",name=this.FN<Report>(x => x.ReportName) },
+      new IRERP_SM_TextItem(){title="TypeFullName",name=this.FN<Report>(x => x.TypeFullName) },
+      new IRERP_SM_TextAreaItem(){title="ReportDocument",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<Report>(x => x.ReportDocument)},
+      //new IRERP_SM_TextItem(){title="ReportFileName",name=this.FN<Report>(x => x.ReportFields) },
+      //new IRERP_SM_TextItem(){title="Version",name=this.FN<Report>(x => x.Version) },
+       
+  };
+
+
+  var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(AllReportDs.ID), ID: this.CID("ReportGrid"), _EditEvent: IRERPControlTypes_editEvent.click, _listEndEditAction: IREREPControlTypes_listEndEditAction.next);
+  var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+  MasterDVS.PageTitle = "گزارش";
+
+  CurPage= MasterDVS;
+  
+  string dses = "";
+  PageDataSources.ForEach(x => dses += x.ToString());
+  CurPage.OtherObjects = dses + CurPage.OtherObjects;
+}
+@Html.Raw(CurPage)
+
+
+    </script>

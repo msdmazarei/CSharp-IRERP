@@ -1,0 +1,60 @@
+﻿@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        var NationalityDataSource = model.GenDS(
+                                x => x.AllServe,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("NationalityDS")
+                            );
+
+        PageDataSources.Add(NationalityDataSource);
+
+
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("NationalityForm"), data: new IRERP_SM_FromString(NationalityDataSource.ID, true),_numcols:1);
+      dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("NationalityViewdyFormNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Nationality>(x=>x.Name)},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("NationalityViewdyFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Nationality>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("NationalityGrid"), Datasource: new IRERP_SM_FromString(NationalityDataSource.ID, true));
+
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("NationalityViewPageTitle"));
+
+
+        Master.PageTitle = ApplicationStatics.T("NationalityViewPageTitle");
+
+        CurPage = Master;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+   
+
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+
+

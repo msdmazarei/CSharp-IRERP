@@ -1,0 +1,85 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Bases.Skins;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    
+    var UsrActionAccountDs = model.GenDS(
+          x => x.AllAccountActions,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("UserActionAccountDs")
+          );
+
+    var UsrRoleSupportDtDs = model.GenDS(
+x => x.AllUserRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserRoleSupportDtDs")
+);
+
+    PageDataSources.Add(UsrActionAccountDs);
+    PageDataSources.Add(UsrRoleSupportDtDs);
+
+    //var UserSelectItem = AbbasiAdmin.GGSelectItem<User, UserRole>(
+    //    this.CID("selectUser"),
+    //x => x.UserID,
+    //   " نام اپراتور",
+    // x=>x.User.DisplayName,
+    // x=>x.User.UserID,
+    //    null,
+    //    this.CID("UserRoleSupportDtDs"),
+    //    true,
+    //    true,
+
+    //  x => x.User.DisplayName
+    //  );
+    ////ServiceTypeSelectItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Building/ServiceingType");
+    ////ServiceTypeSelectItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods("return 'TarighedastresiWindow';");
+    ////ServiceTypeSelectItem.MsdManageUrl = "/Building/Building/ServiceingType";
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("UserForm"), _numcols: 2, data: new IRERP_SM_FromString(UsrActionAccountDs.ID));
+    DyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+    //DyForm.fields = new IRERP_SM_FormItem[]
+    //  {
+    //        new IRERP_SM_TextItem(){title="از تاریخ",type=IRERPControlTypes_FormItemType.date},
+    //        new IRERP_SM_TextItem(){title="تا تاریخ",type=IRERPControlTypes_FormItemType.date},
+    //         UserSelectItem,
+    //        new IRERP_SM_ButtonItem(){title="جستجو"}
+    //};
+
+
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UsrActionAccountDs.ID), ID: this.CID("UserGrid"));
+    Grid.fields =
+new IRERPControlTypes_ListGridFiled[] {
+      
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiAccountAction>(x => x.Account.AccountName),title="نام حساب" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiAccountAction>(x => x.ActionDescription) ,title="مشخصات حساب"}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiAccountAction>(x => x.ActionDate),title="تاریخ آخرین تغییر" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiAccountAction>(x => x.ActionType),title="نوع حساب" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiAccountAction>(x => x.Amount) ,title="موجودی"}, 
+           
+             
+          
+            
+  
+        };
+    
+    
+ 
+    
+
+  //  var buttonEcxcel = new IRERP_SM_Button() { title=new IRERPControlTypes_HTMLString("تبدیل بهExcell ")};
+
+    CurPage = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid,hasDelete:false,hasEdit:false,hasInsert:false,hasFilterBuilder:false,hasFormula:false,hasHilit:false,hasMenu:false);
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    
+    }
+
+@Html.Raw(CurPage)

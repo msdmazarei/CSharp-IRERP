@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7532037-723E-4E1C-ACC4-BF522FE1F614}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IRERP_RestAPI_Models</RootNamespace>
+    <AssemblyName>IRERP_RestAPI_Models</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bases\InstanceStatics.cs" />
+    <Compile Include="Bases\LogModelBase.cs" />
+    <Compile Include="Bases\ModelBaseLog.cs" />
+    <Compile Include="Bases\ProcessModel.cs" />
+    <Compile Include="Filters\Bases\CallInfoFilter.cs" />
+    <Compile Include="Filters\Bases\CharacterFilter.cs" />
+    <Compile Include="Filters\Bases\CharacterRoleFilter.cs" />
+    <Compile Include="Filters\Bases\GenderFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filters\Bases\HelpFilter.cs" />
+    <Compile Include="Filters\Bases\IdentificationFilter.cs" />
+    <Compile Include="Filters\Bases\IdentificationTypeFilter.cs" />
+    <Compile Include="Filters\Bases\LanguageFilter.cs" />
+    <Compile Include="Filters\Bases\LegalBranchFilter.cs" />
+    <Compile Include="Filters\Bases\LegalCharacterFilter.cs" />
+    <Compile Include="Filters\Bases\LegalCharacterTypeFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Filters\Bases\MessagingInfoFilter.cs" />
+    <Compile Include="Filters\Bases\MessagingInfoTypeFilter.cs" />
+    <Compile Include="Filters\Bases\NationalityFilter.cs" />
+    <Compile Include="Filters\Bases\PlacesFilter.cs" />
+    <Compile Include="Filters\Bases\CallInfoTypeFilter.cs" />
+    <Compile Include="Filters\Bases\MessagingRelationTypeFilter.cs" />
+    <Compile Include="Filters\Bases\PostalAddressFilter.cs" />
+    <Compile Include="Filters\Bases\PriceAdditionTypeFilter.cs" />
+    <Compile Include="Filters\Bases\RightFulCharacterFilter.cs" />
+    <Compile Include="Filters\Bases\RolsOfCharacterFilter.cs" />
+    <Compile Include="Filters\Bases\CharactertypeFilter.cs" />
+    <Compile Include="Filters\GroupFilter.cs" />
+    <Compile Include="Filters\GroupMenuFilter.cs" />
+    <Compile Include="Filters\GroupUserFilter.cs" />
+    <Compile Include="Filters\IrerpMenuFilter.cs" />
+    <Compile Include="Filters\Bases\PostalAddressTypeFilter.cs" />
+    <Compile Include="Filters\jah\AuidunceFilter.cs" />
+    <Compile Include="Filters\jah\FilmContentlistFilter.cs" />
+    <Compile Include="Filters\jah\FilmEducationalGoalFilter.cs" />
+    <Compile Include="Filters\jah\FilmFilter.cs" />
+    <Compile Include="Filters\jah\FilmProductionFormatFilter.cs" />
+    <Compile Include="Filters\jah\FilmSystemTypeFilter.cs" />
+    <Compile Include="Filters\jah\Film_ActorsFilter.cs" />
+    <Compile Include="Filters\jah\Film_DirectorsFilter.cs" />
+    <Compile Include="Filters\jah\Film_EducationalGoalsFilter.cs" />
+    <Compile Include="Filters\jah\Film_ExecutivesFilter.cs" />
+    <Compile Include="Filters\jah\Film_SenaristsFilter.cs" />
+    <Compile Include="Filters\jah\Film_SpeakersFilter.cs" />
+    <Compile Include="Filters\jah\Film_TechnicalExpertsFilter.cs" />
+    <Compile Include="Filters\jah\Film_WritersFilter.cs" />
+    <Compile Include="Filters\jah\MagazineTypeFilter.cs" />
+    <Compile Include="Filters\jah\MagNoFilter.cs" />
+    <Compile Include="Filters\jah\MatterFilter.cs" />
+    <Compile Include="Filters\jah\PictureFormatFilter.cs" />
+    <Compile Include="Filters\jah\PictureTypeFilter.cs" />
+    <Compile Include="Filters\jah\ResulationFilter.cs" />
+    <Compile Include="Filters\jah\SizeFilter.cs" />
+    <Compile Include="Filters\jah\StateFilter.cs" />
+    <Compile Include="Filters\jah\SubjectFilter.cs" />
+    <Compile Include="Filters\jah\TitleFilter.cs" />
+    <Compile Include="Filters\jah\TVRDFilter.cs" />
+    <Compile Include="Filters\jah\YearFilter.cs" />
+    <Compile Include="Filters\UserFilter.cs" />
+    <Compile Include="Mappings\Bases\CallInfoLogMap.cs" />
+    <Compile Include="Mappings\Bases\CallInfoMap.cs" />
+    <Compile Include="Mappings\Bases\CharacterLogMap.cs" />
+    <Compile Include="Mappings\Bases\CharacterMap.cs" />
+    <Compile Include="Mappings\Bases\CharacterRoleLogMap.cs" />
+    <Compile Include="Mappings\Bases\CharacterRoleMap.cs" />
+    <Compile Include="Mappings\Bases\GenderLogMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\Bases\GenderMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\Bases\HelpLogMap.cs" />
+    <Compile Include="Mappings\Bases\HelpMap.cs" />
+    <Compile Include="Mappings\Bases\IdentificationLogMap.cs" />
+    <Compile Include="Mappings\Bases\IdentificationMap.cs" />
+    <Compile Include="Mappings\Bases\IdentificationTypeLogMap.cs" />
+    <Compile Include="Mappings\Bases\IdentificationTypeMap.cs" />
+    <Compile Include="Mappings\Bases\LanguageLogMap.cs" />
+    <Compile Include="Mappings\Bases\LanguageMap.cs" />
+    <Compile Include="Mappings\Bases\LegalBranchLogMap.cs" />
+    <Compile Include="Mappings\Bases\LegalBranchMap.cs" />
+    <Compile Include="Mappings\Bases\LegalCharacterLogMap.cs" />
+    <Compile Include="Mappings\Bases\LegalCharacterMap.cs" />
+    <Compile Include="Mappings\Bases\LegalcharactertypelogMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\Bases\LegalCharacterTypeMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappings\Bases\MessagingInfoLogMap.cs" />
+    <Compile Include="Mappings\Bases\MessagingInfoMap.cs" />
+    <Compile Include="Mappings\Bases\MessagingInfoTypeLogMap.cs" />
+    <Compile Include="Mappings\Bases\MessagingInfoTypeMap.cs" />
+    <Compile Include="Mappings\Bases\NationalityLogMap.cs" />
+    <Compile Include="Mappings\Bases\NationalityMap.cs" />
+    <Compile Include="Mappings\Bases\PlacesLogMap.cs" />
+    <Compile Include="Mappings\Bases\PlacesMap.cs" />
+    <Compile Include="Mappings\Bases\CallInfoTypelogMap.cs" />
+    <Compile Include="Mappings\Bases\CallInfoTypeMap.cs" />
+    <Compile Include="Mappings\Bases\MessagingRelationTypeLogMap.cs" />
+    <Compile Include="Mappings\Bases\MessagingRelationTypeMap.cs" />
+    <Compile Include="Mappings\Bases\PostalAddressLogMap.cs" />
+    <Compile Include="Mappings\Bases\PostalAddressMap.cs" />
+    <Compile Include="Mappings\Bases\PostalAddressTypeLogMap.cs" />
+    <Compile Include="Mappings\Bases\CharactertypelogMap.cs" />
+    <Compile Include="Mappings\Bases\CharactertypeMap.cs" />
+    <Compile Include="Mappings\Bases\RightFulCharacterLogMap.cs" />
+    <Compile Include="Mappings\Bases\RightFulCharacterMap.cs" />
+    <Compile Include="Mappings\Bases\RolsOfCharacterLogMap.cs" />
+    <Compile Include="Mappings\Bases\RolsOfCharacterMap.cs" />
+    <Compile Include="Mappings\GroupMap.cs" />
+    <Compile Include="Mappings\GroupUserMap.cs" />
+    <Compile Include="Mappings\GroupMenuMap.cs" />
+    <Compile Include="Mappings\Bases\PostalAddressTypeMap.cs" />
+    <Compile Include="Mappings\jah\AuidunceMap.cs" />
+    <Compile Include="Mappings\jah\FilmContentlistMap.cs" />
+    <Compile Include="Mappings\jah\FilmEducationalGoalMap.cs" />
+    <Compile Include="Mappings\jah\FilmMap.cs" />
+    <Compile Include="Mappings\jah\FilmProductionFormatMap.cs" />
+    <Compile Include="Mappings\jah\FilmSystemTypeMap.cs" />
+    <Compile Include="Mappings\jah\Film_ActorsMap.cs" />
+    <Compile Include="Mappings\jah\Film_DirectorsMap.cs" />
+    <Compile Include="Mappings\jah\Film_EducationalGoalsMap.cs" />
+    <Compile Include="Mappings\jah\Film_ExecutivesMap.cs" />
+    <Compile Include="Mappings\jah\Film_SenaristsMap.cs" />
+    <Compile Include="Mappings\jah\Film_SpeakersMap.cs" />
+    <Compile Include="Mappings\jah\Film_TechnicalExpertsMap.cs" />
+    <Compile Include="Mappings\jah\Film_WritersMap.cs" />
+    <Compile Include="Mappings\jah\MagazineTypeMap.cs" />
+    <Compile Include="Mappings\jah\MagNoMap.cs" />
+    <Compile Include="Mappings\jah\MatterMap.cs" />
+    <Compile Include="Mappings\jah\PictureFormatMap.cs" />
+    <Compile Include="Mappings\jah\PictureTypeMap.cs" />
+    <Compile Include="Mappings\jah\ResulationMap.cs" />
+    <Compile Include="Mappings\jah\SizeMap.cs" />
+    <Compile Include="Mappings\jah\StateMap.cs" />
+    <Compile Include="Mappings\jah\SubjectMap.cs" />
+    <Compile Include="Mappings\jah\TitleMap.cs" />
+    <Compile Include="Mappings\jah\TVRDMap.cs" />
+    <Compile Include="Mappings\jah\YearMap.cs" />
+    <Compile Include="Mappings\MenuMap.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="ModelRepositories\Bases\IdentificationType_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Identification_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\CallInfo_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\CharacterRole_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Character_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Gender_Repository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModelRepositories\Bases\Help_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Language_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\LegalBranch_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\LegalCharacterType_Repository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModelRepositories\Bases\LegalCharacter_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\MessagingInfoType_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\MessagingInfo_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Nationality_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Places_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\CallInfoType_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\MessagingRelationType_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\PostalAddress_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\PriceAdditionType_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\RightFulCharacter_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\RolsOfCharacter_Repository.cs" />
+    <Compile Include="ModelRepositories\Bases\Charactertype_Repository.cs" />
+    <Compile Include="ModelRepositories\GroupMenu_Repository.cs" />
+    <Compile Include="ModelRepositories\GroupUser_Repository.cs" />
+    <Compile Include="ModelRepositories\Group_Repository.cs" />
+    <Compile Include="ModelRepositories\IrerpMenu_Repository.cs" />
+    <Compile Include="ModelRepositories\IRERPRepositoryBaseClass.cs" />
+    <Compile Include="ModelRepositories\Bases\PostalAddressType_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Auidunce_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\FilmContentlist_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\FilmEducationalGoal_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\FilmProductionFormat_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\FilmSystemType_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Actors_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Directors_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_EducationalGoals_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Executives_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Senarists_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Speakers_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_TechnicalExperts_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Film_Writers_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\MagazineType_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\MagNo_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Matter_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\PictureFormat_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\PictureType_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Resulation_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Size_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\State_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Subject_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Title_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\TVRD_Repository.cs" />
+    <Compile Include="ModelRepositories\jah\Year_Repository.cs" />
+    <Compile Include="ModelRepositories\UserRepository.cs" />
+    <Compile Include="Models\jah\Auidunce.cs" />
+    <Compile Include="Models\Bases\Identification.cs" />
+    <Compile Include="Models\Bases\IdentificationLog.cs" />
+    <Compile Include="Models\Bases\IdentificationType.cs" />
+    <Compile Include="Models\Bases\IdentificationTypeLog.cs" />
+    <Compile Include="Models\Bases\CallInfo.cs" />
+    <Compile Include="Models\Bases\CallInfoLog.cs" />
+    <Compile Include="Models\Bases\Character.cs" />
+    <Compile Include="Models\Bases\CharacterLog.cs" />
+    <Compile Include="Models\Bases\CharacterRole.cs" />
+    <Compile Include="Models\Bases\CharacterRoleLog.cs" />
+    <Compile Include="Models\Bases\Gender.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Bases\GenderLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Bases\Help.cs" />
+    <Compile Include="Models\Bases\HelpLog.cs" />
+    <Compile Include="Models\Bases\Language.cs" />
+    <Compile Include="Models\Bases\LanguageLog.cs" />
+    <Compile Include="Models\Bases\LegalBranch.cs" />
+    <Compile Include="Models\Bases\LegalBranchLog.cs" />
+    <Compile Include="Models\Bases\LegalCharacter.cs" />
+    <Compile Include="Models\Bases\LegalCharacterLog.cs" />
+    <Compile Include="Models\Bases\LegalCharacterType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Bases\LegalCharacterTypeLog.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Bases\MessagingInfo.cs" />
+    <Compile Include="Models\Bases\MessagingInfoLog.cs" />
+    <Compile Include="Models\Bases\MessagingInfoType.cs" />
+    <Compile Include="Models\Bases\MessagingInfoTypeLog.cs" />
+    <Compile Include="Models\Bases\Nationality.cs" />
+    <Compile Include="Models\Bases\NationalityLog.cs" />
+    <Compile Include="Models\Bases\Places.cs" />
+    <Compile Include="Models\Bases\PlacesLog.cs" />
+    <Compile Include="Models\Bases\RolsOfCharacter.cs" />
+    <Compile Include="Models\Bases\RolsOfCharacterLog.cs" />
+    <Compile Include="Models\Bases\CallInfoType.cs" />
+    <Compile Include="Models\Bases\CallInfoTypeLog.cs" />
+    <Compile Include="Models\Bases\MessagingRelationType.cs" />
+    <Compile Include="Models\Bases\MessagingRelationTypeLog.cs" />
+    <Compile Include="Models\Bases\PostalAddress.cs" />
+    <Compile Include="Models\Bases\PostalAddressLog.cs" />
+    <Compile Include="Models\Bases\PostalAddressType.cs" />
+    <Compile Include="Models\Bases\PostalAddressTypeLog.cs" />
+    <Compile Include="Models\Bases\PriceAdditionType.cs" />
+    <Compile Include="Models\Bases\PriceAdditionTypeLog.cs" />
+    <Compile Include="Models\Bases\RightFulCharacter.cs" />
+    <Compile Include="Models\Bases\RightFulCharacterLog.cs" />
+    <Compile Include="Models\Bases\Charactertype.cs" />
+    <Compile Include="Models\Bases\Charactertypelog.cs" />
+    <Compile Include="Models\GroupUser.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupMenu.cs" />
+    <Compile Include="Models\IrerpMenuTb.cs" />
+    <Compile Include="Models\jah\Film.cs" />
+    <Compile Include="Models\jah\FilmContentlist.cs" />
+    <Compile Include="Models\jah\FilmEducationalGoal.cs" />
+    <Compile Include="Models\jah\FilmProductionFormat.cs" />
+    <Compile Include="Models\jah\FilmSystemType.cs" />
+    <Compile Include="Models\jah\Film_Actors.cs" />
+    <Compile Include="Models\jah\Film_Directors.cs" />
+    <Compile Include="Models\jah\Film_EducationalGoals.cs" />
+    <Compile Include="Models\jah\Film_Executives.cs" />
+    <Compile Include="Models\jah\Film_Senarists.cs" />
+    <Compile Include="Models\jah\Film_Speakers.cs" />
+    <Compile Include="Models\jah\Film_TechnicalExperts.cs" />
+    <Compile Include="Models\jah\Film_Writers.cs" />
+    <Compile Include="Models\jah\MagazineType.cs" />
+    <Compile Include="Models\jah\MagNo.cs" />
+    <Compile Include="Models\jah\Matter.cs" />
+    <Compile Include="Models\jah\PictureFormat.cs" />
+    <Compile Include="Models\jah\PictureType.cs" />
+    <Compile Include="Models\jah\Resulation.cs" />
+    <Compile Include="Models\jah\Size.cs" />
+    <Compile Include="Models\jah\State.cs" />
+    <Compile Include="Models\jah\Subject.cs" />
+    <Compile Include="Models\jah\Title.cs" />
+    <Compile Include="Models\jah\TVRD.cs" />
+    <Compile Include="Models\jah\Year.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fluent-nhibernate\src\FluentNHibernate\FluentNHibernate.csproj">
+      <Project>{529145d5-6cc3-4016-89b5-826563024af1}</Project>
+      <Name>FluentNHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRERP_REST_API_Bases\IRERP_REST_API_Bases.csproj">
+      <Project>{8c2d1f0e-0117-43e1-8f90-af0238e81ecd}</Project>
+      <Name>IRERP_REST_API_Bases</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MsdLib\MsdLib.csproj">
+      <Project>{42aac68e-5650-4dad-858e-d0f9e9ac563b}</Project>
+      <Name>MsdLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHibernate-3.3.1.GA-src\src\NHibernate\NHibernate.csproj">
+      <Project>{5909bfe7-93cf-4e5f-be22-6293368af01d}</Project>
+      <Name>NHibernate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Queries\petiakwifiperforma_NamedQuery.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,76 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_REST_API_Bases;
+@using IRERP_RestAPI.Models;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrModemDs = model.GenDS(
+    x => x.SelectedUser.ModemList,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID:this.CID("UserModemDs")
+    );
+
+    var UsrTransfeerDs = model.GenDS(
+ x => x.AllTransferee,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserTransfeerDs")
+);
+var toolStripInsert = AbbasiAdmin.GetGenetalToolStripButton(this.CID("AddMenu"), "درج اطلاعات", new IRERPControlTypes_StringMethods(@" ""MenuInsert_DialgSelectDuration(" + this.CID("inserWindow") + @"," + this.CID("editorForm") + @")"" ", true));
+    var ToolStrip = new IRERP_SM_ToolStrip()
+    {
+        width = "100%",
+        height = "5%",
+        members = new IRERPControlBase[] { toolStripInsert}
+
+    };
+    var InserWindow = AbbasiAdmin.GetGenetalwindow(this.CID("inserWindow"), "InsertModem", "30%", "30%",new IRERPControlBase[]{ 
+    AbbasiAdmin.GetGenetalDynamicForm(this.CID("editorForm"),"100%","100%",new IRERP_SM_FormItem[]{
+    new IRERP_SM_HeaderItem(){defaultValue="فرم ثبت سریال مودم"},
+    AbbasiAdmin.GGSelectItem<PetiakWifiModem,User>("cbotest13",x=>x.InstallerId,"تحویل گیرنده",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserTransfeerDs"),true,true,x=>x.DisplayName),
+    new IRERP_SM_RadioGroupItem(){title="نوع مصرف",type=IRERPControlTypes_FormItemType.radioGroup,
+    valueMap=new IRERP_SM_FromString(
+    "{\"nasb\":\"نصب\",\"dakal\":\"دکل\"}",false)},
+    new IRERP_SM_RadioGroupItem(){title="پلمپ شده",type=IRERPControlTypes_FormItemType.radioGroup,
+    valueMap=new IRERP_SM_FromString(
+    "{\"plomp\":\"پلمپ\",\"open\":\"بازشده\"}",false)},
+    new IRERP_SM_TextAreaItem(){title="توضیحات ",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<PetiakWifiModem>(x=>x.Description)},
+    new IRERP_SM_TextItem(){title="شماره سریال مودم",name=this.FN<PetiakWifiModem>(x=>x.MacAddress)},
+    },2,10, new IRERP_SM_FromString(this.CID("UserModemDs"), false)),
+    new IRERP_SM_HLayout()
+    {
+     width="100%",
+     height="100%",
+     members=new IRERPControlBase[]{ 
+     new IRERP_SM_Label(){width="5%"},
+     AbbasiAdmin.GetGenetalButton(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt"),
+     new IRERPControlTypes_StringMethods(@" ""Insert_Save(" + this.CID("editorForm") + @")"" ", true)),
+     new IRERP_SM_Label(){width="0%"},
+     AbbasiAdmin.GetGenetalButton(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Return"),
+     new IRERPControlTypes_StringMethods(@" ""Insert_CloseWindow(" + this.CID("inserWindow") + @")"" ", true)),
+    new IRERP_SM_Label(){width="5%"}
+    }}
+    });
+    var RegisterModem = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+        Datasource: new IRERP_SM_FromString(this.CID("UserModemDs"), false)
+        );
+    RegisterModem.ID =this.CID( "lstRegisterModem");
+    RegisterModem.showFilterEditor = true;
+    RegisterModem.filterOnKeypress = true;
+    RegisterModem.fetchDelay = 1000;
+    RegisterModem.allowFilterExpressions = true;
+   RegisterModem.selectionChanged = new IRERPControlTypes_StringMethods(@" ""SelectGridMenu_DialgSelectDuration(record,state," + this.CID("inserWindow") + @"," + this.CID("editorForm") + @")"" ", true);
+
+
+    var body = new IRERP_SM_VLayout() { members=new IRERPControlBase[]{ToolStrip,RegisterModem}};
+    CurPage.OtherObjects += UsrModemDs.ToString();
+    CurPage.OtherObjects += InserWindow.ToString();
+    CurPage.OtherObjects += UsrTransfeerDs.ToString();
+    CurPage.Commands += this.CID("inserWindow") + ".hide();" ;
+    CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+                }
+@Html.Raw(CurPage)

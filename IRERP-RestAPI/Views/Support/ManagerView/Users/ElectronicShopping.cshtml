@@ -1,0 +1,32 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    var information = new IRERP_SM_VLayout(){members=new IRERPControlBase[]{
+        new IRERP_SM_DynamicForm() { 
+    numCols=2,
+    items=new IRERP_SM_FormItem[]{
+    new IRERP_SM_StaticTextItem(){title="نام مشترک",type= IRERPControlTypes_FormItemType.StaticTextItem,defaultValue="سعیده عباسی"},
+    new IRERP_SM_ComboBoxItem(){title="نوع خرید",type=IRERPControlTypes_FormItemType.comboBox,valueMap=new IRERP_SM_FromString("{\"Choice\":\"انتخاب کنید\",\"Service\":\"سرویس\",\"Traffic\":\"ترافیک(گیگ)\"}",false)}
+   }},
+   
+   new IRERP_SM_HLayout(){
+   members=new IRERPControlBase[]{
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"},
+       new IRERP_SM_Img(){src="/Images/rsz_bank_melli.png",width="10%",height="10%"}
+       
+   }}
+    }};
+    }
+
+
+@Html.Raw(information.ToStringAsMemberOfOther())

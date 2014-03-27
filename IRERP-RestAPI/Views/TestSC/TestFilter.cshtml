@@ -1,0 +1,26 @@
+﻿@using IRERP_RestAPI.Bases.Skins;
+@{
+    ViewBag.Title = "TestFilter";
+    Layout = "~/Views/Shared/SmartClient_Layout.cshtml";
+}
+
+<h2>TestFilter</h2>
+@{
+    IRERP_RestAPI.MetaModel.CustomerPortal_MetaModel model = this.Model;
+    var ds = model.GenDS(x => x.User.Invoices, IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.Invoice_OverView
+        , ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl, "Acc"
+        );
+    var lst = Win8Skin.GetGeneralListGrid(Datasource: ds);
+    lst.ID = "lst";
+    lst.showFilterEditor = true;
+    lst.filterOnKeypress = true;
+    lst.fetchDelay = 500;
+    lst.allowFilterExpressions = true;
+    
+    }
+<script type="text/javascript">
+    @Html.Raw(lst);
+    lst.showFilterEditor= true;
+    lst.filterOnKeypress = true;
+    lst.fetchDelay = 500;
+</script>

@@ -1,0 +1,103 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+    var BuyService = new IRERP_SM_VLayout()
+    {
+        width="100%",
+        height="100%",
+        members=new IRERPControlBase[]{
+           new IRERP_SM_TileGrid(){
+              
+               autoDraw=false,ID="boundList",tileWidth=158,tileHeight=205,height="20%",showAllRecords=true,autoFetchData=true,
+               recordClick=new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNA-3')"" ", true),
+               
+               
+               
+           animateTileChange=true , dataSource=new IRERP_SM_FromString("UserAllService",false) ,fields=new IRERP_SM_DetailViewer[]{
+               new IRERP_SM_DetailViewer(){name="ServiceName"},
+              new IRERP_SM_DetailViewer(){name="Tariff"},
+               new IRERP_SM_DetailViewer(){name="ImageSrc",type="image"},
+               new IRERP_SM_DetailViewer(){name="ServiceSpeed"},
+               
+               
+           }},
+           new IRERP_SM_DynamicForm(){
+           autoDraw=false,
+            ID="boundForm",
+              numCols=6,
+              dataSource=new IRERP_SM_FromString("UserAllService",false) ,
+             fields=new IRERP_SM_FormItem[]{
+                 new IRERP_SM_SliderItem(){
+             name="lifeSpan" , title= "Max Life Span", editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.slider},
+                    minValue=1, maxValue=60, defaultValue=60, height=50,
+                   operator_=IRERPControlTypes_OperatorId.lessThan}
+                },
+             }
+           }
+      
+    };
+
+
+
+    var a = new IRERP_SM_Window()
+    {
+        height = "30%",
+        width = "30%",
+        ID = "modalWindow",
+        title = new IRERPControlTypes_HTMLString("test"),
+        autoSize = true,
+        autoCenter = true,
+        isModal = true,
+        showModalMask = true,
+        autoDraw = false,
+        backgroundColor = "#fc4c4c",
+        showHeader = false,
+        showEdges = false,
+        items = new IRERPControlBase[]{ 
+        new IRERP_SM_DynamicForm(){
+              numCols =2,
+            margin=10,
+                   height = "100%",
+        width = "100%",             
+            fields = new IRERP_SM_FormItem[]{
+               
+                     new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "textForKharidService") },
+                   new IRERP_SM_RadioGroupItem(){ type=IRERPControlTypes_FormItemType.radioGroup,  
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"mah1\":\"یک ماهه\",\"mah3\":\"سه ماهه\",\"mah6\":\"شش ماهه\",\"sal\":\"یک ساله\"}",false)
+                   }
+                   
+                  
+                 
+                  
+        }
+        
+                       
+    },
+       new IRERP_SM_HLayout()
+                   {
+                       width="100%",
+                       height="100%",
+                      
+                       members=new IRERPControlBase[]{ 
+                            new IRERP_SM_Label(){width="5%"},
+                            new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt"))
+                                , click= new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true)},
+                           new IRERP_SM_Label(){width="0%"},
+                       new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Return")),
+                           click= new IRERPControlTypes_StringMethods(@" ""buyServiceCloaseWindow()"" ", true)},
+                           new IRERP_SM_Label(){width="5%"}
+                      
+                       }
+                   } 
+}
+
+
+    };
+    }
+@Html.Raw(a);
+@Html.Raw("modalWindow.hide();")
+@Html.Raw(BuyService.ToStringAsMemberOfOther());

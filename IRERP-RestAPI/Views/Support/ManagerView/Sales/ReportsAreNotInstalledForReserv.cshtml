@@ -1,0 +1,237 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    var information = new IRERP_SM_DynamicForm()
+    {
+        width="100%",
+        height="50%",
+        numCols=2,
+        items=new IRERP_SM_FormItem[]{
+        new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+        new IRERP_SM_TextItem(){title="از"},
+        new IRERP_SM_TextItem(){title="تا"},
+         new IRERP_SM_ComboBoxItem(){title="نام همکار",valueMap=new IRERP_SM_FromString(
+                       "{\"a\":\"همه\",\"b\":\"عباسی\",\"c\":\"احمدی\"}",false)
+                        },
+                        
+                         new IRERP_SM_ComboBoxItem(){title=" علت عدم نصب",valueMap=new IRERP_SM_FromString(
+                       "{\"a1\":\"همه\",\"b1\":\"پر بودن آنتن\",\"c3\":\"ضعیف بودن سیگنال\",\"D4\":\"کیفیت پایین سرویس\",\"G5\":\"ارتفاع کم\"}",false)
+                        },
+                            new IRERP_SM_SelectItem(){
+                 ID="cbotest",
+                 name="FilterSelect",title="نام مشترک",displayField="Email",valueField="UserID", 
+                 pickListProperties=new IRERP_SM_ListGrid(){showFilterEditor=true},
+                 editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.SelectItem},
+                 pickListFields=new IRERP_SM_ListGridFiled[]{new IRERP_SM_ListGridFiled(){name="DisplayName"},
+                     new IRERP_SM_ListGridFiled(){name="Email"}  },
+                 optionDataSource="UserSupportDs",autoFetchData=true
+             },
+                new IRERP_SM_ComboBoxItem(){title=" نام اپراتور",valueMap=new IRERP_SM_FromString(
+                       "{\"a4\":\"همه\",\"b4\":\"عباسی\",\"c4\":\"احمدی\"}",false)
+                        },
+                        new IRERP_SM_TextItem(){title="آدرس"},
+             new IRERP_SM_ButtonItem(){title="جستجو"}
+             
+        }
+    };
+
+    var InastallationInformation =
+        new IRERP_SM_FromString(@"
+                isc.ListGrid.create({
+                    ID: ""countryList1"",
+                    width:""100%"", height:""100%"",
+alternateRecordStyles :false,membersMargin :0,
+    canEdit:false,  showHeader :true, 
+    data: [
+{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},{
+    Row:""1"",
+    ReserveNumber:""1236"",
+    Date:""1392.2.3"",
+    User:""سعیده عباسی"",
+    Instalation:""افشین صادقی"",
+     Service:""PNE-3"",
+   Address:""تهران-ایران"",  
+Desc:""این یک تست است"",
+
+   
+ 
+},
+    ],
+    fields:[
+{name:""Row"",title:""ردیف""},
+{name:""ReserveNumber"",title:""شماره رزرو""},
+{name:""Date"",title:""تاریخ""},
+{name:""User"",title:""مشترک""},
+{name:""Instalation"",title:""نصاب""},
+{name:""Service"",title:""سرویس""},
+{name:""Address"",title:""آدرس""},
+{name:""Desc"",title:""توضیحات""},
+
+
+
+
+
+
+]
+
+            })
+                   
+               ", false);
+
+
+
+
+    var body = new IRERP_SM_VLayout() { members = new IRERPControlBase[] { information, InastallationInformation } };
+
+ }
+     
+
+    
+ 
+@Html.Raw(body.ToStringAsMemberOfOther())

@@ -1,0 +1,86 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    
+    IRERPPageString CurPage = new IRERPPageString();
+    var par1 = new IRERPPageString(Html.Partial("ContactdetailsUser"));
+    CurPage.OtherObjects += par1.OtherObjects;
+    CurPage.Commands += par1.Commands;
+    var ContactDetailsUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                    par1.DisplayControls
+                    )};
+    var par2 = new IRERPPageString(Html.Partial("Tinyconnection"));
+    CurPage.OtherObjects += par2.OtherObjects;
+    CurPage.Commands += par2.Commands;
+    var TinyConnectionUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                   par2.DisplayControls
+                    )};
+    var par3 = new IRERPPageString(Html.Partial("Information"));
+    CurPage.OtherObjects += par3.OtherObjects;
+    CurPage.Commands += par3.Commands;
+    var Information = new IRERPControlBase[] { new IRERP_SM_FromString(
+                  par3.DisplayControls
+                    )};
+   var  par = new IRERPPageString(Html.Partial("ResiveFreeTraffic"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var ResiveTraffic = new IRERPControlBase[] { new IRERP_SM_FromString(
+                     par.DisplayControls
+                    )};
+
+    par = new IRERPPageString(Html.Partial("InformationOfUser"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var InformationOfUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                    par.DisplayControls
+                    )};
+                    
+// var testButton=   new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("ok"), click = new IRERPControlTypes_StringMethods(@" ""TabClick"" ", true) };
+                                                         
+    var tabset = new IRERP_SM_TabSet()
+    {
+        ID = this.CID("TabsetTest1"),
+        tabBarPosition = IRERPControlTypes_Side.top,
+        tabBarAlign = IRERPControlTypes_Side.right,
+        canEditTabTitles = true,
+        titleEditEvent = IRERPControlTypes_TabTitleEditEvent.doubleClick,
+        titleEditorTopOffset = 2,
+        tabs = new IRERP_SM_Tab[]{
+                      
+                
+                 
+            
+             /*      new IRERP_SM_Tab{
+                        title="ریز تماس مشترک",
+                        pane=new IRERP_SM_VLayout(){members=ContactDetailsUser}
+                 },*/
+                 
+                 new IRERP_SM_Tab{
+                        title="ریز اتصال مشترک",
+                     pane=new IRERP_SM_VLayout(){members=TinyConnectionUser}
+                 },
+                    new IRERP_SM_Tab{
+                        title="ریز تمدید موقت مشترک",
+                        pane= new IRERP_SM_VLayout(){members=Information}
+                 },
+                   new IRERP_SM_Tab{
+                        title="ریز حجم رايگان دريافتي مشترک ",
+
+                        pane= new IRERP_SM_VLayout(){members=ResiveTraffic}
+                 }
+                 ,
+                   new IRERP_SM_Tab{
+                        title="توضيحات مرتبط با مشترك ",
+
+                        pane= new IRERP_SM_VLayout(){members=InformationOfUser}
+                 }
+                 
+        }
+    };
+var test= new IRERP_SM_VLayout() { members = new IRERPControlBase[] { tabset } };
+CurPage.DisplayControls = test.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

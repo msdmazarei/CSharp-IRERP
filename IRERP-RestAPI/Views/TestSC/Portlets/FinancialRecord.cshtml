@@ -1,0 +1,38 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    string White = "#ffffff";
+
+    string portletlabelbackcolor = "#888888";
+
+
+    var FinancialRecordPortlet = new IRERP_SM_Portlets()
+    {
+        ID = "Financialportlet",
+        click = new IRERPControlTypes_StringMethods("FinancialReport_Click", true),
+        border = "1px solid",
+        members = new IRERPControlBase[]{
+                new IRERP_SM_VLayout(){
+                    height="100%",width="100%",
+                    
+                    members= new IRERPControlBase[]{
+                        new IRERP_SM_Img(){src="/Images/1368882168_icontexto-aurora-folders-contacts.png",imageType=IRERPControlTypes_imageType.center,height="*"},
+                        new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "FinancialRecord")),
+                            backgroundColor=portletlabelbackcolor
+                            ,baseStyle="portletlabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"
+                        },
+                    }
+                }
+            },
+       
+        showEdges = false,
+        showHeader = false,
+        backgroundColor = White
+
+    };
+    }
+@Html.Raw(FinancialRecordPortlet.ToStringAsMemberOfOther())

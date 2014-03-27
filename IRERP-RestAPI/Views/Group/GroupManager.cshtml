@@ -1,0 +1,55 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    var UsrGroupDs = model.GenDS(
+      x => x.AllGroup,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,  
+      ID: this.CID("UserGroupDs")
+      );
+
+    PageDataSources.Add(UsrGroupDs);
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("GroupForm"), data: new IRERP_SM_FromString(UsrGroupDs.ID));
+
+    DyForm.fields = new IRERP_SM_FormItem[] {  new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue="شما در حال تعریف گروه  جدید می باشید." },
+     new IRERP_SM_TextItem(){title="نام گروه",name= "GroupName"},
+     new IRERP_SM_TextAreaItem(){title="توضیحات", type=IRERPControlTypes_FormItemType.textArea,name="Description"},
+                     };
+
+
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UsrGroupDs.ID), ID: this.CID("GroupGrid"), _CanEdit: false);
+    //       Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+    //     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.AddedBy.DisplayName) }, 
+    //        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.AddedBy.Email) }, 
+    //  new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.DateInserted),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)},
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.PersianDateInserted) },
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.User.DisplayName) },
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.User.Email) },
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.InvoiceableUser>(x => x.User.UserInformation.CustomerType), valueMap=@"{""1"":""مشترک حقیقی"",""0"":""مشترک حقوقی""}" },
+
+    //};           
+
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+
+    MasterDVS.PageTitle = "تعیین منوها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    }
+
+@Html.Raw(CurPage)

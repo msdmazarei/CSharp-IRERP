@@ -1,0 +1,152 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+    
+    
+   //   var NamePortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1369215372_user_64.png", _backgroundcolor: "#6f9e10", LaBEL: IRERPApplicationUtilities.GetHtmlString(ApplicationStatics.LoggedUser, x => x.DisplayName, ApplicationStatics.T("DisplayName")),click: new IRERPControlTypes_StringMethods("UserProperty_Click", true));
+
+      var LastDateTransactionPortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: "تاریخ آخرین تراکنش:1392.2.23", _imgsrc: "/Images/1369215853_calendar_2.png", _backgroundcolor: "#6f9e10");
+      var LastMoneyTransactionPortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: "مبلغ آخرین تراکنش:5467979645", _imgsrc: "/Images/1369215811_credit-cards.png", _backgroundcolor: "#fc4c4c");
+    var FinancialRecordPortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "FinancialRecord"), _backgroundcolor: "#fc4c4c", _imgsrc: "/Images/1369215733_money.png", click: new IRERPControlTypes_StringMethods("FinancialReport_Click", true));
+
+    
+    
+    var LabalePortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescCeredit"),
+        ShowImg:false,  _imgsrc: "", _backgroundcolor: "#6f9e10",_height:"*");
+
+    var BanksaderatPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "saderat"),
+        _imgsrc: "/Images/rsz_1bank_saderat.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankparsianPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "parsian"),
+        _imgsrc: "/Images/rsz_1parsian.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BanksamanPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "saman"),
+        _imgsrc: "/Images/rsz_1saman.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankmaskanPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "maskan"),
+        _imgsrc: "/Images/rsz_2bank_makan.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankmeliPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "bankmeli"),
+        _imgsrc: "/Images/rsz_1bank_melli1.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankkeshavarziPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "keshavarzi"),
+        _imgsrc: "/Images/rsz_agribank.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankAnsarPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ansar"),
+        _imgsrc: "/Images/rsz_bank-ansar.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankSepahPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "sepah"),
+        _imgsrc: "/Images/rsz_bank_sepah.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankTejaratPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "tejarat"),
+        _imgsrc: "/Images/rsz_bank_tejarat.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankNarkaziPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "pasargad"),
+        _imgsrc: "/Images/rsz_bankpasargad.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankKarAfarinPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "karAfarin"),
+        _imgsrc: "/Images/rsz_bankkarafarin.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankEghtesadNovinPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "eghtesad"), 
+        _imgsrc: "/Images/rsz_enbank.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BanktoseePortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "melat"),
+        _imgsrc: "/Images/rsz_mellat_mellat_mellat.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BanksinaPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "sina"),
+        _imgsrc: "/Images/rsz_sina-bank.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BanksarmayePortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "sarmaye"),
+        _imgsrc: "/Images/rsz_sarmaye-bank.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+    var BankrefahPortlet = Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "refah"),
+        _imgsrc: "/Images/rsz_refah-bank.png", click: new IRERPControlTypes_StringMethods(@" ""Ceredit_DialgSelectDuration()"" ", true));
+
+
+
+    var a = new IRERP_SM_Window()
+    {
+        height = "20%",
+        width = "30%",
+        ID = "modalWindow",
+        title = new IRERPControlTypes_HTMLString("test"),
+        autoSize = true,
+        autoCenter = true,
+        isModal = true,
+        showModalMask = true,
+        autoDraw = false,
+        backgroundColor = "#6f9e10",
+        showHeader = false,
+        showEdges = false,
+        items = new IRERPControlBase[]{ 
+        new IRERP_SM_DynamicForm(){
+              numCols =2,
+            margin=10,
+                   height = "100%",
+        width = "100%",             
+            fields = new IRERP_SM_FormItem[]{
+                new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "textForIncreaseCredit") },
+                new IRERP_SM_TextItem(){title="مبلغ"},
+                new IRERP_SM_TextAreaItem(){title="توضیح:"}
+                
+                   
+                   }
+        },
+         new IRERP_SM_HLayout()
+                   {
+                       width="100%",
+                       height="100%",
+                      
+                       members=new IRERPControlBase[]{ 
+                            new IRERP_SM_Label(){width="5%"},
+                            new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt")), click= new IRERPControlTypes_StringMethods(@" ""CereditBank_DialgSelectDuration()"" ", true)},
+                           new IRERP_SM_Label(){width="0%"},
+                       new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Return")),
+                           click= new IRERPControlTypes_StringMethods(@" ""buyCereditCloaseWindow()"" ", true)},
+                           new IRERP_SM_Label(){width="5%"}
+                      
+                       }
+                   } 
+        
+    }
+     
+    };
+
+
+    
+
+
+    var lbl1 = Win8Skin.GetGeneralPortlet(
+       _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+    var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+
+    _v.members = new IRERPControlBase[] {
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString( IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForCeredit")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel" ,align=IRERPControlTypes_Alignment.right,
+                height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel",align=IRERPControlTypes_Alignment.right,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel", height="10",align=IRERPControlTypes_Alignment.right,
+                overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+
+
+    var IMG = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png", LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+    IMG.width = "200px";
+    IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+
+
+    var portal = Win8Skin.GetGeneralPortLayout();
+    portal.portlets = IRERP_SM_Portlets.GetRow(new IRERP_SM_Portlets()
+    {
+        Portlets = new IRERPControlBase[]{ 
+            //IRERP_SM_Portlets.GetRow(NamePortlet,FinancialRecordPortlet,LastDateTransactionPortlet,LastMoneyTransactionPortlet),
+         LabalePortlet,
+        IRERP_SM_Portlets.GetRow( BankAnsarPortlet, BanksaderatPortlet,BankparsianPortlet,BankEghtesadNovinPortlet,BankKarAfarinPortlet,BankkeshavarziPortlet,BankmaskanPortlet,
+        BankmeliPortlet),
+        
+           IRERP_SM_Portlets.GetRow(BankNarkaziPortlet,BankrefahPortlet,BanksamanPortlet,BanksarmayePortlet,BankSepahPortlet,BanksinaPortlet,BankTejaratPortlet,BanktoseePortlet
+        ),
+        IRERP_SM_Portlets.GetRow (IMG,lbl1)
+          
+           
+                      
+         }
+    });
+}
+@Html.Raw(a);
+@Html.Raw("modalWindow.hide();")
+@Html.Raw(portal)

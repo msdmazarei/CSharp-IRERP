@@ -1,0 +1,63 @@
+﻿
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrInfoDs = model.GenDS(
+     x => x.SelectedUser.ConnectionHistory,
+     ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+     ID: this.CID("UserInfoDs")
+     );
+  //  string Sorkh = "#fc4c4c";
+    var date =new IRERP_SM_HLayout(){
+   members=new IRERPControlBase[]{
+       new IRERP_SM_Label(){width="10%"},
+       new IRERP_SM_DynamicForm()
+    {
+        numCols=4,
+        width="100%",
+        items=new IRERP_SM_FormItem[]{
+           
+            new IRERP_SM_DateItem(){title="از تاریخ",type=IRERPControlTypes_FormItemType.date},
+            new IRERP_SM_DateItem(){title="تا تاریخ",type=IRERPControlTypes_FormItemType.date}
+            
+        }
+    },
+    new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("ارسال")
+    
+    },
+    
+     new IRERP_SM_Label(){width="10%"}
+   }};
+
+
+
+    var datasource =IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+        
+        Datasource:new IRERP_SM_FromString( this.CID("UserInfoDs"), false)
+        ) ;
+    datasource.ID =this.CID( "lstConnections");
+    
+    datasource.showFilterEditor=true;
+    datasource.filterOnKeypress=true;
+    datasource.fetchDelay=1000;
+    datasource.allowFilterExpressions = true;
+    
+        
+      
+
+ var last = new IRERP_SM_VLayout()
+ {
+     members = new IRERPControlBase[] { date, datasource }
+
+ };
+ CurPage.OtherObjects = UsrInfoDs.ToString();
+ CurPage.DisplayControls = last.ToStringAsMemberOfOther();
+    }
+
+
+@Html.Raw(CurPage)

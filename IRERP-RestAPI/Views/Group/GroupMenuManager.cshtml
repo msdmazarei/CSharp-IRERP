@@ -1,0 +1,114 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.MetaModel;
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var GroupDs = model.GenDS(
+      x => x.AllGroup,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      ID: this.CID("UserGroupDs")
+      );
+
+    var AllMenuDs = model.GenDS(
+x => x.AllMenu,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("AllMenuDs")
+); 
+      
+    var GroupMenuDs = model.GenDS(
+      x => x.AllGroupMenu,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      SpecMetaModelProfile:IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.General,
+      ID: this.CID("GroupMenuDs")
+      );
+    PageDataSources.Add(GroupDs);
+    PageDataSources.Add(AllMenuDs);
+    PageDataSources.Add(GroupMenuDs);
+
+    for (int i = 0; i < AllMenuDs.fields.Count(); i++)
+    {
+        if (
+            AllMenuDs.fields[i].name.Trim().ToLower() == "ParentId".ToLower()
+            )
+        {
+            AllMenuDs.fields[i].foreignKey = AllMenuDs.ID + ".id";
+            break;
+        }
+
+    }
+
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("GroupmenuForm"), data: new IRERP_SM_FromString(GroupMenuDs.ID));
+
+    DyForm.fields = new IRERP_SM_FormItem[] {   new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue="شما در حال تعریف  گروه  برای منو  می باشید." },
+                     new IRERP_SM_PickTreeItem(){
+                         canSelectParentItems=true, 
+                         dataSource=new IRERP_SM_FromString(this.CID("AllMenuDs"), false),
+                         emptyMenuMessage="No Selected Value",
+                         displayField=IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.Title),
+                         valueField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.id),
+                         name=this.FN<GroupMenu>(x=>x.Menu.id)
+                    },
+                    AbbasiAdmin.GGSelectItem<GroupUser,Group>(
+                    this.CID("cbogroup"), 
+                    x=>x.Group.id,"نام گروه",
+                    x=>x.GroupName,
+                    x=>x.id
+                    ,null
+                    ,this.CID("UserGroupDs"),
+                    true,true,x=>x.GroupName),
+                  new IRERP_SM_NativeCheckboxItem(){title="با فرزندان",type=IRERPControlTypes_FormItemType.checkbox,name=this.FN<GroupMenu>(x=>x.WithChildren)}   
+                     };
+
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(GroupMenuDs.ID), ID: this.CID("GroupMenuGrid"), _CanEdit: false);
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.GroupMenu>(x => x.Menu.Title) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.GroupMenu>(x => x.WithChildren) }, 
+      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.GroupMenu>(x =>x.Group.GroupName)},
+       
+    };           
+
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+
+    MasterDVS.PageTitle = "تعیین گروه منوها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    //var ShowAllGroupMenu = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+
+    // Datasource: new IRERP_SM_FromString(this.CID("GroupMenuDs"), false)
+    // );
+    //ShowAllGroupMenu.ID = this.CID("lstAllGroupMenu");
+
+    //ShowAllGroupMenu.showFilterEditor = true;
+    //ShowAllGroupMenu.filterOnKeypress = true;
+    //ShowAllGroupMenu.fetchDelay = 1000;
+    //ShowAllGroupMenu.allowFilterExpressions = true;
+    //ShowAllGroupMenu.autoDraw = true;
+    //ShowAllGroupMenu.autoFetchData = true;
+    //ShowAllGroupMenu.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.GroupMenu>(x=>x.Menu.Title) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.GroupMenu>(x=>x.WithChildren) }, 
+          
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<GroupUser>(x=>x.Group.GroupName) } 
+    //};
+
+    
+    }
+
+@Html.Raw(CurPage)

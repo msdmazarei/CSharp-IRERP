@@ -1,0 +1,30 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    var Information =
+
+        new IRERP_SM_DynamicForm()
+        {
+            width = "100%",
+            height = "50%",
+            numCols = 2,
+            items = new IRERP_SM_FormItem[]{
+          new IRERP_SM_StaticTextItem(){title="نام ",defaultValue="سعیده عباسی",type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="میزان اعتبار ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          
+          new IRERP_SM_StaticTextItem(){title="هزینه کل ",defaultValue="10 ",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="هزینه سرویس ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="هزینه ترافیک ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem},
+          new IRERP_SM_StaticTextItem(){title="مانده ",defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),type=IRERPControlTypes_FormItemType.StaticTextItem}
+         
+          
+           
+
+           }
+        };
+          
+     
+    }
+@Html.Raw(Information.ToStringAsMemberOfOther())

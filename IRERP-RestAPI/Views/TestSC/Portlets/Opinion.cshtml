@@ -1,0 +1,63 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    string Sorkh = "#FE6F5E";
+    //string portletlabelbackcolor = "#888888";
+    
+    var OpinionPortlet = new IRERP_SM_Portlets()
+    {
+        border = "1px solid",
+        members = new IRERPControlBase[]{
+              new IRERP_SM_HLayout(){
+                    height="100%",width="100%",
+                   members= new IRERPControlBase[]{
+                  
+               new IRERP_SM_VLayout(){
+                    height="100%",width="70%",
+                    
+                    members= new IRERPControlBase[]{
+                        
+                        new IRERP_SM_DynamicForm()
+                        {
+                          
+                             numCols = 2,
+                               height="100%",width="100%"
+                               ,margin=10,
+                               
+            fields = new IRERP_SM_FormItem[]{
+                
+                  new IRERP_SM_HeaderItem(){defaultValue=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "QeustionForOpinion"),name=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "QeustionForOpinion"),textBoxStyle="whitelabel"},
+                   new IRERP_SM_RadioGroupItem(){ title=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Opinion"),
+                       type=IRERPControlTypes_FormItemType.radioGroup, textBoxStyle="whitelabel",titleStyle="whitelabel",
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"khob\":\"خوب\",\"bad\":\"بد\"}",false)
+                        },
+                       new IRERP_SM_TextAreaItem(){type=IRERPControlTypes_FormItemType.text,title=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForOpinion"),align=IRERPControlTypes_Alignment.right,titleStyle="whitelabel"},
+                     
+                   
+                                    }
+                        },
+                        
+                        
+                    new IRERP_SM_Label(){height="5%",width="5%"},
+                  new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt"))},
+                   new IRERP_SM_Label(){width="5%"} 
+                      
+               }
+               },
+                        new IRERP_SM_Img(){src="/Images/1369045403_checklist.png",imageType=IRERPControlTypes_imageType.center,height="*"}
+               
+                   
+                   
+                   } }
+        },
+
+        showEdges = false,
+        showHeader = false,
+
+        backgroundColor = Sorkh
+    };  
+    }
+@Html.Raw(OpinionPortlet.ToStringAsMemberOfOther())

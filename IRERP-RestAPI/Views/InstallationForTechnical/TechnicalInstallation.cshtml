@@ -1,0 +1,66 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrInstallDs = model.GenDS(
+    x => x.AllInstallation,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID: this.CID("InstallDs")
+    );
+    var UsrSupportDs = model.GenDS(
+          x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.General,
+       ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+       ID: this.CID("UserSupportDs")
+       );
+    var Instalation = new IRERP_SM_DynamicForm()
+    {
+        numCols = 2,
+        dataSource=new IRERP_SM_FromString(this.CID("InstallDs"), false),
+        ID=this.CID("editorForm"),
+        items = new IRERP_SM_FormItem[] { 
+            new IRERP_SM_HeaderItem(){defaultValue="مشخصات"},
+
+            new IRERP_SM_TextItem(){title="نام سایت",name=""},
+            new IRERP_SM_TextItem(){title="نام AccessPoint",name="AccessPointID"},
+            new IRERP_SM_TextItem(){title="توضیحات",name="Description"},
+            new IRERP_SM_TextItem(){title="طول جغرافیایی",name=""},
+            new IRERP_SM_TextItem(){title="عرض جغرافیایی",name=""},
+            new IRERP_SM_TextItem(){title="ارتفاع",name=""},
+            new IRERP_SM_TextItem(){title="آدرس",name="StationAddress"},
+            new IRERP_SM_NativeCheckboxItem(){title="متعلق به پتیاک",name="ForPetiak"},
+            new IRERP_SM_NativeCheckboxItem(){title="حذف شده",name="Deleted"},
+            new IRERP_SM_HeaderItem(){defaultValue="جزئیات",name=""},
+            new IRERP_SM_TextItem(){title="WANMAC",name="WANMAC"},
+            new IRERP_SM_TextItem(){title="LANMAC",name="LANMAC"},
+            new IRERP_SM_TextItem(){title="LANIPAddress",name="LANIPAddress"},
+            new IRERP_SM_TextItem(){title="SubnetMask",name="SubnetMask"},
+            new IRERP_SM_TextItem(){title="Gateway",name="Gateway"},
+            new IRERP_SM_TextItem(){title="OutputPower",name="OutputPower"},
+            new IRERP_SM_TextItem(){title="CCQ",hint=new IRERPControlTypes_HTMLString("%"),name="CCQ"},
+            new IRERP_SM_TextItem(){title="Rx",hint=new IRERPControlTypes_HTMLString("mb"),name="Rx"},
+            new IRERP_SM_TextItem(){title="Tx",hint=new IRERPControlTypes_HTMLString("mb"),name="Tx"},
+            new IRERP_SM_TextItem(){title="Ping",hint=new IRERPControlTypes_HTMLString("ms"),name="Ping"},
+       AbbasiAdmin.GGSelectItem<PetiakWifiStation,User>(this.CID("cbotest"),x=>x.LoginUsername,"نام مشترک",x=>x.Email,x=>x.UserID,null,this.CID("UserSupportDs"),true,true,x=>x.DisplayName),
+                   
+             new IRERP_SM_NativeCheckboxItem(){title="Faulty",name="Faulty"},
+             new IRERP_SM_NativeCheckboxItem(){title="For Site",name="ForSite"},
+             new IRERP_SM_ButtonItem(){title="ارسال", click= new IRERPControlTypes_StringMethods(@" ""Insert_Save(" + this.CID("editorForm") + @")"" ", true)}
+            
+            
+            
+        }
+    };
+
+    CurPage.OtherObjects += UsrSupportDs.ToString();
+    
+    CurPage.OtherObjects += UsrInstallDs != null ? UsrInstallDs.ToString() : "";
+    
+    CurPage.DisplayControls += Instalation.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

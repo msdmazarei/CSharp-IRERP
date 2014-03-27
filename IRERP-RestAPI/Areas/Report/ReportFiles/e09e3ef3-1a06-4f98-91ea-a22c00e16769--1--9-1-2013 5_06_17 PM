@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="1">
+      <RealInvoice_InvoicePrint Ref="2" type="DataTableSource" isKey="true">
+        <Alias>RealInvoice_InvoicePrint</Alias>
+        <Columns isList="true" count="7">
+          <value>Invoice.InvoiceNumber,شماره_فاکتور_x0020_,System.Int32</value>
+          <value>Invoice.PersianInvoiceDate,تاریخ_فاکتور_شمسی,System.String</value>
+          <value>Invoice.Performa.PerformaNumber,شماره_پیش_فاکتور,System.Int32</value>
+          <value>Invoice.Performa.PerformaType,نوع_فاکتور,System.Int32</value>
+          <value>Invoice.Performa.User.DisplayName,نام_کاربر,System.String</value>
+          <value>Invoice.Performa.User.Email,پست_الکترونیک_کاربر,System.String</value>
+          <value>Invoice.Performa.DiscountPercentage,درصد_تخفیف,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>RealInvoice_InvoicePrint</Name>
+        <NameInSource>RealInvoice_InvoicePrint</NameInSource>
+      </RealInvoice_InvoicePrint>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="4">
+      <value>,tarikh_emruz,tarikh_emruz,System.String,_x0031_4:39:03_x0020_1392_x002F_06_x002F_10,False,False</value>
+      <value>,address_sherekat,address_sherekat,System.String,شهید_x0020_قلندی_x0020_-_x0020_تهران_x0020_-_x0020_بزرگراه_x0020_شهید_x0020_صدر,False,False</value>
+      <value>,shoare_sherekat,shoare_sherekat,System.String,همه_x0020_چیز_x0020_خوبست_x0020_مگر_x0020_اینکه_x0020_تو_x0020_نخواهی_x0020_که_x0020_باشد,False,False</value>
+      <value>,name_sherekat,name_sherekat,System.String,پتیاک,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <HeaderBand1 Ref="4" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.72,1.1</ClientRectangle>
+          <Components isList="true" count="2">
+            <Text3 Ref="5" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.9,0.4,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{tarikh_emruz}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text3>
+            <Text4 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1.8,0.4,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>tarikh_emruz</Text>
+              <TextBrush>Black</TextBrush>
+            </Text4>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Name>HeaderBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+        </HeaderBand1>
+        <DataBand1 Ref="7" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.7,7.72,1.6</ClientRectangle>
+          <Components isList="true" count="4">
+            <Text1 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>4,0.5,3.4,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="7" />
+              <Text>{RealInvoice_InvoicePrint.Invoice_Performa_User_DisplayName}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text1>
+            <Text2 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.9,0.5,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="3" />
+              <Parent isRef="7" />
+              <Text>نام_کاربر</Text>
+              <TextBrush>Black</TextBrush>
+            </Text2>
+            <Text5 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2,0.5,0.6,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="3" />
+              <Parent isRef="7" />
+              <Text>{RealInvoice_InvoicePrint.Invoice_InvoiceNumber}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text5>
+            <Text6 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.9,0.5,1.1,0.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="3" />
+              <Parent isRef="7" />
+              <Text>شماره_فاکتور</Text>
+              <TextBrush>Black</TextBrush>
+            </Text6>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>RealInvoice_InvoicePrint</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>fd4c947636b0458d9ac97e8b98d0754a</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11</PageHeight>
+      <PageWidth>8.5</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="12" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="13" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>9/1/2013 2:39:08 PM</ReportChanged>
+  <ReportCreated>9/1/2013 1:54:26 PM</ReportCreated>
+  <ReportFile />
+  <ReportGuid>3bb9b4e6f31fbcc56d22d8ff5d4fcb77</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2013.1.1505</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

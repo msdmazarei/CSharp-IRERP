@@ -1,0 +1,45 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    IList<IRERP_RestAPI.Models.MenuItem> m = IRERP_RestAPI.ModelRepositories.IrerpMenu_Repository.GetHeadMenu(InstanceStatics.LoggedUser);
+
+    List<IRERPControlBase> menuBtn = new List<IRERPControlBase>();
+
+    Func<IRERP_RestAPI.Models.MenuItem, IRERP_SM_Menu> CreateMenu=null;
+     CreateMenu = y => {
+        IRERP_SM_Menu rtn = new IRERP_SM_Menu()
+        {
+            shadowDepth = 10,
+            autoDraw = false,
+            showShadow = true
+        };
+        List<IRERP_SM_MenuItem> SubMenus = new List<IRERP_SM_MenuItem>();
+        foreach(var w in y.UserSpec_Children)
+        {
+            if(w.HasChild)
+            {
+                SubMenus.Add(new IRERP_SM_MenuItem() { IsInInitializeTime = true, title = w.Title, submenu = CreateMenu(w) });
+            } else
+            {
+                var mnuitem = new IRERP_SM_MenuItem() { IsInInitializeTime = true, title = w.Title };
+                if (w.MethodToCall != null)
+                    if (w.MethodToCall.Trim() != "")
+                        mnuitem.click = new IRERPControlTypes_StringMethods( w.MethodToCall,true);
+                SubMenus.Add(mnuitem);
+            }
+        }
+        rtn.data = SubMenus.ToArray();
+        return rtn;
+    };
+    foreach (var x in m)
+    {
+        var tempMenu = new IRERP_SM_MenuButton() {title=new IRERPControlTypes_HTMLString(x.Title),menu=CreateMenu(x)};
+        menuBtn.Add(tempMenu);
+    }
+    
+    var body = new IRERP_SM_HLayout() { members =menuBtn.ToArray()};
+    }
+
+@Html.Raw(body.ToStringAsMemberOfOther())

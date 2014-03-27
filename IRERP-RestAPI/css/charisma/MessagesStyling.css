@@ -1,0 +1,33 @@
+﻿.text {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-family:Tahoma;
+    font-size:16px;
+   
+    
+  border-color: #9AD72B;
+  color: #772953;
+  font-weight:bold;
+}
+
+
+.waitbody {
+     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-family:Tahoma;
+    font-size:16px;
+   
+    
+  border-color: #9AD72B;
+  color: #772953;
+  font-weight:bold;
+}
+
+.waitHeader {
+     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-family:Tahoma;
+    font-size:16px;
+   
+    
+  border-color: #9AD72B;
+  color: #772953;
+  
+}

@@ -1,0 +1,97 @@
+﻿@using Stimulsoft.Report.Mvc;
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Scripts/PersianCalendar/skins/aqua/theme.css" rel="stylesheet" />
+    <script type="text/javascript"> var baseurl = '';</script>
+    <script type="text/javascript"> var isomorphicDir = "/Scripts/isomorphic/" </script>
+
+    <script src="~/Scripts/isomorphic/client/modules/ISC_History.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/development/ISC_FileLoader.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_Core.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_Foundation.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_Containers.js"></script>
+    
+    <script src="~/Scripts/isomorphic/client/modules/ISC_Grids.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_Forms.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_RichTextEditor.js"></script>
+    <script src="~/Scripts/isomorphic/client/modules/ISC_DataBinding.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/skins/EnterpriseBlue/load_skin.js"></script>
+
+    <!--  Enterprise Files
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_History.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/development/ISC_FileLoader.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_Core.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_Foundation.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_Containers.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/development/ISC_Grids.js" dir="ltr"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_Forms.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_RichTextEditor.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/system/modules/ISC_DataBinding.js"></script>
+    <script type="text/javascript" src="~/Scripts/isomorphic/skins/EnterpriseBlue/load_skin.js"></script>
+        -->
+    <!--------------------------------------LANGUAGE--------------------------------------->
+    <script src="~/Scripts/isomorphic/locales/frameworkMessages_fa.js"></script>
+    
+    <!------------------------------------------------------------------------------------->
+
+    <script type="text/javascript">var irerp = isc;</script>
+
+    <script src="~/Scripts/jquery-1-9-1.min.js"></script>
+    <!--script src="~/Scripts/jquery-1.7.1.min.js"></--script> -->
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script src="~/Scripts/jquery.jqplot.min.js"></script>
+    <script src="~/Scripts/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script src="~/Scripts/plugins/jqplot.highlighter.min.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpcontrols.js"></script>
+    
+    <script src="~/Scripts/PersianCalendar/jalali.js"></script>
+    <script src="~/Scripts/PersianCalendar/calendar.js"></script>
+    <script src="~/Scripts/PersianCalendar/calendar-setup.js"></script>
+    <script src="~/Scripts/PersianCalendar/lang/calendar-fa.js"></script>
+    <script src="~/Scripts/irerpjscontrols/PersianDatePickerItem.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpPickTreeItem.js"></script>
+    <script src="~/Scripts/GeneralFunctions/functions.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpGeneralControlFunctions.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpListGrid.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpMenuButton.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpMenu.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpFilterBuilder.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpColorItem.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpHiliteEditor.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpSelectItem.js"></script>
+    <script src="~/Scripts/win8portal/Win8Function.js"></script>
+<script src="~/Scripts/win8portal/win8portal.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpTextItem.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpFileUpload.js"></script>
+    <script src="~/Scripts/irerpjscontrols/Types/irerpFile.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpNullOrNotFilterEditor.js"></script>
+    
+
+
+    <!-- Google Address-->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places"></script>
+    <script src="~/Scripts/GeneralFunctions/gmaps.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpGAddressItem.js"></script>
+    <script src="~/Scripts/irerpjscontrols/Types/irerpGAddress.js"></script>
+    <script src="~/Scripts/irerpjscontrols/irerpMapWindow.js"></script>
+    
+    @{//Html.StiMvcViewerFxRenderScripts()
+    }
+
+    @{
+    //Html.Stimulsoft().RenderMvcViewerFxScripts()
+    }
+    <!-- TO SOLVE GRID SCROLL PROBLEM   -->
+    
+<script type="text/javascript">     isc.Canvas.addProperties({ showCustomScrollbars: false });</script>    
+    
+</head>
+<body >
+    @RenderBody()
+</body>
+</html>

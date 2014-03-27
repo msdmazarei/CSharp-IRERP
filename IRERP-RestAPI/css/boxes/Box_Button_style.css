@@ -1,0 +1,80 @@
+﻿.button-8 {
+	cursor: pointer;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	background-color: #9AD72B;
+	border: 1px solid #9AD72B;
+	color: black;
+	text-shadow: none;
+	padding: 8px 15px;
+}
+.button-8:hover {
+	border-color: #4c8534;
+	color: black;
+}
+.button-8:active {
+	background-color: #9AD72B;
+}
+
+
+
+.button-8yellow {
+	cursor: pointer;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	background-color: #FFF212;
+	border: 1px solid #FFF212;
+	color: black;
+	text-shadow: none;
+	padding: 8px 15px;
+}
+.button-8yellow:hover {
+	border-color: #4c8534;
+	color: black;
+}
+.button-8yellow:active {
+	background-color: #FFF212;
+}
+
+
+
+
+.button-8red{
+	cursor: pointer;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	background-color: red;
+	border: 1px solid red;
+	color: black;
+	text-shadow: none;
+	padding: 8px 15px;
+}
+.button-8red:hover {
+	border-color: #4c8534;
+	color: black;
+}
+.button-8red:active {
+	background-color: red;
+}
+
+
+
+
+.button-8black{
+	cursor: pointer;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	box-shadow: 0 1px 0 rgba(0,0,0,.05);
+	background-color: gray;
+	border: 1px solid gray;
+	color: black;
+	text-shadow: none;
+	padding: 8px 15px;
+}
+.button-8black:hover {
+	border-color: #4c8534;
+	color: black;
+}
+.button-8black:active {
+	background-color: silver;
+}
+

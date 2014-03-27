@@ -1,0 +1,53 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+      
+    IRERPPageString CurPage = new IRERPPageString();
+    var button = new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("AddTab"), click = new IRERPControlTypes_StringMethods(@" ""AddTab('gholi','/ReportContact/ReportContactOfSupport')"" ", true) };
+    var button2 = new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("RemoveTab"), click = new IRERPControlTypes_StringMethods(@" ""RemoveTab()"" ", true) };
+
+    var tabset = new IRERP_SM_TabSet()
+    {
+        ID = "TabsetTest",
+        tabBarPosition = IRERPControlTypes_Side.top,
+        tabBarAlign = IRERPControlTypes_Side.right,
+        canEditTabTitles = true,
+        titleEditEvent = IRERPControlTypes_TabTitleEditEvent.doubleClick,
+        titleEditorTopOffset = 2,
+        tabs = new IRERP_SM_Tab[]{
+                               
+                        new IRERP_SM_Tab{
+                        title="ریز تماس مشترک",
+                        pane=new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("Detail1")}
+                 },
+                 
+                 new IRERP_SM_Tab{
+                        title="ریز اتصال مشترک",
+                     pane=new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("Detail2")}
+                 },
+                    new IRERP_SM_Tab{
+                        title="ریز تمدید موقت مشترک",
+                        pane= new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("Detail3")}
+                 },
+                   new IRERP_SM_Tab{
+                        title="ریز حجم رايگان دريافتي مشترک ",
+
+                        pane= new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("Detail4")}
+                 }
+                 ,
+                   new IRERP_SM_Tab{
+                        title="توضيحات مرتبط با مشترك ",
+
+                        pane= new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("Detail5")}
+                 }
+                 
+        }
+    };
+
+    var body = new IRERP_SM_VLayout() {members=new IRERPControlBase[]{button,button2,tabset}};
+    CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

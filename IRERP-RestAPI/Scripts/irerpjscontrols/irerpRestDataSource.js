@@ -1,0 +1,1 @@
+﻿irerp.defineClass("irerpRestDataSource", "RestDataSource");

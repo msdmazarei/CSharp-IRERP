@@ -1,0 +1,32 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+
+@{
+    ViewBag.Title = "caltest";
+    Layout = "~/Views/Shared/SmartClient_Layout.cshtml";
+}
+
+<h2>caltest</h2>
+
+			<script type="text/javascript">
+			    @{
+                    IRERP_RestAPI.MetaModel.Support_MetaModel model = new IRERP_RestAPI.MetaModel.Support_MetaModel();
+                    var usrds = model.GenDS<User>(
+                        x => x.AllUsers, IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.General,
+                        ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl, this.CID("a")
+                        );
+                        
+                    }
+			    @Html.Raw(usrds);
+			    isc.FilterBuilder.create({
+			        ID: "advancedFilter",
+			        dataSource: @this.CID("a"),
+			        criteria: {
+			            _constructor: "AdvancedCriteria"			     }
+			    });
+			</script>

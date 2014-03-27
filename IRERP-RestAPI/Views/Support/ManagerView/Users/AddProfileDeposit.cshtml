@@ -1,0 +1,27 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+
+ var ProfileDeposit =
+        new IRERP_SM_DynamicForm() {
+    numCols=2,
+    items=new IRERP_SM_FormItem[]{
+        new IRERP_SM_HeaderItem(){title="فرم ورود اطلاعات بانكي ",defaultValue="فرم ورود اطلاعات بانكي "},
+        new IRERP_SM_ComboBoxItem(){title="نام بانک",type=IRERPControlTypes_FormItemType.comboBox,valueMap=new IRERP_SM_FromString("{\"Choice\":\"انتخاب کنید\",\"saman\":\" سامان\",\"melat\":\"ملت\"}",false)},
+        new IRERP_SM_TextItem(){title="مبلغ واريزي",mask="ریال",hint=new IRERPControlTypes_HTMLString("ریال")},
+        new IRERP_SM_TextItem(){title="شماره فيش "},
+        new IRERP_SM_TextItem(){title="واريز كننده"},
+        new IRERP_SM_DateItem(){title="تاريخ واريز",type=IRERPControlTypes_FormItemType.date},
+         new IRERP_SM_TextAreaItem(){title="توضيحات",type=IRERPControlTypes_FormItemType.textArea},
+        
+              new IRERP_SM_ButtonItem(){title="افزودن"},
+        
+        
+     
+    
+    }} ;
+}
+
+@Html.Raw(ProfileDeposit.ToStringAsMemberOfOther())

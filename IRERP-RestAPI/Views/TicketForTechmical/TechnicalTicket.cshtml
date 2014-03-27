@@ -1,0 +1,35 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    var Ticket =new IRERP_SM_VLayout(){
+    members=new IRERPControlBase[]{
+        new IRERP_SM_DynamicForm() { 
+    numCols=2,
+    items=new IRERP_SM_FormItem[]{
+     new IRERP_SM_ComboBoxItem(){title="اولویت:",type=IRERPControlTypes_FormItemType.comboBox,valueMap=new IRERP_SM_FromString(
+                       "{\"a2\":\"بحرانی\",\"b2\":\"فوری\",\"c2\":\"زیاد\",\"d2\":\"متوسط\",\"f2\":\"کم\"}",false)},
+              new IRERP_SM_ComboBoxItem(){title="از بخش:",type=IRERPControlTypes_FormItemType.comboBox,valueMap=new IRERP_SM_FromString(
+                       "{\"a1\":\"پشتیبانی\"}",false)},
+                        new IRERP_SM_TextItem(){title="عنوان"},
+                         new IRERP_SM_TextAreaItem(){title="جزئیات",type=IRERPControlTypes_FormItemType.textArea},
+                         new IRERP_SM_UploadItem(){title="جستجو", type=IRERPControlTypes_FormItemType.imageFile},
+                        new IRERP_SM_TextItem(){title="ایمیل"},
+                        new IRERP_SM_ComboBoxItem(){title="به بخش:",type=IRERPControlTypes_FormItemType.comboBox,valueMap=new IRERP_SM_FromString(
+                       "{\"a3\":\"فروش\",\"b1\":\"فنی\",\"c1\":\"مالی\",\"d1\":\"مدیر شبکه\",\"f1\":\"مدیرکل\"}",false)}
+ }},
+ 
+ new IRERP_SM_HLayout(){
+ members=new IRERPControlBase[]{
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("ارسال")},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("انصراف")},
+     new IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("ایجاد تیکت جدید")},
+     
+ }}
+    }};
+    CurPage.DisplayControls = Ticket.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

@@ -1,0 +1,198 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var GolchinLale = model.GenDS(
+x => x.AllGolchinLale,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("GolchinLaleDs")
+);
+
+    PageDataSources.Add(GolchinLale);
+
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ElitelLaleForm"), data: new IRERP_SM_FromString(GolchinLale.ID));
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("ElitelLaleGrid"), _CanEdit: false, Datasource: new IRERP_SM_FromString(GolchinLale.ID));
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiGolchinLaleh>(x => x.User.DisplayName) }, 
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiGolchinLaleh>(x => x.User.Email) }, 
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiGolchinLaleh>(x => x.User.UserInformation.Tel) }, 
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiGolchinLaleh>(x => x.User.UserInformation.Cell) }, 
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiGolchinLaleh>(x => x.User.UserInformation.Address) }, 
+         
+  
+ };
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid, hasInsert: false, hasDelete: false, hasHilit: false, hasFormula: false, hasMenu: false, hasEdit: false);
+
+    MasterDVS.PageTitle = "گلچین لاله";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //    new IRERP_SM_HeaderItem(){defaultValue="لطفا ساختمان مورد نظر را انتخاب کنید "},
+            
+    //    new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+    //    new IRERP_SM_TextItem(){title="از"},
+    //    new IRERP_SM_TextItem(){title="تا"},
+      
+    //         new IRERP_SM_ButtonItem(){title="جستجو"}
+             
+    //    }
+    //};
+
+//    var EliteLaleInformation =
+//        new IRERP_SM_FromString(@"
+//                isc.ListGrid.create({
+//                    ID: ""countryList1"",
+//                    width:""100%"", height:""100%"",
+//alternateRecordStyles :false,membersMargin :0,
+//    canEdit:false,  showHeader :true, 
+//    data: [
+//{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},{
+//    name:""سعیده عباسی"",
+//    Email:""abbasi.saeide@yahoo.com"",
+//    tell:""344343"",
+//    cell:""091225689"",
+//    address:""ایران-تهران""
+//   
+// 
+//},
+//    ],
+//    fields:[
+//{name:""name"",title:""نام""},
+//{name:""Email"",title:""ایمیل""},
+//{name:""tell"",title:""تلفن""},
+//{name:""cell"",title:""موبایل""},
+//{name:""address"",title:""آدرس""},
+//
+//
+//
+//
+//]
+//
+//            })
+//                   
+//               ", false);
+
+
+
+
+ //   var body = new IRERP_SM_VLayout() {members=new IRERPControlBase[]{information} };
+
+ //CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+ }
+@Html.Raw(CurPage)

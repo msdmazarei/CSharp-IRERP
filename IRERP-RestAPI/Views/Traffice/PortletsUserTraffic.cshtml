@@ -1,0 +1,218 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+
+@{ 
+    string Abi = "#0086D0";
+    string Sorkh = "#fc4c4c";
+
+    var NamePortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1369215372_user_64.png", _backgroundcolor: "#6f9e10", LaBEL: IRERPApplicationUtilities.GetHtmlString(ApplicationStatics.LoggedUser, x => x.DisplayName, ApplicationStatics.T("DisplayName")),click: new IRERPControlTypes_StringMethods("UserProperty_Click", true));
+
+    var BuyServicePortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "BuyService"), _backgroundcolor: "#fc4c4c", _imgsrc: "/Images/1368871535_cart-empty.png", click: new IRERPControlTypes_StringMethods("test1", true));
+
+    var BuyTrafficPortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "BuyTraffic"), _backgroundcolor: "#6f9e10", _imgsrc: "/Images/1368871535_cart-empty.png", click: new IRERPControlTypes_StringMethods("test", true));
+
+    var ProfileServiceTarhPortlet = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "serviceProfile"), _backgroundcolor: "#fc4c4c", _imgsrc: "/Images/rsz_1globe.png", click: new IRERPControlTypes_StringMethods("CurentUserService_Click", true));
+    
+
+   
+    var datasource = new IRERP_SM_Portlets()
+    {
+        height = "60%",
+        width = "100%",
+        members = new IRERPControlBase[] { 
+            IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(Datasource:new IRERP_SM_FromString("UserConHst",false))
+            /*
+            new IRERP_SM_FromString(@"
+                isc.ListGrid.create({
+                    ID: ""countryList"",
+                    width:""100%"", height:""100%"",
+bodyBackgroundColor :""#9569e5"",backgroundColor :""#9569e5"",alternateRecordStyles :false,membersMargin :0,baseStyle: ""myOtherGridCell"",
+    canEdit:false,  showHeader :true, 
+    data: Temp,
+    fields:[
+{name:""DateConnection"",title:""تاریخ اتصال""},
+{name:""ConnectionTime"",title:""مدت زمان اتصال""},
+{name:""RemainingTraffic"",title:""حجم مصرفی""},
+{name:""Traffic"",title:""حجم باقی مانده""},
+
+
+]
+
+            })
+                   
+               ")*/
+            },
+            title = new IRERPControlTypes_HTMLString(" TraficGraf"),
+            showEdges = false,
+            showHeader = false,
+            bodyColor = Abi,
+            backgroundColor = Abi
+        };
+
+    string _tmp = @"
+      
+
+Temp = [
+
+{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},
+{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},{
+    DateConnection:""1392.2.6"",
+    ConnectionTime:""23min"",
+    RemainingTraffic :""2G"",
+    Traffic:""3GB"",
+   
+ 
+},
+
+    ];
+
+
+";
+
+
+    var lbl1 = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(
+    _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+    var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+
+    _v.members = new IRERPControlBase[] {
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString( IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForTraffic")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel" ,align=IRERPControlTypes_Alignment.right,
+                height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel",align=IRERPControlTypes_Alignment.right,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel", height="10",align=IRERPControlTypes_Alignment.right,
+                overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+
+
+
+    var IMG = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png", LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+    IMG.width = "200px";
+    IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+         
+  
+
+    var portal = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralPortLayout();
+
+  portal.portlets = IRERP_SM_Portlets.GetRow(new IRERP_SM_Portlets()
+  {
+      Portlets = new IRERPControlBase[]{ 
+            IRERP_SM_Portlets.GetRow( NamePortlet,BuyServicePortlet,BuyTrafficPortlet,ProfileServiceTarhPortlet)
+,   
+               datasource,
+                 IRERP_SM_Portlets.GetRow( IMG, lbl1)
+           
+                      
+         }
+  });
+
+    }
+@Html.Raw(_tmp)
+@Html.Raw(
+portal
+)

@@ -1,0 +1,201 @@
+﻿
+@font-face {
+    font-family: 'B Yekan';
+    src:url('/css/fontsdir/47.eot?#') format('eot'),    
+        url('/css/fontsdir/47.woff') format('woff'),
+        url('/css/fontsdir/47.ttf') format('truetype'); 
+}
+
+body {
+}
+
+.logintext {
+    font-family:B Yekan,'B Yekan',tahoma;
+    font-size:16px;
+    color:black;
+}
+.logintextFocused {
+    font-family:B Yekan,'B Yekan',tahoma;
+    font-size:16px;
+    color:black;
+}
+
+.logintxt {
+    font-family:B Yekan,'B Yekan',tahoma;
+    border:1px solid black;
+}
+
+.logintxtFocused {
+    font-family:B Yekan,'B Yekan',tahoma;
+    border:1px solid red;
+}
+
+
+
+
+
+ .portlethover
+    {
+        border:5px solid double;
+        display:none;
+    }
+    .Brand {
+        font-family: "Nassim";
+        font-size:22px;
+        font-weight:200;
+        color:#000000;
+    }
+    .slogan {
+        font-family: "Nassim";
+        font-size:19px;
+        font-weight:400;
+        color:#999999;
+    }
+
+   .portletlabel {
+       font-family:B Yekan,'B Yekan',tahoma;
+        font-size:16px;
+        font-weight:200;
+        color:#000000;
+    }
+
+    .whitelabel
+    {
+        font-family:B Yekan,'B Yekan',tahoma;
+        font-size:18px;
+        font-weight:200;
+        color:white;
+    
+    }
+
+     .Redlabel
+    {
+      font-family:B Yekan,'B Yekan',tahoma;
+        font-size:18px;
+        font-weight:200;
+        color:red;
+    
+    }
+        .Blacklabel
+    {
+      font-family:B Yekan,'B Yekan',tahoma;
+        font-size:18px;
+        font-weight:200;
+        color:black;
+        direction:rtl;
+        text-align:right;
+    
+    }
+   .Blacklabel1
+    {
+      font-family:B Yekan,'B Yekan',tahoma;
+        font-size:14px;
+        font-weight:200;
+        color:black;
+    
+    }
+          .RedlabelTitle
+    {
+      font-family:B Yekan,'B Yekan',tahoma;
+        font-size:x-large;
+        font-weight:200;
+        color:red;
+    
+    }
+    .toolstrip_dis {
+        font-family: "Nassim";
+        font-size:16px;
+        font-weight:400;
+        color:#999999;
+    }
+    .toolstrip_ena {
+        font-family: "Nassim";
+        font-size:16px;
+        font-weight:200;
+        color:#FC0000;
+    }
+
+
+
+    
+.myOtherGridCell {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:white;
+    border-bottom:1px solid #9569e5; border-top:1px solid #9569e5;
+    background-color:#9569e5;
+}
+.myOtherGridCellDark {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:white;
+    border-bottom:1px solid #f0f0e8; border-top:1px solid #f0f0e8;
+    background-color:#f0f0e8;
+}
+.myOtherGridCellOver,
+.myOtherGridCellOverDark {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:black;
+    border-bottom:1px solid #c0c0c0; border-top:1px solid #c0c0c0;
+    background-color:#ffffc0;
+}
+.myOtherGridCellSelected,
+.myOtherGridCellSelectedDark {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:white;
+    border-bottom:1px solid #c0c0ff; border-top:1px solid #c0c0ff;
+    background-color:#c0c0ff;
+}
+.myOtherGridCellSelectedOver,
+.myOtherGridCellSelectedOverDark {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:white;
+    border-bottom:1px solid #a0a0a0; border-top:1px solid #a0a0a0;
+    background-color:#e0e0ff;
+}
+.myOtherGridCellDisabled {
+    font-family:B Yekan,'B Yekan',tahoma; font-size:14px;
+    color:#808080;
+    border-bottom:1px solid #9569e5; border-top:1px solid #9569e5;
+    background-color:#9569e5;
+}
+.myOtherGridCellDisabledDark
+{
+    font-family: B Yekan,'B Yekan',tahoma;
+    font-size: 11px;
+    color: #808080;
+    border-bottom: 1px solid #f0f0e8;
+    border-top: 1px solid #f0f0e8;
+    background-color: #f0f0e8;
+}
+.btntext {
+       font-family:B Yekan,'B Yekan',tahoma;
+       color:black;
+       font-size:12px;
+       border:1px solid black;
+
+}
+.btntextFocused {
+       font-family:B Yekan,'B Yekan',tahoma;
+       color:black;
+       font-size:12px;
+       border:1px solid blue;
+}
+.btntextFocusedDown {
+       font-family:B Yekan,'B Yekan',tahoma;
+       color:blue;
+       font-size:12px;
+       border:1px solid black;
+}
+.btntextFocusedOver {
+       font-family:B Yekan,'B Yekan',tahoma;
+       color:black;
+       font-size:12px;
+       border:1px solid black;
+}
+
+
+.btntextOver {
+       font-family:B Yekan,'B Yekan',tahoma;
+       color:red;
+       font-size:12px;
+       border:1px solid red;
+}

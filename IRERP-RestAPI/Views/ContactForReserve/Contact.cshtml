@@ -1,0 +1,98 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("InsertContact")/*, data: new IRERP_SM_FromString(UsrMenuDs.ID)*/);
+
+    DyForm.fields = new IRERP_SM_FormItem[] { 
+      new IRERP_SM_HeaderItem(){defaultValue="WIFI فرم درخواست رزرو اینترنت"},
+            new IRERP_SM_HeaderItem(){defaultValue="  كامل كردن مواردي كه با * مشخص شده اند الزامي است"},
+            
+            new IRERP_SM_TextItem(){title="نام درخواست کننده"},
+            new IRERP_SM_TextItem(){title=" تلفن ثابت"},
+            new IRERP_SM_TextItem(){title=" تلفن همراه "},
+             new IRERP_SM_RadioGroupItem(){ title="جنسیت ",
+                       type=IRERPControlTypes_FormItemType.radioGroup, 
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"Agha\":\"آقا\",\"Khanom\":\"خانم\"}",false)
+                        },
+                           new IRERP_SM_ComboBoxItem(){title="امکان یابی سرویس",valueMap=new IRERP_SM_FromString(
+                       "{\"a\":\"امکان دریافت سیگنال\",\"b\":\"عدم رویت دکل\",\"c\":\"خارج از محدوده \"}",false)
+                        },
+                           new IRERP_SM_ComboBoxItem(){title="نوع درخواست",valueMap=new IRERP_SM_FromString(
+                       "{\"a1\":\"حتمی\",\"b1\":\"نیاز به بازدید\",\"c1\":\"دریافت اطلاعات(آشنایی)\"}",false)
+                        },
+            
+                new IRERP_SM_ComboBoxItem(){title="نوع ساختمان",valueMap=new IRERP_SM_FromString(
+                       "{\"a1\":\"برج\",\"b1\":\"شرکت\",\"c1\":\"مسکونی\"}",false)
+                        },
+            
+            new IRERP_SM_TextAreaItem(){title="توضیحات",type=IRERPControlTypes_FormItemType.textArea},
+            new IRERP_SM_TextAreaItem(){title="آدرس ",type=IRERPControlTypes_FormItemType.textArea},
+           
+           };  
+    
+    
+    
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //        new IRERP_SM_HeaderItem(){defaultValue="WIFI فرم درخواست رزرو اینترنت"},
+    //        new IRERP_SM_HeaderItem(){defaultValue="  كامل كردن مواردي كه با * مشخص شده اند الزامي است"},
+            
+    //        new IRERP_SM_TextItem(){title="نام درخواست کننده"},
+    //        new IRERP_SM_TextItem(){title=" تلفن ثابت"},
+    //        new IRERP_SM_TextItem(){title=" تلفن همراه "},
+    //         new IRERP_SM_RadioGroupItem(){ title="جنسیت ",
+    //                   type=IRERPControlTypes_FormItemType.radioGroup, 
+    //                   valueMap=new IRERP_SM_FromString(
+    //                   "{\"Agha\":\"آقا\",\"Khanom\":\"خانم\"}",false)
+    //                    },
+    //                       new IRERP_SM_ComboBoxItem(){title="امکان یابی سرویس",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a\":\"امکان دریافت سیگنال\",\"b\":\"عدم رویت دکل\",\"c\":\"خارج از محدوده \"}",false)
+    //                    },
+    //                       new IRERP_SM_ComboBoxItem(){title="نوع درخواست",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a1\":\"حتمی\",\"b1\":\"نیاز به بازدید\",\"c1\":\"دریافت اطلاعات(آشنایی)\"}",false)
+    //                    },
+            
+    //            new IRERP_SM_ComboBoxItem(){title="نوع ساختمان",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a1\":\"برج\",\"b1\":\"شرکت\",\"c1\":\"مسکونی\"}",false)
+    //                    },
+            
+    //        new IRERP_SM_TextAreaItem(){title="توضیحات",type=IRERPControlTypes_FormItemType.textArea},
+    //        new IRERP_SM_TextAreaItem(){title="آدرس ",type=IRERPControlTypes_FormItemType.textArea},
+    //        new IRERP_SM_ButtonItem(){title="ایجاد"},
+    //        new IRERP_SM_ButtonItem(){title="انصراف"}
+            
+    //    }
+    //};
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("ContactGrid"), _CanEdit: false);
+
+
+
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid, hasDelete: false, hasEdit: false, hasHilit: false, hasFormula: false, hasMenu: false);
+
+    MasterDVS.PageTitle = "تماس با ما";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+
+ }
+@Html.Raw(CurPage)

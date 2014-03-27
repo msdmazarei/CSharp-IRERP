@@ -1,0 +1,64 @@
+@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        var LanguageDataSource = model.GenDS(
+                                x => x.AllLanguage,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("LanguageDS")
+
+  );
+        PageDataSources.Add(LanguageDataSource);
+
+
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("LanguageForm"), data: new IRERP_SM_FromString(LanguageDataSource.ID, true), _numcols: 1);
+      dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("LanguageViewdyFormNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Language>(x=>x.LanguageName),width=300,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/Gender/Name")},
+ 
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("LanguageViewdyFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Language>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("LanguageGrid"), Datasource: new IRERP_SM_FromString(LanguageDataSource.ID, true));
+
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("LanguageViewPageTitle"));
+
+
+        Master.PageTitle = ApplicationStatics.T("LanguageViewPageTitle");
+
+        CurPage = Master;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+   
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+
+
+
+
+
+

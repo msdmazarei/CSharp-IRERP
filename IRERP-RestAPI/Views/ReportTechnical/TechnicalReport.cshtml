@@ -1,0 +1,42 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    var UsrModemIPDs = model.GenDS(
+       x => x.SelectedUser.UserModemIpList,
+       ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+       ID: "UserModemIPDs"
+       );
+
+    IRERPPageString CurPage = new IRERPPageString();
+    var GetInformation = new IRERP_SM_DynamicForm() { 
+    numCols=2,
+    items=new IRERP_SM_FormItem[]{
+        new IRERP_SM_TextItem(){title="IpAddress"},
+        new IRERP_SM_TextItem(){title="Mac Id"},
+        new IRERP_SM_ButtonItem(){title="جستجو"}
+        
+    }};
+
+    var Report = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+
+        Datasource: new IRERP_SM_FromString("UserModemIPDs", false)
+        );
+    Report.ID = "lstReportTechnical";
+
+    Report.showFilterEditor = true;
+    Report.filterOnKeypress = true;
+    Report.fetchDelay = 1000;
+    Report.allowFilterExpressions = true;
+
+
+    var body = new IRERP_SM_VLayout() {members=new IRERPControlBase[]{GetInformation,Report} };
+    CurPage.OtherObjects += UsrModemIPDs.ToString();
+    CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+    }
+
+@Html.Raw(CurPage)
+

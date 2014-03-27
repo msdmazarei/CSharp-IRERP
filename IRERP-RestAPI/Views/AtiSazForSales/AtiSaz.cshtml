@@ -1,0 +1,88 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    var UsrAtisazeDs = model.GenDS(
+         x => x.AllAtiSaze,
+         ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+         ID: this.CID("UserAtisazeDs")
+         );
+
+    PageDataSources.Add(UsrAtisazeDs);
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UsrAtisazeDs.ID), ID: this.CID("AtisazGrid"), _CanEdit: false);
+           Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiAtisaz>(x=>x.User.DisplayName) }, 
+         
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiAtisaz>(x=>x.User.Email) }, 
+          
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiAtisaz>(x=>x.User.UserInformation.Tel) } ,
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiAtisaz>(x=>x.User.UserInformation.Cell) } ,
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiAtisaz>(x=>x.User.UserInformation.Address) } ,
+        
+    };
+
+
+           var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("AtisazForm"), data: new IRERP_SM_FromString(UsrAtisazeDs.ID));
+
+           var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid,
+             
+               hasInsert: false, hasDelete: false, hasHilit: false, hasFormula: false, hasMenu: false,hasEdit:false);
+
+           MasterDVS.PageTitle = "نمایندگاه فروش";
+
+           CurPage = MasterDVS;
+
+           string dses = "";
+           PageDataSources.ForEach(x => dses += x.ToString());
+           CurPage.OtherObjects = dses + CurPage.OtherObjects;        
+
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //    new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+    //    new IRERP_SM_TextItem(){title="از"},
+    //    new IRERP_SM_TextItem(){title="تا"},
+    //     new IRERP_SM_ComboBoxItem(){title="وضعيت",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a\":\"همه\",\"b\":\"فعال\",\"c\":\"غیر فعال\"}",false)
+    //                    },
+    //         new IRERP_SM_ButtonItem(){title="جستجو"}
+             
+    //    }
+    //};
+
+    //var AtiSazInformation = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+    //    Datasource: new IRERP_SM_FromString(this.CID("UserAtisazeDs"), false)
+    //    );
+    //AtiSazInformation.ID = this.CID("lstAtiSazInformation");
+    //AtiSazInformation.showFilterEditor = true;
+    //AtiSazInformation.filterOnKeypress = true;
+    //AtiSazInformation.fetchDelay = 1000;
+    //AtiSazInformation.allowFilterExpressions = true;
+    //AtiSazInformation.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.User>(x=>x.DisplayName) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.User>(x=>x.Email) }, 
+          
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.User>(x=>x.UserInformation.Tel) } ,
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.User>(x=>x.UserInformation.Cell) } ,
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.User>(x=>x.UserInformation.Address) } ,
+        
+    //};
+
+
+
+ }
+@Html.Raw(CurPage)

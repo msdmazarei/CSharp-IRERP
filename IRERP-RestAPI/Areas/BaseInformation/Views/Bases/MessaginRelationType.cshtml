@@ -1,0 +1,57 @@
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@using IRERP_RestAPI.Models.Bases;
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        //”«Œ  œ? « ”Ê—”
+        var MessaginRelationTypeDataSource = model.GenDS(
+                                x => x.AllMessaginRelationTypeType
+,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("MessaginRelationTypeDS")
+                            );
+
+        PageDataSources.Add(MessaginRelationTypeDataSource);
+       
+        //”«Œ  ›—„
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("MessaginRelationTypeForm"), data: new IRERP_SM_FromString(MessaginRelationTypeDataSource.ID, true));
+        //dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("MessagingInfoRelationTypedyFormNameFiledTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<MessagingRelationType>(x=>x.RelationName),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/MessaginInfoRelationType/RelationName")},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("MessagingInfoRelationTypedyFormDescriptionFiledTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<MessagingRelationType>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+        //”«Œ  ê—?œ
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("MessaginRelationTypeGrid"), Datasource: new IRERP_SM_FromString(MessaginRelationTypeDataSource.ID, true));
+        //”«Œ  „” —
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("MessagingInfoRelationTypePageTitle"));
+        // «? · ’›ÕÂ
+        Master.PageTitle = ApplicationStatics.T("MessagingInfoRelationTypePageTitle");
+        CurPage = Master;
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+   
+    } else { CurPage = new IRERPPageString(cachedView);}
+
+
+

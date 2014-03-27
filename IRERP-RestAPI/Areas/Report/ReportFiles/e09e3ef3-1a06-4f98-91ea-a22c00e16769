@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="1">
+      <RealInvoice_InvoicePrint Ref="2" type="DataTableSource" isKey="true">
+        <Alias>RealInvoice_InvoicePrint</Alias>
+        <Columns isList="true" count="23">
+          <value>Invoice.Performa.User.UserOfficialInfo.RegisteredNumber,شماره_ثبت_شرکت,System.String</value>
+          <value>Invoice.Performa.User.UserOfficialInfo.ComercialCode,شناسه_اقتصادي,System.String</value>
+          <value>Invoice.InvoiceNumber,شماره_فاکتور_x0020_,System.Int32</value>
+          <value>Invoice.Performa.Service.RealUplinkRate,سرعت,System.String</value>
+          <value>Invoice.PersianInvoiceDate,تاريخ_فاکتور_شمسي,System.String</value>
+          <value>Invoice.Performa.PerformaNumber,شماره_پيش_فاکتور,System.Int32</value>
+          <value>Invoice.Performa.User.UserInformation.Fax,شماره_فاکس,System.String</value>
+          <value>Invoice.Performa.Tariff,تعرفه_واحد,System.Nullable`1[System.Int32]</value>
+          <value>Invoice.Performa.PerformaType,نوع_فاکتور,System.Int32</value>
+          <value>Invoice.Performa.User.UserInformation.PostalCode,کد_پستي,System.String</value>
+          <value>Invoice.Performa.User.DisplayName,نام_کاربر,System.String</value>
+          <value>Invoice.Performa.User.UserHouseholdInfo.PersonalIdentity,شماره_ملي,System.String</value>
+          <value>Invoice.Performa.User.Email,پست_الکترونيک_کاربر,System.String</value>
+          <value>Invoice.Performa.VAT_Rials,مبلغ_ماليات_عوارض,System.Int32</value>
+          <value>Invoice.Performa.DiscountPercentage,درصد_تخفيف,System.Int32</value>
+          <value>Invoice.Performa.User.UserInformation.Tel,شماره_تلفن,System.String</value>
+          <value>Invoice.Performa.User.UserOfficialInfo.OfficeNationalCode,شناسه_ملي_شرکت,System.String</value>
+          <value>Invoice.Performa.GigForVolumePerforma,مقدار_حجم,System.Int32</value>
+          <value>Invoice.Performa.Service.ServiceName,نام_سرويس,System.String</value>
+          <value>Invoice.Performa.Payable,مبلغ_قابل_پرداخت,System.Int32</value>
+          <value>Invoice.Performa.Discount_Rials,مبلغ_تخفيف,System.Int32</value>
+          <value>Invoice.Performa.TotalTariff,مبلغ_کل,System.Int32</value>
+          <value>Invoice.Performa.User.UserInformation.Address,آدرس_مشتري,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>RealInvoice_InvoicePrint</Name>
+        <NameInSource>RealInvoice_InvoicePrint</NameInSource>
+      </RealInvoice_InvoicePrint>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="4">
+      <value>,tarikh_emruz,tarikh_emruz,System.String,_x0031_3:37:13_x0020_1392_x002F_07_x002F_13,False,False</value>
+      <value>,address_sherekat,address_sherekat,System.String,شهید_x0020_قلندی_x0020_-_x0020_تهران_x0020_-_x0020_بزرگراه_x0020_شهید_x0020_صدر,False,False</value>
+      <value>,shoare_sherekat,shoare_sherekat,System.String,همه_x0020_چیز_x0020_خوبست_x0020_مگر_x0020_اینکه_x0020_تو_x0020_نخواهی_x0020_که_x0020_باشد,False,False</value>
+      <value>,name_sherekat,name_sherekat,System.String,پتیاک,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataBand1 Ref="4" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,4,297,185.42</ClientRectangle>
+          <Components isList="true" count="23">
+            <Text1 Ref="5" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>215.9,40.64,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>تهران</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text1>
+            <Text3 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>172.72,40.64,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>6f84ea71b925bd0e37d33041f6e07aaa</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>تهران</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text3>
+            <Text2 Ref="7" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>165.1,35.56,48.26,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_DisplayName)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text2>
+            <Text5 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>124.46,45.72,134.62,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text5</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(Replace(RealInvoice_InvoicePrint.Invoice_Performa_User_UserInformation_Address,'ی','ي'))}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text5>
+            <Text4 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>76.2,35.56,38.1,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text4</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_UserOfficialInfo_ComercialCode)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text4>
+            <Text6 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.54,40.64,38.1,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text6</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_UserHouseholdInfo_PersonalIdentity)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text6>
+            <Text7 Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>76.2,40.64,35.56,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text7</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_UserInformation_PostalCode)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text7>
+            <Text8 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.54,45.72,35.56,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text8</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_UserInformation_Tel)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text8>
+            <Text9 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>2.54,35.56,33.02,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text9</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_User_UserOfficialInfo_RegisteredNumber)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text9>
+            <Text10 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>198.12,81.28,38.1,12.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text10</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{IIF((RealInvoice_InvoicePrint.Invoice_Performa_PerformaType ==1),
+RealInvoice_InvoicePrint.Invoice_Performa_Service_ServiceName+ " "+
+"سرويس "
+,
+"خريد ترافيک")}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text10>
+            <Text12 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>154.94,81.28,15.24,7.62</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>c939e0cd22eab40d9d4c30ae6188e407</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text12</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{IIF((RealInvoice_InvoicePrint.Invoice_Performa_PerformaType ==1),
+"کيلوبيت بر ثانيه",
+"گيگابايت"
+)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text12>
+            <Text13 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <ClientRectangle>175.26,81.28,15.24,7.62</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>83c89e8f29a53ecc88e330af6ec54f4a</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text13</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(
+IIF((RealInvoice_InvoicePrint.Invoice_Performa_PerformaType ==1),
+RealInvoice_InvoicePrint.Invoice_Performa_Service_RealUplinkRate,
+RealInvoice_InvoicePrint.Invoice_Performa_GigForVolumePerforma
+).ToString()
+)
+}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </Text13>
+            <Text11 Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>129.54,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text11</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_Tariff)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text11>
+            <Text14 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>104.14,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text14</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_TotalTariff)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text14>
+            <Text15 Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>81.28,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text15</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_Discount_Rials)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text15>
+            <Text16 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>55.88,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text16</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_TotalTariff-RealInvoice_InvoicePrint.Invoice_Performa_Discount_Rials)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text16>
+            <Text17 Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>33.02,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text17</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_VAT_Rials)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text17>
+            <Text18 Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.7,81.28,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text18</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_Payable)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text18>
+            <Text19 Ref="23" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>208.28,137.16,5.08,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text19</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>*</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text19>
+            <Text20 Ref="24" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>10.16,0,7.62,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text20</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(Substring(
+RealInvoice_InvoicePrint.Invoice_PersianInvoiceDate
+,2,2))
+}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text20>
+            <Text22 Ref="25" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>20.32,0,7.62,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>0f847d97b9e4a1af61ae31a0e10323fb</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text22</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(Substring(
+RealInvoice_InvoicePrint.Invoice_PersianInvoiceDate
+,5,2))
+}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text22>
+            <Text23 Ref="26" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>30.48,0,7.62,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>9c8f08155c32136c70e331a1a3cbc472</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text23</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(Substring(
+RealInvoice_InvoicePrint.Invoice_PersianInvoiceDate
+,8,2))
+}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text23>
+            <Text24 Ref="27" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.7,129.54,15.24,5.08</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10</Font>
+              <Guid>55659fc9ea845e3851d031a3dd38de28</Guid>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text24</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Persian(RealInvoice_InvoicePrint.Invoice_Performa_Payable)}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+            </Text24>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>RealInvoice_InvoicePrint</DataSourceName>
+          <Filters isList="true" count="0" />
+          <Name>DataBand1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <RightToLeft>True</RightToLeft>
+          <Sort isList="true" count="0" />
+        </DataBand1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>fd4c947636b0458d9ac97e8b98d0754a</Guid>
+      <Margins>0,0,0,0</Margins>
+      <Name>Page1</Name>
+      <Orientation>Landscape</Orientation>
+      <PageHeight>210</PageHeight>
+      <PageWidth>297</PageWidth>
+      <PaperSize>A4</PaperSize>
+      <Report isRef="0" />
+      <RightToLeft>True</RightToLeft>
+      <Watermark Ref="28" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <ImageTransparency>100</ImageTransparency>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="29" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/5/2013 1:37:39 PM</ReportChanged>
+  <ReportCreated>9/1/2013 1:54:26 PM</ReportCreated>
+  <ReportFile />
+  <ReportGuid>f68c406e9766fee1564788163710535d</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Millimeters</ReportUnit>
+  <ReportVersion>2013.1.1505</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

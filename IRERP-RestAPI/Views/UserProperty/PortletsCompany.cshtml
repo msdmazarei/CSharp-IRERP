@@ -1,0 +1,202 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+    string White = "#ffffff";
+
+    var a = new IRERP_SM_VLayout()
+    {
+        members = new IRERPControlBase[]{
+       Win8Skin.GetGeneralLable(
+           IRERPApplicationUtilities.GetHtmlString(
+              ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.OfficeName,ApplicationStatics.T("CompaneyName")
+              )),
+              
+       Win8Skin.GetGeneralLable(
+           IRERPApplicationUtilities.GetHtmlString(
+              ApplicationStatics.LoggedUser.UserInformation,x=>x.Tel,ApplicationStatics.T("Tell")
+              )),
+              
+          Win8Skin.GetGeneralLable(
+              IRERPApplicationUtilities.GetHtmlString(
+                  ApplicationStatics.LoggedUser.UserInformation,x=>x.Cell,ApplicationStatics.T("Mobail")
+                  )),
+                  
+        Win8Skin.GetGeneralLable(
+           IRERPApplicationUtilities.GetHtmlString(
+             ApplicationStatics.LoggedUser.UserInformation,x=>x.PostalCode,ApplicationStatics.T("CodePosty")
+             )),
+             
+         Win8Skin.GetGeneralLable(
+            IRERPApplicationUtilities.GetHtmlString(
+               ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.RegisteredNumber,ApplicationStatics.T("codesabt")
+               )),
+               
+          Win8Skin.GetGeneralLable(
+             IRERPApplicationUtilities.GetHtmlString(
+               ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.AgentPosition,ApplicationStatics.T("sematNamayande")
+               )),
+               
+           Win8Skin.GetGeneralLable(
+               IRERPApplicationUtilities.GetHtmlString(
+                  ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.ComercialCode,ApplicationStatics.T("CodeEghtesadi")
+                  ))
+                                             }
+    };
+
+
+    var b = new IRERP_SM_VLayout()
+    {
+        members = new IRERPControlBase[]{
+               Win8Skin.GetGeneralLable(
+                 IRERPApplicationUtilities.GetHtmlString(
+                   ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.ManagerName,ApplicationStatics.T("managerName")
+                   )),
+                   
+                Win8Skin.GetGeneralLable(
+                   IRERPApplicationUtilities.GetHtmlString(
+                     ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.RegisteredOffice,ApplicationStatics.T("placeCompaney")
+                     )),
+                     
+                 Win8Skin.GetGeneralLable( 
+                    IRERPApplicationUtilities.GetHtmlString(
+                       ApplicationStatics.LoggedUser.UserInformation,x=>x.Fax,ApplicationStatics.T("Fax")
+                       )),
+                       
+                    Win8Skin.GetGeneralLable(
+                       IRERPApplicationUtilities.GetHtmlString(
+                          ApplicationStatics.LoggedUser.UserInformation,x=>x.Address,ApplicationStatics.T("Address")
+                          )),
+                          
+                      Win8Skin.GetGeneralLable(
+                         IRERPApplicationUtilities.GetHtmlString(
+                            ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.AgentName,ApplicationStatics.T("NamayandeName")
+                            )),
+                            
+                       Win8Skin.GetGeneralLable(
+                          IRERPApplicationUtilities.GetHtmlString(
+                             ApplicationStatics.LoggedUser,x=>x.Email,ApplicationStatics.T("Email")
+                             )),
+                             
+                       Win8Skin.GetGeneralLable(
+                          IRERPApplicationUtilities.GetHtmlString(
+                             ApplicationStatics.LoggedUser.UserInformation.Office,x=>x.ActivityType,ApplicationStatics.T("typeActivety")
+                             ))
+                       
+                                             }
+    };
+
+
+    var c = new IRERP_SM_HLayout()
+    {
+        members = new IRERPControlBase[] { b, a }
+    };
+
+
+
+    var d = new IRERP_SM_HLayout()
+    {
+        height = "60%",
+        width = "100%",
+        margin = 10,
+        members = new IRERPControlBase[]{c,
+                          
+       new IRERP_SM_Img(){src="/Images/1369058149_man-24.png",imageType=IRERPControlTypes_imageType.center,height="60%",width="20%"}
+
+}
+    };
+
+
+    var UserInformationPortlet = new IRERP_SM_Portlets()
+    {
+
+
+        height = "50%",
+        width = "100%",
+        hoverStyle = "portlethover",
+        border = "1px solid",
+        members = new IRERPControlBase[]{
+            new IRERP_SM_HLayout(){
+                
+                members=new IRERPControlBase[]{
+                    new IRERP_SM_Label(){width="10%"},
+                      new IRERP_SM_VLayout(){
+
+                          height="100%",width="100%",
+
+                          members= new IRERPControlBase[]{d}
+                      } ,
+                      
+                  new IRERP_SM_Label(){width="10%"}
+                }
+            }
+        },
+
+
+        showEdges = false,
+        showHeader = false,
+        backgroundColor = White
+
+
+    };
+    var UserChangePassPortlet =
+        Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ChanegPass"),
+        _imgsrc: "/Images/1369058540_lock.png", _backgroundcolor: "#6f9e10");
+
+    var UserSendPassPortlet =
+        Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "SendPass")
+     , _imgsrc: "/Images/1369058330_Forward.png", _backgroundcolor: "#FE6F5E");
+
+    var UserChangePorofilePortlet =
+        Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ChangeProfile")
+    , _imgsrc: "/Images/1369058650_user_profile_edit.png", _backgroundcolor: "#023080");
+
+    var UserchangephotoPortlet =
+        Win8Skin.GetGeneralPortlet(LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ChangePicture")
+     , _imgsrc: "/Images/1369058428_MB__photo.png", _backgroundcolor: "#8050e5");
+
+    var lbl1 = Win8Skin.GetGeneralPortlet(
+        _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+    var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+
+    _v.members = new IRERPControlBase[] {
+         
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForOffice")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel" ,
+                align=IRERPControlTypes_Alignment.right,
+                height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel",
+                            align=IRERPControlTypes_Alignment.right, height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel",
+                height="10",align=IRERPControlTypes_Alignment.right,overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+
+
+
+    var IMG = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png",
+        LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+    IMG.width = "200px";
+    IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+
+
+    var portal = Win8Skin.GetGeneralPortLayout();
+    portal.portlets = IRERP_SM_Portlets.GetRow(new IRERP_SM_Portlets()
+    {
+        Portlets = new IRERPControlBase[]{ 
+           
+         UserInformationPortlet,
+             IRERP_SM_Portlets.GetRow( UserChangePassPortlet,UserchangephotoPortlet,UserChangePorofilePortlet,UserSendPassPortlet),
+              IRERP_SM_Portlets.GetRow( IMG, lbl1)
+          
+           
+                      
+         }
+    });
+}
+@Html.Raw(portal)

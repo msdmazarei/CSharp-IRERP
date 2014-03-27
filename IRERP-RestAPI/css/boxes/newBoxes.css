@@ -1,0 +1,29 @@
+﻿.BoxHeader {
+     font-family:Tahoma;
+     font-size:14px;
+  
+}
+.BoxBody {
+    height:38px;
+       font-family:Tahoma;
+     font-size:12px;
+}
+.jack {
+    line-height:0px;
+    height:8px;
+}
+.CloseBox1Body {
+    direction:rtl;
+    font-family:Tahoma;
+    color:red;
+}
+.CloseBox2Body {
+    direction:rtl;
+    font-family:Tahoma;
+    color:black;
+}
+.CloseBox3Body {
+    direction:rtl;
+    font-family:Tahoma;
+    color:orange;
+}

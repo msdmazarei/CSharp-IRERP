@@ -1,0 +1,148 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+   
+ 
+
+    var datasource = 
+           // IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString("UserInfoDs",false))
+            
+           
+    new IRERP_SM_FromString(@"
+                isc.ListGrid.create({
+                    ID: ""countryList2"",
+                    width:""100%"", height:""100%"",
+alternateRecordStyles :false,membersMargin :0,
+    canEdit:false,  showHeader :true, 
+    data: [
+
+{
+    Row:""1"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""2"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""3"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""4"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""5"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""6"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""7"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},{
+    Row:""8"",
+    NumberReserv:""2136"",
+    name:""عیاسی"",
+    Address:""تهران-ایران"",
+    HowFind:""همکاران"",
+    Desc:""مودم داشته باشید"",
+    VahedCount:""1"",
+    Date:""1392.2.30""
+
+ 
+},
+    ],
+    fields:[
+{name:""Row"",title:""ردیف""},
+{name:""NumberReserv"",title:""شماره رزرو""},
+{name:""name"",title:""نام""},
+{name:""Address"",title:""آدرس""},
+{name:""HowFind"",title:""طریقه آشنایی""},
+{name:""Desc"",title:""توضیحات""},
+{name:""VahedCount"",title:""تعداد واحد""},
+{name:""Date"",title:""تاریخ در خواست""}
+
+
+
+
+]
+
+            })
+                   
+               ", false);
+
+    var Button = new IRERP_SM_HLayout() {members=new IRERPControlBase[]{
+    new   IRERP_SM_Button(){title=new IRERPControlTypes_HTMLString("ویرایش")}
+
+    
+    } };
+
+
+    var last = new IRERP_SM_VLayout()
+    {
+        members = new IRERPControlBase[] { datasource,Button }
+
+    };
+               CurPage.DisplayControls = last.ToStringAsMemberOfOther();
+ }
+@Html.Raw(CurPage)

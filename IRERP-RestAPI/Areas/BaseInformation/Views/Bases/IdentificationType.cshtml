@@ -1,0 +1,72 @@
+﻿@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+@{
+    ViewBag.Title = "IdentificationType";
+}
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        var IdentificationtypeDataSource = model.GenDS(
+                                x => x.allIdentificationType,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("IdentificationtypeDS")
+                            );
+
+        PageDataSources.Add(IdentificationtypeDataSource);
+
+
+    var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("IdentificationtypeForm"), data: new IRERP_SM_FromString(IdentificationtypeDataSource.ID, true),_numcols:1);
+        dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("IdentificationTypeName"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IdentificationType>(x=>x.Name),MsdHelpMessage=InstanceStatics.GetHelpByKey("BaseInformation/identificationType/Name")},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("IdentificationTypeDesc"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IdentificationType>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("IdentificationtypeGrid"), Datasource: new IRERP_SM_FromString(IdentificationtypeDataSource.ID, true));
+
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("IdentificationTypeViewPageTitle"));
+
+
+        Master.PageTitle = ApplicationStatics.T("IdentificationTypeViewPageTitle");
+
+        CurPage = Master;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+        string content = CurPage.ToString();
+        viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+        IRERP_RestAPI.Bases.ViewCache.CreateCacheForView(viewPath, content, this.CID(""));
+
+    } 
+else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrPerformaDs = model.GenDS(
+x => x.SelectedUser.PerformaList,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserPerformaDs")
+);
+
+    var UsrDtlSupportDs = model.GenDS(
+ x => x.AllUsers,
+ SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.Detail,
+ ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ ID: this.CID("UsrDtlSupportDs")
+ );
+    var UsrSupportDs = model.GenDS(
+        x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+     ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+     ID: this.CID("UserSupportDs")
+     );
+     
+     
+    var information =  new IRERP_SM_DynamicForm() {
+        numCols=2,
+        items=new IRERP_SM_FormItem[]{
+             new IRERP_SM_SelectItem(){
+                 ID=this.CID("cbotest"),
+                 name="FilterSelect",title="نام مشترک",displayField="DisplayName",valueField="UserID",width=500,
+                 pickListProperties=new IRERP_SM_ListGrid(){showFilterEditor=true,filterOnKeypress=true,fetchDelay=1000,allowFilterExpressions=true},
+                 editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.SelectItem},
+                 pickListFields=new IRERP_SM_ListGridFiled[]{new IRERP_SM_ListGridFiled(){name="DisplayName"},
+                     new IRERP_SM_ListGridFiled(){name="Email"}  },
+                 optionDataSource=IRERPApplicationUtilities.ControlId((System.Web.Mvc.Controller)this.ViewContext.Controller,"UserSupportDs"),autoFetchData=true,allowExpressions=true,
+                   changed=new IRERPControlTypes_StringMethods("function(form,item,rec){"+
+                     this.CID("FrmDetail")+".filterData({UserID:rec});"+
+                     this.CID("lstAccountInformation1")+".fetchData({ _SelectedUser___UserID: rec });"+
+                 
+                     "}",true),
+             }
+       
+   //,
+   //          new IRERP_SM_ButtonItem(){title="جستجو"},
+             
+        }
+    };
+    var detail = new IRERP_SM_DynamicForm() { numCols=4,
+         dataSource = new IRERP_SM_FromString(this.CID("UsrDtlSupportDs"), false),
+        ID=this.CID("FrmDetail"),
+        fields=new IRERP_SM_FormItem[]{
+              new IRERP_SM_StaticTextItem(){title="نام:",canEdit=false,name="DisplayName",titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+
+               new IRERP_SM_StaticTextItem(){title="میزان اعتبار:",canEdit=false,name="LastACC___Credit",hint=new IRERPControlTypes_HTMLString("ریال"),titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+               new IRERP_SM_StaticTextItem(){title="هزینه کل:",canEdit=false,defaultValue="10",titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+               new IRERP_SM_StaticTextItem(){title="هزینه سرویس:",canEdit=false,defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+               new IRERP_SM_StaticTextItem(){title="هزینه ترافیک:",canEdit=false,defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+               new IRERP_SM_StaticTextItem(){title="مانده:",canEdit=false,defaultValue="10",hint=new IRERPControlTypes_HTMLString("ریال"),titleStyle="Blacklabel1",textBoxStyle="Blacklabel1"},
+             new IRERP_SM_ComboBoxItem(){title="نوع خرید",type=IRERPControlTypes_FormItemType.comboBox, valueMap=new IRERP_SM_FromString(
+                       "{\"khob2\":\"خرید سرویس\",\"bad4\":\"خرید گیگ\"}",false)},
+             new IRERP_SM_ComboBoxItem(){title="نوع خرید",type=IRERPControlTypes_FormItemType.comboBox, valueMap=new IRERP_SM_FromString(
+                       "{\"khob3\":\"خوب\",\"bad5\":\"بد\"}",false)},
+             new IRERP_SM_ComboBoxItem(){title="دوره اشتراک",type=IRERPControlTypes_FormItemType.comboBox, valueMap=new IRERP_SM_FromString(
+                       "{\"khob1\":\"یک ماهه\",\"bad1\":\"سه ماهه\",\"bad2\":\"شش ماهه\",\"bad3\":\"یک ساله\"}",false)},
+                       new IRERP_SM_ButtonItem(){title="تمدید"}
+             
+        }
+    };
+    var AccountInformation = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+
+        Datasource: new IRERP_SM_FromString(this.CID("UserPerformaDs"), false)
+        );
+    AccountInformation.ID =this.CID("lstAccountInformation1");
+
+    AccountInformation.showFilterEditor = true;
+    AccountInformation.filterOnKeypress = true;
+    AccountInformation.fetchDelay = 1000;
+    AccountInformation.allowFilterExpressions = true;
+
+    var footer = new IRERP_SM_HLayout()
+    {
+        members = new IRERPControlBase[]{
+   new IRERP_SM_Button() { title=new IRERPControlTypes_HTMLString("پرینت")},
+     new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("ارسال ایمیل") }
+    }
+    };
+
+    var body = new IRERP_SM_VLayout() { members = new IRERPControlBase[] { information,detail, AccountInformation, footer } };
+    CurPage.OtherObjects += UsrPerformaDs.ToString();
+    CurPage.OtherObjects += UsrSupportDs.ToString();
+    CurPage.OtherObjects += UsrDtlSupportDs.ToString();
+    CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+    }
+
+@Html.Raw(CurPage)

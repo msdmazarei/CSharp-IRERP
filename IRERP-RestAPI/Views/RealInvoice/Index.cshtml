@@ -1,0 +1,222 @@
+﻿@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+<h2>InvoiceableUser</h2>
+<script type="text/javascript">
+    @{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+
+    var AllInvoiceDs = model.GenDS(
+        x => x.AllInvoices,
+        SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.RealInvoice_OverView,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("InvoiceDs")
+    );
+
+    var AllRealInvoice = model.GenDS(
+        x => x.AllRealInvoice,
+        SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.RealInvoice_OverView,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("RealInvoiceDs")
+    );
+
+    PageDataSources.Add(AllInvoiceDs);
+    PageDataSources.Add(AllRealInvoice);
+
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("InvoiceForm"), "100%", "100%", data: new IRERP_SM_FromString(AllRealInvoice.ID));
+
+    var selectItem = AbbasiAdmin.GGSelectItem<RealInvoice, PetiakWifiInvoice>(
+            this.CID("selectInvoice"), 
+            x => x.Invoice.InvoiceNumber, 
+            "Invoice", 
+            x => x.InvoiceNumber, 
+            x => x.InvoiceNumber, 
+            null, 
+            this.CID("InvoiceDs"), 
+            true, 
+            true,
+          x => x.InvoiceNumber,
+          x => x.Performa.User.DisplayName,
+          x => x.Performa.User.Email,
+          x => x.PersianInvoiceDate,
+          x => x.Performa.User.UserInformation.CustomerType
+          );
+    
+    selectItem.pickListWidth = 800;
+    DyForm.fields = new IRERP_SM_FormItem[]
+      {
+      selectItem,
+      new IRERP_SM_NativeCheckboxItem(){title="Print",type=IRERPControlTypes_FormItemType.checkbox,name=this.FN<IRERP_RestAPI.Models.RealInvoice>(x => x.Printed),valueMap= @"[0,1]" },
+      new IRERP_SM_NativeCheckboxItem(){title="Sent",type=IRERPControlTypes_FormItemType.checkbox,name=this.FN<IRERP_RestAPI.Models.RealInvoice>(x => x.Sent),valueMap=@"[0,1]"},
+      new IRERP_SM_TextItem(){title="MalakhNumber",name=this.FN<IRERP_RestAPI.Models.RealInvoice>(x => x.MalakhlNo) }
+      };
+
+    var GroupInsert = 
+        AbbasiAdmin.GetGenetalwindow(this.CID("InsertGroup"), 
+        "insert", "50%", "70%", 
+        new IRERPControlBase[]{
+              AbbasiAdmin.GetGroupInsert(
+              this.CID("RealInvoiceDs"),
+              new IRERP_SM_FromString(AllInvoiceDs.ID),
+              this.CID("InvoiceG1rid"),
+              this.CID("InsertGroup"), 
+              new IRERPControlTypes_ListGridFiled[]{
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.InvoiceDate),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.InvoiceNumber) }, 
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.DisplayName) }, 
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.Email)},
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.UserInformation.CustomerType)},
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.PersianInvoiceDate) },
+                     new IRERPControlTypes_ListGridFiled() { name=  this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.PlaceofDeposit) },
+
+                }, 
+                new IRERPControlTypes_StringMethods(
+                                        @"var grid="
+                                        +this.CID("InvoiceG1rid")+@";var maingrid="+this.CID("InvoiceGrid")+@";var selecteds = grid.getSelectedRecords();
+                                                for(var i=0;i<selecteds.length;i++){
+                                                    maingrid.addData({Invoice___InvoiceNumber:selecteds[i].InvoiceNumber},
+                                                    function (dsResponse, data, dsRequest){
+                                                        var g = eval(dsRequest.params.__client_griduser_1);
+                                                        if (dsResponse.status == 0) {
+                                                        //Find Record Which Saved
+                                                        var selecteds = g.getSelectedRecords();
+                                                        var rec = null;
+                                                        for (var i = 0; i < selecteds.length; i++) {
+                                                        rec = selecteds[0];
+                                                        if (rec.InvoiceNumber == dsRequest.data.Invoice___InvoiceNumber) break;
+                                                        }
+                                                        if (rec != null)
+                                                        g.deselectRecord(rec);
+                                                    }
+                                                    return false;
+        
+                                                }
+                                                ,{params:{__client_Operation:'GroupInsert',__client_griduser_1:grid.ID}});
+                                                }
+        "))});
+
+    var menuItem = AbbasiAdmin.GetMenu(this.CID("MoveMenu"), new IRERP_SM_MenuItem[]{
+      
+      AbbasiAdmin.GetmenuItem("درج اطلاعات",new IRERPControlTypes_StringMethods(@" ""GeneralAdd(" + this.ViewContext + @"," + this.CID("InvoiceForm") +  @"," + this.CID("InvoiceGrid") + @")"" ", true),"/Images/1377510525_insert-object.png"),
+      AbbasiAdmin.GetmenuItem("ویرایش اطلاعات",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377510469_old-edit-find-replace.png"),
+      AbbasiAdmin.GetmenuItem("حذف اطلاعات",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377510425_edit-delete.png"),
+      AbbasiAdmin.GetmenuItem("برجسته سازی",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377606892_preferences-desktop-color.png"),
+      AbbasiAdmin.GetmenuItem("افزودن فیلد",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377606642_server_add.png"),
+      AbbasiAdmin.GetmenuItem("درج گروهی",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377510539_archive-insert-directory.png"),
+      AbbasiAdmin.GetmenuItem("درج گروهی بانکها",new IRERPControlTypes_StringMethods(@" """" ", true),"/Images/1377512511_03.png"),
+      AbbasiAdmin.GetmenuItem("فیلترینگ",new IRERPControlTypes_StringMethods(@" """" ", true)),
+  
+  });
+
+
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(
+        Datasource: new IRERP_SM_FromString(AllRealInvoice.ID), 
+        ID: this.CID("InvoiceGrid"), 
+        _EditEvent: IRERPControlTypes_editEvent.doubleClick, 
+        _listEndEditAction: IREREPControlTypes_listEndEditAction.next,
+        _cellContextClick: new IRERPControlTypes_StringMethods(@" ""ItemMenuContext(" + this.CID("MoveMenu") + @")"" ", true),
+        _CanEdit:true,fixedRecordHeights:false);
+    
+     Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.AddedBy.DisplayName),canEdit=false  ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.AddedBy.Email) ,canEdit=false ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Printed)},
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Sent)},
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.MalakhlNo) },
+     //new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.DateInsert),canEdit=false ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)},
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.PersianDateInserted),canEdit=false},
+     //new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.InvoiceDate),canEdit=false  ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)},
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.PersianInvoiceDate),canEdit=false },
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.InvoiceNumber),canEdit=false  },
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.Performa.User.DisplayName),canEdit=false  },
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.Performa.User.Email),canEdit=false  },
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.Performa.User.UserInformation.CustomerType),canEdit=false  },
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<RealInvoice>(x => x.Invoice.PlaceofDeposit),canEdit=false ,wrap=true },
+ };
+
+     //Grid.rowEditorExit = new IRERPControlTypes_StringMethods("General_ListGridInlineEdit_ExitEditor", true);
+    /* Grid.showGridSummary = true;
+     Grid.summaryRowDataSource = AllRealInvoice;
+     Grid.summaryRowFetchRequestProperties = @"{params:{_irerpFetchType:""irerpSummary""}}";*/
+     Grid.showIRERP_SummaryMsg = true;
+     Grid.irerpListGridSummaryMsg = new IRERP_SM_Label() { contents = new IRERPControlTypes_HTMLString("Here is All Things"), align = IRERPControlTypes_Alignment.center, baseStyle = "gridSummaryCell" };
+     Grid.IRERP_SummaryMsg_CallBack = new IRERPControlTypes_StringMethods(
+         new string[] { "data", "textStatus", "jqXHR", "additionalParams" }, 
+@"
+           if (textStatus == ""success"") {
+               data = JSON.parse(data);
+               eval(additionalParams.Grid).irerpListGridSummaryMsg.setContents(data.data);
+           }
+");
+     Grid.IRERP_SummaryMsg_DataSource = new IRERP_SM_FromString(AllRealInvoice.ID);
+     
+     //Related Report 
+     var rpt = IRERP_RestAPI.Areas.Report.ModelRepositories.Report_Repository.GetByReportName("RealInvoice_PrintOnMalakh");
+     string reportparams = @"\
+                                {\
+                                id : '"+rpt.id.ToString()+@"',\
+                                ReportDataProvider:'SiteAction',\
+                                SiteActionUrl: '" + AllRealInvoice.dataURL.Url + @"',\
+                                ControllerName:'" + ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).GetType().FullName 
+                          +@"',}";
+     IRERP_SM_MenuItem[] menuitems = new IRERP_SM_MenuItem[] { 
+         new IRERP_SM_MenuItem(){ 
+             title="ارسال موارد برای چاپ", 
+             click= new IRERPControlTypes_StringMethods(@" ""SendItemsToPrint('"+Grid.ID+"',"+reportparams+",'"+rpt.ReportName+@"')"" ",true)
+             
+         }
+           
+     };
+  
+  
+     IRERP_SM_ToolStripButton[] buttons = new IRERP_SM_ToolStripButton[]{
+         AbbasiAdmin.GetGenetalToolStripButton(
+         this.CID("AddGroup"), "درج گروهی", 
+         new IRERPControlTypes_StringMethods(@" ""OpenWindow(" + this.CID("InsertGroup") + @")"" ", true), "/Images/1377510539_archive-insert-directory.png")
+     };
+     
+  var MasterDVS = AbbasiAdmin.GetGeneralDVS(
+      this.ViewContext, 
+      DyForm, 
+      Grid, 
+      buttons,
+      menuitems,
+      formName: "تعیین  فاکتور"
+      
+     );
+ 
+  MasterDVS.PageTitle = "تعیین  فاکتور";
+  CurPage= MasterDVS;
+  string dses = "";
+  PageDataSources.ForEach(x => dses += x.ToString());
+  CurPage.Commands += this.CID("InvoiceGrid") + ".showIRERP_SummaryMsg=true;"; 
+  CurPage.OtherObjects = dses + CurPage.OtherObjects;
+  CurPage.OtherObjects += GroupInsert.ToString();
+  CurPage.OtherObjects += menuItem.ToString();
+  
+  
+  CurPage.Commands += this.CID("InsertGroup") + ".hide();"
+      
+  + this.CID("InvoiceForm") + @"Edit.click=function(){
+    GeneralEdit(" + "win" + this.CID("InvoiceForm") + @"," + this.CID("InvoiceForm") + "," + this.CID("InvoiceGrid") + @");" +
+ this.CID("InvoiceForm") + ".getField(" + this.CID("selectInvoice") + ").disable();" + @"};"
+
+  + this.CID("InvoiceForm") + @"Add.click=function(){
+    GeneralAdd(" + "win" + this.CID("InvoiceForm") + @"," + this.CID("InvoiceForm") + "," + this.CID("InvoiceGrid") + @");" +
+this.CID("InvoiceForm") + ".getField(" + this.CID("selectInvoice") + ").enable();" + @"};";
+
+
+}
+    @Html.Raw(CurPage)
+</script>

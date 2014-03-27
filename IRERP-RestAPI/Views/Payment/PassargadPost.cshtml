@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "PassargadPost";
+}
+@{
+    IRERP_RestAPI.Models.Passargad m = this.Model;
+    }
+<h2>PassargadPost</h2>
+<form id="Form2" method="post"
+Action="https://epayment.bankpasargad.com/gateway.aspx"> 
+<input type="hidden" name="invoiceNumber" value="@Html.Raw(m.invoiceNumber)"
+/> 
+<input type="hidden" name="invoiceDate" value="@Html.Raw(m.invoiceDate)" /> 
+<input type="hidden" name="amount" value="@Html.Raw(m.amount)" /> 
+<input type="hidden" name="terminalCode" value="@Html.Raw(m.terminalCode)" /> 
+<input type="hidden" name="merchantCode" value="@Html.Raw(m.merchantCode)" /> 
+<input type="hidden" name="redirectAddress" value="@Html.Raw(m.redirectAddress)" /> 
+<input type="hidden" name="timeStamp" value="@Html.Raw(m.timeStamp)" /> 
+<input type="hidden" name="action" value="@Html.Raw(m.action)" /> 
+<input type="hidden" name="sign" value="@Html.Raw(m.sign)" /> 
+<input type="submit" name="submit" value="ارسال" /> 
+</form>

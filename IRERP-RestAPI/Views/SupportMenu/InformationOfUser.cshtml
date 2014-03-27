@@ -1,0 +1,80 @@
+﻿  
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    var DescUser =new IRERP_SM_VLayout(){
+        //backgroundColor = "#fc4c4c",
+        width="30%",
+        members=new IRERPControlBase[]{
+        new IRERP_SM_DynamicForm() {
+            padding=10,
+        numCols=2,
+        items=new IRERP_SM_FormItem[]{
+            new IRERP_SM_HeaderItem(){defaultValue="توضيحات مرتبط با مشترك",name="توضيحات مرتبط با مشترك"},
+            new IRERP_SM_RadioGroupItem(){type=IRERPControlTypes_FormItemType.radioGroup, textBoxStyle="whitelabel",titleStyle="whitelabel",
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"Connect\":\"اتصال به مشترک\",\"Connect2\":\"اتصال به MAC\"}",false)
+                        },
+                        new IRERP_SM_TextAreaItem(){title="اتصال به مشترک",type=IRERPControlTypes_FormItemType.textArea},
+                        new IRERP_SM_TextAreaItem(){title="اتصال به MAC",type=IRERPControlTypes_FormItemType.textArea},
+                        
+            
+        }
+        },
+        new IRERP_SM_HLayout()
+                   {
+                       width="100%",
+                       height="100%",
+                      
+                       members=new IRERPControlBase[]{ 
+                           new IRERP_SM_Label(){width="5%"},
+                            new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt"))},
+                           new IRERP_SM_Label(){width="0%"},
+                       new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString("انصراف")},
+                           new IRERP_SM_Label(){width="5%"},
+                         
+                      
+                       }
+                   } 
+        }
+    };
+    
+  var  user=new IRERP_SM_VLayout(){
+     // backgroundColor = "#00A6E0",
+      width = "30%",
+        members=new IRERPControlBase[]{
+
+            
+      new IRERP_SM_DynamicForm(){
+          padding=10,
+    numCols=4,
+    items=new IRERP_SM_FormItem[]{
+         new IRERP_SM_HeaderItem(){defaultValue="ریز افراد مرتبط با مشترک",name="ریز افراد مرتبط با مشترک"},
+    new IRERP_SM_StaticTextItem(){title="ایمیل:",canEdit=false,defaultValue="abbasi.saeide1988@yahoo.com"},
+      new IRERP_SM_StaticTextItem(){title="نصاب:",canEdit=false,defaultValue="عباسی"},  
+      new IRERP_SM_StaticTextItem(){title="تاریخ نصب:",canEdit=false,defaultValue="1392.2.6"},  
+      new IRERP_SM_StaticTextItem(){title="IP",canEdit=false,defaultValue="192.168.1.250"},
+      new IRERP_SM_StaticTextItem(){title="ایمیل:",canEdit=false,defaultValue="abbasi.saeide1988@yahoo.com"},
+      new IRERP_SM_StaticTextItem(){title="نصاب:",canEdit=false,defaultValue="عباسی"},  
+      new IRERP_SM_StaticTextItem(){title="تاریخ نصب:",canEdit=false,defaultValue="1392.2.6"},  
+      new IRERP_SM_StaticTextItem(){title="IP",canEdit=false,defaultValue="192.168.1.250"},
+      new IRERP_SM_StaticTextItem(){title="ایمیل:",canEdit=false,defaultValue="abbasi.saeide1988@yahoo.com"},
+      new IRERP_SM_StaticTextItem(){title="نصاب:",canEdit=false,defaultValue="عباسی"},  
+      new IRERP_SM_StaticTextItem(){title="تاریخ نصب:",canEdit=false,defaultValue="1392.2.6"},  
+      new IRERP_SM_StaticTextItem(){title="IP",canEdit=false,defaultValue="192.168.1.250"},
+    }}
+    }};
+
+
+  var main = new IRERP_SM_HLayout() {
+      width = "100%",
+  members=new IRERPControlBase[]{
+     DescUser,user
+  }};
+  CurPage.DisplayControls = main.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

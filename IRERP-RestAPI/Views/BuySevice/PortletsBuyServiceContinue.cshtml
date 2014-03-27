@@ -1,0 +1,77 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+
+          var BuyService2043Portlet = IRERP_SM_Portlets.GetRow(
+  Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971475_internet_connection.png", LaBEL: Win8Skin.GetTitle("PNE-3", "2mbps", "3GB" ), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNE-3')"" ", true)),
+  Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971475_internet_connection.png", LaBEL:Win8Skin.GetTitle( "PNE-5" , "2048Kbps" ,"  5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNE-5')"" ", true)),
+   Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971475_internet_connection.png", LaBEL: Win8Skin.GetTitle("PNE-10" , "2048Kbps" ," 10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNE-10')"" ", true))
+);
+          var BuyService4086Portlet = IRERP_SM_Portlets.GetRow(
+     Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PNF-3" , "3Mbps" ,"3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNF-3')"" ", true)),
+     Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL: Win8Skin.GetTitle("PNF-5" , "3Mbps" ," 5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNF-5')"" ", true)),
+      Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PNF-10" , "3Mbps" ,"10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNF-10')"" ", true)),
+      Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL: Win8Skin.GetTitle("PNF-20" , "3Mbps" , " 20GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNF-20')"" ", true))
+      
+   );
+   
+          var BuyService4Portlet = IRERP_SM_Portlets.GetRow(
+        Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL: Win8Skin.GetTitle("PNG-3" , "4Mbps" , " 3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNG-3')"" ", true)),
+        Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL: Win8Skin.GetTitle("PNG-5" , "4Mbps" ," 5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNG-5')"" ", true)),
+         Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL: Win8Skin.GetTitle("PNG-10" , "4Mbps" , "  10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNG-10')"" ", true)),
+         Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL: Win8Skin.GetTitle("PNG-20" ,"4Mbps", "  20GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNG-20')"" ", true))
+
+      );
+
+          var lbl1 = Win8Skin.GetGeneralPortlet(
+               _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+          var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+
+          _v.members = new IRERPControlBase[] {
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString( IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForBuyService")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                baseStyle="Redlabel" ,align=IRERPControlTypes_Alignment.right,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                            baseStyle="Redlabel",align=IRERPControlTypes_Alignment.right, height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                baseStyle="Redlabel", height="10",align=IRERPControlTypes_Alignment.right,overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+        
+
+          var IMG = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png", LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+          IMG.width = "200px";
+          IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+          
+          var IMG1 = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png", LaBEL:IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToBeforeService"));
+          IMG1.width = "200px";
+          IMG1.click = new IRERPControlTypes_StringMethods("ServiceBack", true);
+    
+          
+          var portal = Win8Skin.GetGeneralPortLayout();
+      portal.portlets = IRERP_SM_Portlets.GetRow(new IRERP_SM_Portlets()
+      {
+          Portlets = new IRERPControlBase[]{ 
+               
+                BuyService2043Portlet,
+                BuyService4086Portlet,
+                BuyService4Portlet,
+           
+           
+            IRERP_SM_Portlets.GetRow(IMG,lbl1,IMG1)
+           
+                      
+         }
+      });
+      
+    }
+@Html.Raw(
+portal
+)

@@ -1,0 +1,68 @@
+@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        var LegalCharactertypeDataSource = model.GenDS(
+                                x => x.allLegalcharactertype,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("LegalCharactertypeDS")
+                            );
+
+        PageDataSources.Add(LegalCharactertypeDataSource);
+
+
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("LegalCharactertypeForm"), data: new IRERP_SM_FromString(LegalCharactertypeDataSource.ID, true));
+        //dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.right;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("LegalCharactertypeViewdyFormNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<LegalCharacterType>(x=>x.Name),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/LegalCharacterType/Name")},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("LegalCharactertypeViewdyFormDecriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<LegalCharacterType>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("LegalCharactertypeGrid"), Datasource: new IRERP_SM_FromString(LegalCharactertypeDataSource.ID, true));
+
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("LegalCharactertypeViewPageTitle"));
+
+
+        Master.PageTitle = ApplicationStatics.T("LegalCharactertypeViewPageTitle");
+
+        CurPage = Master;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+        string content = CurPage.ToString();
+        viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+        IRERP_RestAPI.Bases.ViewCache.CreateCacheForView(viewPath, content, this.CID(""));
+
+    } else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+
+
+
+
+
+
+

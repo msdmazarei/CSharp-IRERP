@@ -1,0 +1,278 @@
+﻿
+
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    var UsrSupportDs = model.GenDS(
+             x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("UserSupportDs")
+          );
+    var UsrRoleSupportDtDs = model.GenDS(
+x => x.AllUserRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserRoleSupportDtDs")
+);
+
+    var UninstallDs = model.GenDS(
+     x => x.AllUninstallItem,
+  ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  ID: this.CID("UninstallDs")
+  );
+
+    var UsrAccountDs = model.GenDS(
+     x => x.AllInstaller,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID: this.CID("UserAccountDs")
+    );
+
+
+    PageDataSources.Add(UsrSupportDs);
+    PageDataSources.Add(UninstallDs);
+    PageDataSources.Add(UsrRoleSupportDtDs);
+    PageDataSources.Add(UsrAccountDs);
+ 
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ReportUNInstallForm")/*, data: new IRERP_SM_FromString(UsrMenuDs.ID)*/);
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("ReportUnInstallGrid"), Datasource: new IRERP_SM_FromString(UninstallDs.ID), _CanEdit: false);
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.ReservationId) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.AddDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.persianADDllDate) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.lastuser.DisplayName) }, 
+          //new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.lastuser.DisplayName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastService.ServiceName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.Address) } ,
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.UninstallReservations.Description) } 
+          
+    };
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid,
+         hasInsert: false, hasDelete: false, hasHilit: false, hasFormula: false, hasMenu: false, hasEdit: false);
+
+    MasterDVS.PageTitle = "گزارش نصب نشده ها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //    new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+    //    new IRERP_SM_TextItem(){title="از"},
+    //    new IRERP_SM_TextItem(){title="تا"},
+    //   AbbasiAdmin.GGSelectItem<User,User>("cbotest13",x=>x.UserID,"نام همکار",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserAccountDs"),true,true,x=>x.DisplayName),
+    //                     new IRERP_SM_ComboBoxItem(){title=" علت عدم نصب",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a1\":\"همه\",\"b1\":\"پر بودن آنتن\",\"c3\":\"ضعیف بودن سیگنال\",\"D4\":\"کیفیت پایین سرویس\",\"G5\":\"ارتفاع کم\"}",false)
+    //                    },
+    //                        new IRERP_SM_SelectItem(){
+    //             ID=this.CID("cbotest"),
+    //             name="FilterSelect",title="نام مشترک",displayField="Email",valueField="UserID", 
+    //             pickListProperties=new IRERP_SM_ListGrid(){showFilterEditor=true},
+    //             editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.SelectItem},
+    //             pickListFields=new IRERP_SM_ListGridFiled[]{new IRERP_SM_ListGridFiled(){name="DisplayName"},
+    //                 new IRERP_SM_ListGridFiled(){name="Email"}  },
+    //             optionDataSource=this.CID("UserSupportDs"),autoFetchData=true
+    //         },
+    //                 AbbasiAdmin.GGSelectItem<User,User>("cbotest12",x=>x.UserID,"نام اپراتور",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.DisplayName),
+
+    //                    new IRERP_SM_TextItem(){title="آدرس"},
+    //         new IRERP_SM_ButtonItem(){title="جستجو"}
+             
+    //    }
+    //};
+
+    //var InastallationInformation = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+    //    Datasource: new IRERP_SM_FromString(this.CID("UninstallDs"), false)
+    //    );
+    //InastallationInformation.ID = this.CID("lstUnInastallationInformation");
+    //InastallationInformation.showFilterEditor = true;
+    //InastallationInformation.filterOnKeypress = true;
+    //InastallationInformation.fetchDelay = 1000;
+    //InastallationInformation.allowFilterExpressions = true;
+    //InastallationInformation.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.ReservationId) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.InstalDate) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.FirstName) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastName) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.lastuser.DisplayName) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastService.ServiceName) }, 
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.Address) } ,
+    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.UninstallReservations.Description) } 
+          
+    //};
+
+
+   // var body = new IRERP_SM_VLayout() { members = new IRERPControlBase[] { information, InastallationInformation } };
+
+ 
+   // CurPage.OtherObjects += UsrSupportDs.ToString();
+   // CurPage.OtherObjects += UninstallDs.ToString();
+   //CurPage.OtherObjects += UsrAccountDs.ToString();
+
+   //CurPage.OtherObjects += UsrRoleSupportDtDs.ToString();
+
+   // CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+ }
+@Html.Raw(CurPage)
+@*  @using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    var UsrSupportDs = model.GenDS(
+             x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("UserSupportDs")
+          );
+    var UsrRoleSupportDtDs = model.GenDS(
+x => x.AllUserRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserRoleSupportDtDs")
+);
+
+    var UninstallDs = model.GenDS(
+     x => x.AllUninstallItem,
+  ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  ID: this.CID("UninstallDs")
+  );
+
+    var UsrAccountDs = model.GenDS(
+     x => x.AllInstaller,
+    ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    ID: this.CID("UserAccountDs")
+    );
+    PageDataSources.Add(UsrSupportDs);
+    PageDataSources.Add(UsrRoleSupportDtDs);
+    PageDataSources.Add(UninstallDs);
+    PageDataSources.Add(UsrAccountDs);
+
+
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("UninstallForm"), data: new IRERP_SM_FromString(UninstallDs.ID));
+
+    DyForm.fields = new IRERP_SM_FormItem[] {
+        new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+        new IRERP_SM_TextItem(){title="از"},
+        new IRERP_SM_TextItem(){title="تا"},
+       AbbasiAdmin.GGSelectItem<User,User>("cbotest13",x=>x.UserID,"نام همکار",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserAccountDs"),true,true,x=>x.DisplayName),
+                         new IRERP_SM_ComboBoxItem(){title=" علت عدم نصب",valueMap=new IRERP_SM_FromString(
+                       "{\"a1\":\"همه\",\"b1\":\"پر بودن آنتن\",\"c3\":\"ضعیف بودن سیگنال\",\"D4\":\"کیفیت پایین سرویس\",\"G5\":\"ارتفاع کم\"}",false)
+                        },
+                            new IRERP_SM_SelectItem(){
+                 ID=this.CID("cbotest"),
+                 name="FilterSelect",title="نام مشترک",displayField="Email",valueField="UserID", 
+                 pickListProperties=new IRERP_SM_ListGrid(){showFilterEditor=true},
+                 editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.SelectItem},
+                 pickListFields=new IRERP_SM_ListGridFiled[]{new IRERP_SM_ListGridFiled(){name="DisplayName"},
+                     new IRERP_SM_ListGridFiled(){name="Email"}  },
+                 optionDataSource=this.CID("UserSupportDs"),autoFetchData=true
+             },
+                     AbbasiAdmin.GGSelectItem<User,User>("cbotest12",x=>x.UserID,"نام اپراتور",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.DisplayName),
+
+                        new IRERP_SM_TextItem(){title="آدرس"},
+             new IRERP_SM_ButtonItem(){title="جستجو"}
+                     };
+
+
+    //var information = new IRERP_SM_DynamicForm()
+    //{
+    //    width="100%",
+    //    height="50%",
+    //    numCols=2,
+    //    items=new IRERP_SM_FormItem[]{
+    //    new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+    //    new IRERP_SM_TextItem(){title="از"},
+    //    new IRERP_SM_TextItem(){title="تا"},
+    //   AbbasiAdmin.GGSelectItem<User,User>("cbotest13",x=>x.UserID,"نام همکار",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserAccountDs"),true,true,x=>x.DisplayName),
+    //                     new IRERP_SM_ComboBoxItem(){title=" علت عدم نصب",valueMap=new IRERP_SM_FromString(
+    //                   "{\"a1\":\"همه\",\"b1\":\"پر بودن آنتن\",\"c3\":\"ضعیف بودن سیگنال\",\"D4\":\"کیفیت پایین سرویس\",\"G5\":\"ارتفاع کم\"}",false)
+    //                    },
+    //                        new IRERP_SM_SelectItem(){
+    //             ID=this.CID("cbotest"),
+    //             name="FilterSelect",title="نام مشترک",displayField="Email",valueField="UserID", 
+    //             pickListProperties=new IRERP_SM_ListGrid(){showFilterEditor=true},
+    //             editorType=new IRERP_SM_FormItem(){type=IRERPControlTypes_FormItemType.SelectItem},
+    //             pickListFields=new IRERP_SM_ListGridFiled[]{new IRERP_SM_ListGridFiled(){name="DisplayName"},
+    //                 new IRERP_SM_ListGridFiled(){name="Email"}  },
+    //             optionDataSource=this.CID("UserSupportDs"),autoFetchData=true
+    //         },
+    //                 AbbasiAdmin.GGSelectItem<User,User>("cbotest12",x=>x.UserID,"نام اپراتور",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.DisplayName),
+
+    //                    new IRERP_SM_TextItem(){title="آدرس"},
+    //         new IRERP_SM_ButtonItem(){title="جستجو"}
+             
+    //    }
+    //};
+     var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UninstallDs.ID), ID: this.CID("UnInstallGrid"), _CanEdit: false);
+      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.ReservationId) };
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.InstalDate) }; 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.FirstName) }; 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastName) }; 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.lastuser.DisplayName) }; 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastService.ServiceName) }; 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.Address) } ;
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x => x.UninstallReservations.Description) };
+          
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+
+    MasterDVS.PageTitle = "تعیین منوها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    
+    var InastallationInformation = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+        Datasource: new IRERP_SM_FromString(this.CID("UninstallDs"), false)
+        );
+    InastallationInformation.ID = this.CID("lstUnInastallationInformation");
+    InastallationInformation.showFilterEditor = true;
+    InastallationInformation.filterOnKeypress = true;
+    InastallationInformation.fetchDelay = 1000;
+    InastallationInformation.allowFilterExpressions = true;
+    InastallationInformation.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.ReservationId) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.InstalDate) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.FirstName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.lastuser.DisplayName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x=>x.LastService.ServiceName) }, 
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.Address) } ,
+          new IRERPControlTypes_ListGridFiled() { name = this.FN<PetiakWifiReservation>(x=>x.UninstallReservations.Description)
+          } 
+          
+    };
+
+ }
+@Html.Raw(CurPage)*@

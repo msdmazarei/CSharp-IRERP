@@ -1,0 +1,147 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+      
+    var BuyService128Portlet = IRERP_SM_Portlets.GetRow(
+        Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368978623_Browser_D.png", LaBEL:Win8Skin.GetTitle( "PNA-3", "128Kbps" , " 3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNA-3')"" ", true)),
+      Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368978623_Browser_D.png", LaBEL:Win8Skin.GetTitle( "PNA-5" , "128Kbps" , "  5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNA-5')"" ", true))
+      
+        );
+    var a = new IRERP_SM_Window()
+    {
+        height = "30%",
+        width = "30%",
+        ID = "modalWindow",
+        title = new IRERPControlTypes_HTMLString("test"),
+        autoSize = true,
+        autoCenter = true,
+        isModal = true,
+        showModalMask = true,
+        autoDraw = false,
+        backgroundColor = "#fc4c4c",
+        showHeader=false,
+        showEdges=false,
+        items = new IRERPControlBase[]{ 
+        new IRERP_SM_DynamicForm(){
+              numCols =2,
+            margin=10,
+                   height = "100%",
+        width = "100%",             
+            fields = new IRERP_SM_FormItem[]{
+               
+                     new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue=IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "textForKharidService") },
+                   new IRERP_SM_RadioGroupItem(){ type=IRERPControlTypes_FormItemType.radioGroup,  
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"mah1\":\"یک ماهه\",\"mah3\":\"سه ماهه\",\"mah6\":\"شش ماهه\",\"sal\":\"یک ساله\"}",false)
+                   }
+                   
+                  
+                 
+                  
+        }
+        
+                       
+    },
+       new IRERP_SM_HLayout()
+                   {
+                       width="100%",
+                       height="100%",
+                      
+                       members=new IRERPControlBase[]{ 
+                            new IRERP_SM_Label(){width="5%"},
+                            new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Sabt"))
+                                , click= new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true)},
+                           new IRERP_SM_Label(){width="0%"},
+                       new IRERP_SM_Button(){ title=new IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "Return")),
+                           click= new IRERPControlTypes_StringMethods(@" ""buyServiceCloaseWindow()"" ", true)},
+                           new IRERP_SM_Label(){width="5%"}
+                      
+                       }
+                   } 
+}
+    
+    
+    };
+    
+
+    var BuyService256Portlet = IRERP_SM_Portlets.GetRow(
+              Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL:Win8Skin.GetTitle( "PNB-3", "256Kbps" , "  3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNB-3')"" ", true)),
+              Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL:Win8Skin.GetTitle( "PNB-5" , "256Kbps", "  5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNB-5')"" ", true)),
+               Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971351_input_devices_settings.png", LaBEL: Win8Skin.GetTitle("PNB-10", "256Kbps" , "  10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNB-10')"" ", true))
+        );
+    var BuyService512Portlet = IRERP_SM_Portlets.GetRow(
+        Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL: Win8Skin.GetTitle("PNC-3" , "512Kbps" , "  3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNC-3')"" ", true)),
+        Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PNC-5" , "512Kbps", "  5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNC-5')"" ", true)),
+         Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971065_connect_to_network.png", LaBEL: Win8Skin.GetTitle("PNC-10" , "512Kbps" , "  10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PNC-10')"" ", true))
+  );
+    var BuyService1024Portlet = IRERP_SM_Portlets.GetRow(
+  Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971488_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PND-3" ,"1024Kbps" , "  3GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PND-3')"" ", true)),
+  Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971488_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PND-5" ,"1024Kbps" , "  5GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PND-5')"" ", true)),
+   Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368971488_connect_to_network.png", LaBEL:Win8Skin.GetTitle( "PND-10" , "1024Kbps", "  10GB"), click: new IRERPControlTypes_StringMethods(@" ""buyService_DialgSelectDuration('PND-10')"" ", true))
+);
+
+    var lbl1 = Win8Skin.GetGeneralPortlet(
+              _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+    var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+
+    _v.members = new IRERPControlBase[] {
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString( IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForBuyService")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                baseStyle="Redlabel" ,align=IRERPControlTypes_Alignment.right,height="10",overflow=IRERPControlTypes_Overflow.visible,
+                width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                            baseStyle="Redlabel",align=IRERPControlTypes_Alignment.right, height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),
+                baseStyle="Redlabel", height="10",align=IRERPControlTypes_Alignment.right,overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+        
+
+
+
+  
+
+    //var _a = ((IRERP_SM_VLayout)lbl1.members[0]).members.ToList();
+    //_a.RemoveAt(0);
+    //((IRERP_SM_VLayout)(lbl1.members[0])).members = _a.ToArray();
+
+          var IMG = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png",
+              LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+          IMG.width = "200px";
+          IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+
+
+          var IMG1 = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368978488_33.png",
+              LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ContinueServiceBySpeed"));
+          IMG1.width = "200px";
+          IMG1.click = new IRERPControlTypes_StringMethods("ServiceContinue", true);
+          
+          var portal = Win8Skin.GetGeneralPortLayout();
+      portal.portlets = IRERP_SM_Portlets.GetRow(new IRERP_SM_Portlets()
+      {
+          Portlets = new IRERPControlBase[]{ 
+                BuyService128Portlet,
+                BuyService256Portlet,
+                BuyService512Portlet,
+                BuyService1024Portlet,
+            IRERP_SM_Portlets.GetRow(IMG,lbl1,IMG1)
+           
+                      
+         }
+      });
+      
+    }
+
+@Html.Raw(a);
+@Html.Raw("modalWindow.hide();")
+
+@Html.Raw(
+portal
+)

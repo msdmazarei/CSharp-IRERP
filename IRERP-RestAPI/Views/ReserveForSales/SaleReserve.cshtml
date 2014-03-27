@@ -1,0 +1,155 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var UsrSupportDs = model.GenDS(
+          x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+       ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+       ID: this.CID("UserSupportDs")
+       );
+
+
+    var UsrAllService = model.GenDS(x => x.AllServices,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserAllService")
+);
+    PageDataSources.Add(UsrSupportDs);
+    PageDataSources.Add(UsrAllService);
+
+    //    var addReservationinfo = model.GenDS(
+    //x => x.AllReservationApSetting,
+    //ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+    //ID: this.CID("addReservationinfoDS")
+    //);
+    var addReservationinfo = model.GenDS(
+x => x.AllUninstallItem,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("addReservationinfoDS")
+);
+    PageDataSources.Add(addReservationinfo);
+
+
+    //    var DyFormSelectCustomer = AbbasiAdmin.GetGenetalDynamicForm(this.CID("SelectCustomer")/*, data: new IRERP_SM_FromString(UsrMenuDs.ID)*/);
+
+    //    DyFormSelectCustomer.fields = new IRERP_SM_FormItem[] { 
+    //          new IRERP_SM_HeaderItem(){defaultValue="متقاضی اشتراک سرویس WIFI"},
+    //     new IRERP_SM_SelectItem(){
+    //            name="SelectItem",
+    //           valueMap=new IRERP_SM_FromString(
+    //                       "{\"all\":\"متقاضی عام\",\"khass\":\"متقاضی خاص\",\"Wait\":\"منتظر تماس\",\"AdameService\":\"عدم تماس\"}",false),
+    //                 changed=new IRERPControlTypes_StringMethods("function(form,item,rec){if(item.getValue()=='all'){"+this.CID("AllUser")+@".show();"+this.CID("WaittingForCall")+@".hide();}
+    //               else if(item.getValue()=='khass'){"+this.CID("AllUser")+@".show();"+this.CID("WaittingForCall")+@".hide();}
+    //               else if(item.getValue()=='Wait'){"+this.CID("WaittingForCall")+@".show();"+this.CID("AllUser")+@".hide();}     
+    //  else
+    //                   {"+this.CID("WaittingForCall")+@".show();"+this.CID("AllUser")+@".hide();}
+    //                     alert(item.getValue());}",true),
+
+    //               }     };  
+
+
+    //=======================Moteghazi am=========================================================
+
+    var DyFormAllUser = AbbasiAdmin.GetGenetalDynamicForm(this.CID("AllUser"), _numcols: 4, _width: "50%", data: new IRERP_SM_FromString(addReservationinfo.ID));
+
+    DyFormAllUser.fields = new IRERP_SM_FormItem[] { 
+          new IRERP_SM_TextItem(){title="نام",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.FirstName)},
+    new IRERP_SM_TextItem(){title="نام خانوادگی",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.LastName)},
+    new IRERP_SM_TextItem(){title="تلفن",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Tel)},
+    new IRERP_SM_TextItem(){title="تلفن همراه",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Cell)},
+    new IRERP_SM_TextAreaItem(){title="آدرس",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Address)},
+    new IRERP_SM_ComboBoxItem(){title="طریق آشنایی",type=IRERPControlTypes_FormItemType.comboBox,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Knowing),
+    valueMap=new IRERP_SM_FromString("{\"hamkar\":\"همکاران\",\"sms\":\"پیام کوتاه\"}",false)},
+    new IRERP_SM_TextItem(){title="فکس",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Fax)},
+    AbbasiAdmin.GGSelectItem<PetiakWifiReservation,PetiakWifiService>(this.CID("cbotest2"),x=>x.ServiceId,"نوع سرویس",x=>x.ServiceName,x=>x.ServiceID,null,this.CID("UserAllService"),true,true,x=>x.ServiceName),
+    new IRERP_SM_TextItem(){title="نوع ساختمان",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Location)},
+    new IRERP_SM_TextItem(){title="تعداد واحد",hint=new IRERPControlTypes_HTMLString("واحد"),name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Unit)},
+    new IRERP_SM_TextAreaItem(){title="توضیحات",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Description)},
+    new IRERP_SM_NativeCheckboxItem(){title="جدید",type=IRERPControlTypes_FormItemType.checkbox,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.HasService)},
+    new IRERP_SM_NativeCheckboxItem(){title="جابجایی",type=IRERPControlTypes_FormItemType.checkbox,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Offset)}
+    };
+
+    var insertAllUser = AbbasiAdmin.GetGenetalwindow(this.CID("insertAllUser"), "insert", "50%", "70%", new IRERPControlBase[] { DyFormAllUser,
+           
+          new IRERP_SM_HLayout(){
+                    width="100%",height="100%",
+                    members=new IRERPControlBase[]{
+           AbbasiAdmin.GetGenetalButton("ذخیره اطلاعات",  new IRERPControlTypes_StringMethods(@" ""GeneralSave(" + this.CID("insertAllUser") + "," + this.CID("AllUser") + "," +  this.CID("UserGrid") + @")"" ", true)),
+                        
+                  AbbasiAdmin.GetGenetalButton("بازگشت", new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("insertAllUser") + @")"" ", true)),
+    
+                } } 
+    });
+
+    //=======================Montazer tamas=========================================================
+    var DyFormWaittingForCall = AbbasiAdmin.GetGenetalDynamicForm(this.CID("WaittingForCall"), _numcols: 4, data: new IRERP_SM_FromString(UsrSupportDs.ID));
+
+    DyFormWaittingForCall.fields = new IRERP_SM_FormItem[] { 
+        new IRERP_SM_HeaderItem(){defaultValue="متقاضی اشتراک سرویس WIFI"},
+     new IRERP_SM_TextItem(){title="نام",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.FirstName)},
+    new IRERP_SM_TextItem(){title="نام خانوادگی",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.LastName)},
+    new IRERP_SM_TextItem(){title="تلفن",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Tel)},
+    new IRERP_SM_TextItem(){title="تلفن همراه",name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Cell)},
+    new IRERP_SM_TextAreaItem(){title="آدرس",type=IRERPControlTypes_FormItemType.textArea,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Address)},
+    new IRERP_SM_ComboBoxItem(){title="طریق آشنایی",type=IRERPControlTypes_FormItemType.comboBox,name=this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Knowing),
+    valueMap=new IRERP_SM_FromString("{\"hamkar\":\"همکاران\",\"sms\":\"پیام کوتاه\"}",false)},
+    };
+
+
+    var insertWaittingForCall = AbbasiAdmin.GetGenetalwindow(this.CID("insertWaittingForCall"), "insert", "50%", "70%", new IRERPControlBase[] { DyFormWaittingForCall,
+           
+             new IRERP_SM_HLayout(){
+                    width="100%",height="100%",
+                    members=new IRERPControlBase[]{
+           AbbasiAdmin.GetGenetalButton("ذخیره اطلاعات",  new IRERPControlTypes_StringMethods(@" ""GeneralSave(" + this.CID("insertWaittingForCall") + "," + this.CID("WaittingForCall") + "," +  this.CID("UserGrid") + @")"" ", true)),
+                        
+                  AbbasiAdmin.GetGenetalButton("بازگشت", new IRERPControlTypes_StringMethods(@" ""CloseWindow(" + this.CID("insertWaittingForCall") + @")"" ", true)),
+    
+                } } 
+    });
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("UserGrid"), Datasource: new IRERP_SM_FromString(addReservationinfo.ID), _CanEdit: false);
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.ReservationId) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.lastuser.DisplayName) }, 
+      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x =>x.Address)},
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Knowing),valueMap=@"{""15"":""همکاران"",""14"":""جابجایی"",""13"":""اکسس پوینت "",""11"":""سایر"",""10"":""دنیای آموزش"",""9"":""پیام کوتاه "",""8"":""دوستان "",""4"":""تراکت"",""3"":""قاصدک شهرک "",""2"":""پیک برتر "",""1"":""گوگل ""}" }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Description) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.Unit) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.AddDate),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.persianADDllDate) }, 
+            
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiReservation>(x => x.CustomerStatus), valueMap=@"{""7"":"" درانتظار"",""6"":""پيگيري"",""5"":""اکسس پوینت"",""4"":""لغو شده"",""3"":""عدم سرویس"",""2"":""منتظر تماس"",""0"":""متقاضی خاص "",""1"":""متقاضی عام""}" }, 
+    };
+
+    var buttons = new IRERP_SM_ToolStripButton[]{ 
+          AbbasiAdmin.GetGenetalToolStripButton( "InsertAll", "درج متقاضی عام", new IRERPControlTypes_StringMethods(@" ""GeneralAdd(" + this.CID("insertAllUser") + "," + this.CID("AllUser") + "," +  this.CID("UserGrid") + @")"" ", true)),
+          AbbasiAdmin.GetGenetalToolStripButton( "InsertWait", "درج منتظر تماس ", new IRERPControlTypes_StringMethods(@" ""GeneralAdd(" + this.CID("insertWaittingForCall") + "," + this.CID("WaittingForCall") + "," +  this.CID("UserGrid") + @")"" ", true))
+            
+        };
+
+    var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyFormAllUser, Grid, buttons,
+       hasEdit: false, hasHilit: false, hasFormula: false, hasMenu: false, hasDelete: false);
+
+    MasterDVS.PageTitle = "تعیین منوها";
+
+    CurPage = MasterDVS;
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    CurPage.OtherObjects += insertAllUser.ToString();
+    CurPage.OtherObjects += insertWaittingForCall.ToString();
+
+    CurPage.Commands += this.CID("insertAllUser") + ".hide();" + this.CID("insertWaittingForCall") + ".hide();";
+
+}
+
+@Html.Raw(CurPage)
+

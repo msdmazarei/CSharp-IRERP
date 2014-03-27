@@ -1,0 +1,108 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models.Bases;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+    IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+   
+
+
+    var PlacesDataSource = model.GenDS(
+        x => x.allPlaces,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("PlacesDs")
+        );
+
+
+    PageDataSources.Add(PlacesDataSource);
+    
+        
+        //Get Id Of ParentId Field
+    for (int i = 0; i < PlacesDataSource.fields.Count(); i++)
+        {
+            if(
+                PlacesDataSource.fields[i].name.Trim().ToLower() == "Pid".ToLower()
+                )
+            {
+                PlacesDataSource.fields[i].foreignKey = PlacesDataSource.ID + ".id";
+                break;
+            }
+            
+        }
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("PlacesForm"), data: new IRERP_SM_FromString(PlacesDataSource.ID));
+   // dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+    DyForm.fields = new IRERP_SM_FormItem[] {new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue=ApplicationStatics.T("PlacesViewFormHeaderTitle")},
+                     new IRERP_SM_TextItem(){title=ApplicationStatics.T("PlacesViewNameTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.Places>(x=>x.LocationName)},
+                   
+                     new IRERP_SM_PickTreeItem(){
+                         canSelectParentItems=true, 
+                         dataSource=new IRERP_SM_FromString(this.CID("PlacesDs"), false),
+                         name=IRERPApplicationUtilities.GPN<Places>(x=>x.Pid),
+                         title=ApplicationStatics.T("PlacesViewName"),
+                         emptyMenuMessage="No Selected Value",
+                         displayField=IRERPApplicationUtilities.GPN<Places>(x=>x.LocationName),
+                         valueField = IRERPApplicationUtilities.GPN<Places>(x=>x.id),
+                    }
+                     };
+                     
+                     
+        var Grid = new IRERP_SM_TreeGrid()
+        {
+            width = "100%",
+            height = "100%",
+            dataSource = new IRERP_SM_FromString(PlacesDataSource.ID),
+            ID = this.CID("PlacesGrid"),
+            autoFetchData = true,
+            autoSaveEdits = true,
+            canAcceptDroppedRecords = true,
+            canDragRecordsOut = true,
+            canEdit = true,
+            canReorderRecords = true,
+            canReparentNodes = true,
+            canSort = false,
+            showOpenIcons = false,
+            showDropIcons = true,
+            dropIconSuffix = "into",
+            dragDataAction = IRERPControlTypes_DragDataAction.move,
+            fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() {name = this.FN<Places>(x => x.LocationName),createDefaultTreeField=true },
+        new IRERPControlTypes_ListGridFiled() {name = this.FN<Places>(x => x.Pid),title=ApplicationStatics.T("PlacesViewNameTitle") },
+        new IRERPControlTypes_ListGridFiled() {name = this.FN<Places>(x => x.Description) },
+         new IRERPControlTypes_ListGridFiled() { name = this.FN<Places>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<Places>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             
+
+  }
+
+        };
+
+
+
+        var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid, formName: ApplicationStatics.T("PlacesViewformName"));
+
+        MasterDVS.PageTitle = ApplicationStatics.T("PlacesViewformName");
+
+        CurPage = MasterDVS;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    
+    
+    } else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);

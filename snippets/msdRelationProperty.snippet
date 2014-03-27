@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>msdRelationProperty</Title>
+      <Author>Mazarei</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>irerpRelation</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>TYPE</ID>
+          <ToolTip>TYPE</ToolTip>
+          <Default>TYPE</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>VARNAME</ID>
+          <ToolTip>VARNAME</ToolTip>
+          <Default>VARNAME</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[   LoadableVar<$TYPE$> _$VARNAME$ = new LoadableVar<$TYPE$>();
+        public virtual $TYPE$ _____$VARNAME$ { get; set; }
+        public virtual $TYPE$ $VARNAME$
+        {
+            get
+            {
+                return LoadNHRelation<$TYPE$, Guid>
+                    (ref _$VARNAME$,
+                    x => x._____$VARNAME$,
+                    ModelRepositories.$TYPE$_Repository.GetByID,
+                    x => x._____$VARNAME$.id);
+            }
+
+            set { SetRelationProperty(x => x.$VARNAME$, x => x._____$VARNAME$, _$VARNAME$, value); }
+        }
+//////// ADD THIS LINE TO GetAssociation:  
+/// if (_GPN(x => x.$VARNAME$) == PropertyPath)
+///                return new Tuple<string, NHibernate.SqlCommand.JoinType, NHibernate.Criterion.ICriterion>(_GPN(x => x._____$VARNAME$), NHibernate.SqlCommand.JoinType.LeftOuterJoin, null);
+
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

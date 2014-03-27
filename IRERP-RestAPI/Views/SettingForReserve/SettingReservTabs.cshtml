@@ -1,0 +1,114 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    
+
+    IRERPPageString CurPage = new IRERPPageString();
+    var par = new IRERPPageString(Html.Partial("ParticularApplicant"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var ParticularApplicantUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                   par.DisplayControls
+                    )};
+    par = new IRERPPageString(Html.Partial("GeneralApplicant"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var GeneralApplicantUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                    par.DisplayControls
+                    )};
+    par = new IRERPPageString(Html.Partial("WattingForCall"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var WattingForCallUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                 par.DisplayControls
+                    )};
+    par = new IRERPPageString(Html.Partial("LackOfService"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var LackOfServiceUSer = new IRERPControlBase[] { new IRERP_SM_FromString(
+                                  par.DisplayControls
+
+                    )};
+
+    par = new IRERPPageString(Html.Partial("CanceledReserve"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var CanceledReserveUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                                    par.DisplayControls
+
+                    )};
+    par = new IRERPPageString(Html.Partial("FollowReserve"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var FollowReserveUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                                     par.DisplayControls
+
+                    )};
+    par = new IRERPPageString(Html.Partial("WaitingReserve"));
+    CurPage.OtherObjects += par.OtherObjects;
+    CurPage.Commands += par.Commands;
+    var WaitingReserveUser = new IRERPControlBase[] { new IRERP_SM_FromString(
+                              par.DisplayControls
+
+                    )};
+
+    var tabset = new IRERP_SM_TabSet()
+    {
+        tabBarPosition = IRERPControlTypes_Side.top,
+        tabBarAlign = IRERPControlTypes_Side.right,
+        canEditTabTitles = true,
+        titleEditEvent = IRERPControlTypes_TabTitleEditEvent.doubleClick,
+        titleEditorTopOffset = 2,
+        tabs = new IRERP_SM_Tab[]{
+                      
+                   new IRERP_SM_Tab{
+                        title="متقاضی خاص",
+                        pane=new IRERP_SM_VLayout(){members=ParticularApplicantUser}
+                 },
+                 
+                 new IRERP_SM_Tab{
+                        title="متقاضی عام",
+                     pane=new IRERP_SM_VLayout(){members=GeneralApplicantUser}
+                 },
+                    new IRERP_SM_Tab{
+                        title="منتظر تماس",
+                        pane= new IRERP_SM_VLayout(){members=WattingForCallUser}
+                 },
+                   new IRERP_SM_Tab{
+                        title="عدم سرویس ",
+
+                        pane= new IRERP_SM_VLayout(){members=LackOfServiceUSer}
+                 }
+                 ,
+                   new IRERP_SM_Tab{
+                        title="لغو شده ",
+
+                        pane= new IRERP_SM_VLayout(){members=CanceledReserveUser}
+                 }
+                   ,
+                   new IRERP_SM_Tab{
+                        title="AccessPoint ",
+
+                        pane= new IRERP_SM_VLayout(){members=FollowReserveUser}
+                 }
+                   ,
+                   new IRERP_SM_Tab{
+                        title="پیگیری ",
+
+                        pane= new IRERP_SM_VLayout(){members=FollowReserveUser}
+                 }
+                   ,
+                   new IRERP_SM_Tab{
+                        title="در انتظار ",
+
+                        pane= new IRERP_SM_VLayout(){members=WaitingReserveUser}
+                 }
+                 
+        }
+    };
+    CurPage.DisplayControls = tabset.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

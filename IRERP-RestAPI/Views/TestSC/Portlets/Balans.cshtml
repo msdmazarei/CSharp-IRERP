@@ -1,0 +1,51 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    string Sabz = "#0086D0";
+    string portletlabelbackcolor = "#888888";
+
+    var BalansPortlet = new IRERP_SM_Portlets()
+    {
+
+        ID = "Trafficportlet",
+        click = new IRERPControlTypes_StringMethods("ReminnigTraffic_Click", true),
+        
+        
+        border = "1px solid",
+        
+  
+        members = new IRERPControlBase[]{
+               new IRERP_SM_VLayout(){
+                    height="100%",width="100%",
+                    members= new IRERPControlBase[]{
+                        new IRERP_SM_Img(){src="/Images/1368526686_mix_volume.png",imageType=IRERPControlTypes_imageType.center,height="*"
+                        },
+                   
+                            new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlString(ApplicationStatics.LoggedUser.UserConnectionInfo, x => x.RemainedTraffic, ApplicationStatics.T("RemainedTraffic"))),
+                            
+                            baseStyle="whitelabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"
+                        },
+                         new IRERP_SM_Label(){height="20%"},
+                        new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "RemainingTrafic")),
+                            backgroundColor=portletlabelbackcolor
+                            ,baseStyle="portletlabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"
+                        },
+               }
+           }
+        },
+
+            showEdges = false,
+            showHeader = false,
+        backgroundColor = Sabz
+        
+   };
+    
+    
+    }
+@Html.Raw(BalansPortlet.ToStringAsMemberOfOther())

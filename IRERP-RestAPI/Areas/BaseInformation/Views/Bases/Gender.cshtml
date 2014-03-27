@@ -1,0 +1,54 @@
+﻿@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        //ساخت دیتا سورس
+        var GenderDataSource = model.GenDS(
+                                x => x.AllGender
+,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("GenderDS")
+                            );
+
+        PageDataSources.Add(GenderDataSource);
+       
+        //ساخت فرم
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("GenderForm"), data: new IRERP_SM_FromString(GenderDataSource.ID, true));
+       // dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("GenderViewNameTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.Gender>(x=>x.GenderName),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/Gender/Name")},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("GenderViewDescriptionTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.Gender>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+        //ساخت گرید
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("GenderGrid"), Datasource: new IRERP_SM_FromString(GenderDataSource.ID, true));
+        //ساخت مستر
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("GenderViewformName"));
+        //تایتل صفحه
+        Master.PageTitle = ApplicationStatics.T("GenderViewformName");
+        CurPage = Master;
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);

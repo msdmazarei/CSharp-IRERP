@@ -1,0 +1,87 @@
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Models.Bases;;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        //”«Œ  œ? « ”Ê—”
+        var DDLGroupDataSource = model.GenDS(
+                                x => x.AllDropDownListGroup
+,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("DDLGroupDS")
+                            );
+
+
+        var AllMenuDs = model.GenDS(
+       x => x.AllMenu,
+      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+      ID: this.CID("AllMenuDs")
+      );                  
+        PageDataSources.Add(DDLGroupDataSource);
+        PageDataSources.Add(AllMenuDs);
+        
+        //”«Œ  ›—„
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("DDLGroupForm"), data: new IRERP_SM_FromString(DDLGroupDataSource.ID, true));
+
+
+        for (int i = 0; i < AllMenuDs.fields.Count(); i++)
+        {
+            if (
+                AllMenuDs.fields[i].name.Trim().ToLower() == "ParentId".ToLower()
+                )
+            {
+                AllMenuDs.fields[i].foreignKey = AllMenuDs.ID + ".id";
+                break;
+            }
+
+        }
+
+        var MenuItem = new IRERP_SM_PickTreeItem()
+        {
+            canSelectParentItems = true,
+            dataSource = new IRERP_SM_FromString(this.CID("AllMenuDs"), false),
+            emptyMenuMessage = "No Selected Value",
+            displayField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x => x.Title),
+            valueField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x => x.id),
+            name = this.FN<DropDownListGroup>(x => x.menuItem)
+        };
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+          MenuItem,
+      new IRERP_SM_TextItem(){title="‰«„",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<DropDownListGroup>(x=>x.dropDownListName)},
+      new IRERP_SM_TextItem(){title="Ê÷⁄? ",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<DropDownListGroup>(x=>x.Condition)},
+       new IRERP_SM_TextAreaItem(){title=" Ê÷?Õ« ",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<DropDownListGroup>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+        //”«Œ  ê—?œ
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("DDLGroupGrid"), Datasource: new IRERP_SM_FromString(DDLGroupDataSource.ID, true));
+        //”«Œ  „” —
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: " ⁄??‰ ê—ÊÂ „‰Ê ò‘Ê??");
+        // «? · ’›ÕÂ
+        Master.PageTitle = " ⁄??‰ ê—ÊÂ „‰Ê ò‘Ê??";
+        CurPage = Master;
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+

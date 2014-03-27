@@ -1,0 +1,65 @@
+﻿@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+@{
+    ViewBag.Title = "RealInvoiceGroup";
+}
+<script type="text/javascript">
+    @{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+
+    var AllInvoiceDs = model.GenDS(
+        x => x.AllInvoices,
+        SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.RealInvoice_OverView,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("InvoiceDs")
+    );
+
+
+    PageDataSources.Add(AllInvoiceDs);
+ 
+    
+    IRERPPageString CurPage = new IRERPPageString();
+
+    var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("InvoiceGroupForm"));
+    
+    
+    var Grid = AbbasiAdmin.GetGeneralListGrid(
+       Datasource: new IRERP_SM_FromString(AllInvoiceDs.ID),
+       ID: this.CID("InvoiceGroupGrid")
+       );
+
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.InvoiceDate),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.DisplayName) }, 
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.Email)},
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.Performa.User.UserInformation.CustomerType)},
+                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.PersianInvoiceDate) },
+                     new IRERPControlTypes_ListGridFiled() { name=  this.FN<IRERP_RestAPI.Models.PetiakWifiInvoice>(x => x.PlaceofDeposit) },
+ };
+
+          var MasterDVS = AbbasiAdmin.GetGeneralDVS(
+      this.ViewContext, 
+      DyForm, 
+      Grid, 
+      hasInsert:false,hasEdit:false,hasDelete:false,hasFilterBuilder:false,hasFormula:false,hasHilit:false,hasMenu:false);
+ 
+  MasterDVS.PageTitle = "تعیین  فاکتور گروهی";
+  CurPage= MasterDVS;
+  string dses = "";
+  PageDataSources.ForEach(x => dses += x.ToString());
+  CurPage.OtherObjects = dses + CurPage.OtherObjects;
+
+
+
+
+}
+@Html.Raw(CurPage)
+</script>

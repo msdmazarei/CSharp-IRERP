@@ -1,0 +1,86 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrServeInfoDs = model.GenDS(
+          x => x.AllServes,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("ServesDS")
+          );
+    
+    var UsrSupportDs = model.GenDS(
+        x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+     ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+     ID: this.CID("UserSupportDs1")
+     );
+    var UsrRoleSupportDtDs = model.GenDS(
+x => x.AllUserRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserRoleSupportDtDs")
+);
+  //  var UsrOperatorDs = model.GenDS(
+  //   x => x., SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+  //ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  //ID: this.CID("OperatorDs")
+  //);
+  
+    CurPage.OtherObjects += UsrSupportDs.ToString();
+      var InformationReportBroken = new IRERP_SM_DynamicForm() { 
+        numCols=2,
+        items=new IRERP_SM_FormItem[]{
+          new IRERP_SM_TextItem(){title="از"},
+          new IRERP_SM_TextItem(){title="تا"},
+          
+             AbbasiAdmin.GGSelectItem<User,User>(this.CID("cbotest"),x=>x.UserID,"نام مشترک",x=>x.Email,x=>x.UserID,null,this.CID("UserSupportDs1"),true,true,x=>x.DisplayName,x=>x.Email),
+
+             AbbasiAdmin.GGSelectItem<User,UserRole>("cbotest12",x=>x.UserID,"نام اپراتور",x=>x.User.DisplayName,x=>x.User.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.User.DisplayName),
+            // new IRERP_SM_ComboBoxItem(){title="نام اپراتور",type=IRERPControlTypes_FormItemType.comboBox,optionDataSource=""}, 
+             new IRERP_SM_ComboBoxItem(){title="عملکرد",type=IRERPControlTypes_FormItemType.comboBox,
+                       valueMap=new IRERP_SM_FromString(
+                       "{\"all\":\"همه\",\"sabt\":\"ثبت\",\"taied\":\"تایید نهایی\",\"edit\":\"ویرایش\"}",false)}, 
+                       new IRERP_SM_ButtonItem(){title="جستجو"}
+        }
+    };
+
+
+      var datasourceReportBroken = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+        Datasource: new IRERP_SM_FromString(this.CID("ServesDS"), false)
+        );
+      datasourceReportBroken.ID = this.CID("lstReportBroken");
+      datasourceReportBroken.showFilterEditor = true;
+      datasourceReportBroken.filterOnKeypress = true;
+      datasourceReportBroken.fetchDelay = 1000;
+      datasourceReportBroken.allowFilterExpressions = true;
+      datasourceReportBroken.fields = new IRERPControlTypes_ListGridFiled[] { 
+       
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.User.DisplayName) }, 
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Ipaddress) }, 
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.ServeDiscription) } ,
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Upkeep) } ,
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.AddDate) } ,
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.CorrectDate) } 
+    };
+      var button = new IRERP_SM_HLayout() {members=new IRERPControlBase[]{
+       new IRERP_SM_Button() {title=new IRERPControlTypes_HTMLString("تبدیل به Excell") },
+      new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("یادداشت") }
+      } };
+
+    var body = new IRERP_SM_VLayout() { members=new IRERPControlBase[]{
+        InformationReportBroken,datasourceReportBroken,button
+    }};
+    CurPage.OtherObjects += UsrServeInfoDs.ToString();
+    CurPage.OtherObjects += UsrRoleSupportDtDs.ToString();
+    CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+    }
+
+@Html.Raw(CurPage)
+
+
+
+

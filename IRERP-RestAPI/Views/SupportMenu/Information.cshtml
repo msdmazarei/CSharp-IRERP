@@ -1,0 +1,32 @@
+﻿  
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrLimitChargeDs = model.GenDS(
+           x => x.SelectedUser.AllLimitCharge, 
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("UserLimitChargeDs")
+        );
+
+    var datasource = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+
+       Datasource: new IRERP_SM_FromString(this.CID("UserLimitChargeDs"), false)
+        );
+    datasource.ID = this.CID("lstLimitCharge");
+
+    datasource.showFilterEditor = true;
+    datasource.filterOnKeypress = true;
+    datasource.fetchDelay = 1000;
+    datasource.allowFilterExpressions = true;
+
+
+    CurPage.OtherObjects = UsrLimitChargeDs!=null ? UsrLimitChargeDs.ToString() : "";
+    CurPage.DisplayControls = datasource.ToStringAsMemberOfOther();
+    }
+
+@Html.Raw(CurPage)

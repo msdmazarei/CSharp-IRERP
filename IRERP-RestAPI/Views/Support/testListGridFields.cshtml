@@ -1,0 +1,67 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using  IRERP_RestAPI.Models;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+  var UsrMenuDs = model.GenDS(
+        x => x.AllMenu,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("UserMenuDs")
+        );
+
+  PageDataSources.Add(UsrMenuDs);
+
+  //Get Id Of ParentId Field
+  for (int i = 0; i < UsrMenuDs.fields.Count(); i++)
+  {
+      if (
+          UsrMenuDs.fields[i].name.Trim().ToLower() == "ParentId".ToLower()
+          )
+      {
+          UsrMenuDs.fields[i].foreignKey = UsrMenuDs.ID + ".id";
+          break;
+      }
+
+  }
+  var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("MenuForm"), data: new IRERP_SM_FromString(UsrMenuDs.ID));
+  var Grid = new IRERP_SM_TreeGrid() { 
+    width="100%",
+    height="100%",
+    dataSource = new IRERP_SM_FromString(this.CID("UserMenuDs"), true),
+    autoFetchData= true,
+    autoSaveEdits= true,
+    canAcceptDroppedRecords= true,
+    canDragRecordsOut= true,
+    canEdit= true,
+    canReorderRecords= true,
+    canReparentNodes= true,
+    canSort= false,
+    showOpenIcons= false,
+    showDropIcons= true,
+    dropIconSuffix= "into",
+    dragDataAction= IRERPControlTypes_DragDataAction.move,
+   fields= new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() {name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.Title),createDefaultTreeField=true }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.EnName) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.HasChild) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.Description) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.ParentID) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.MethodToCall) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.MenuItem_Url) },
+  }
+  
+  };
+
+
+
+  var body = new IRERP_SM_VLayout() { members = new IRERPControlBase[] { DyForm,Grid } };
+  CurPage.OtherObjects += UsrMenuDs.ToString();
+  CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+  }
+@Html.Raw(CurPage)

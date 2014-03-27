@@ -1,0 +1,630 @@
+﻿@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models.Bases;
+@{
+    ViewBag.Title = "RightFullCharacter";
+}
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        
+        //****************************data sources definition
+        var RightFullCharacterDataSource = model.GenDS(
+                                x => x.AllRightFullCharacter,
+                                 SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_RightFulCharacter,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("RightFullCharacterDS")
+                            );
+
+        //gender database
+        var GenderDataSource = model.GenDS(
+x => x.AllGender,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("GenderDS")
+);
+        //
+        //birth place database
+        var BirthPlaceDataSource = model.GenDS(
+x => x.allPlaces,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("BirthPlaceDS")
+);
+
+//character type
+        var CharacterTypeDatasource = model.GenDS(
+          x => x.AllCharacterType,
+       ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+       ID: this.CID("CharacterTypeDS")
+       );
+  
+       //MEssag in fo data source
+        var MessaginInfoDatasource = model.GenDS(
+      x => x.SelecteCharacterFilter.MessagingInfo,
+  SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_RightFulCharacter,
+      
+   ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+   ID: this.CID("MessaginInfoDS")
+   );
+ 
+   //callInfo data source
+        var CallInfoDatasource = model.GenDS(
+     x => x.SelecteCharacterFilter.CallInfo,
+  SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_RightFulCharacter,
+     
+  ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  ID: this.CID("AllCallInfoDS")
+  );
+ 
+  //postal Adress DataSource
+        var PostalAddressDatasource = model.GenDS(
+     x => x.SelecteCharacterFilter.PostalAddress,
+  SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_RightFulCharacter,
+     
+  ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  ID: this.CID("PostalAddressDS")
+  );
+        //Mesaaging Info tyoe DataSource
+        var MessagingInfoTypeDatasource = model.GenDS(
+     x => x.allMessagingInfoType,
+  ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+  ID: this.CID("MessagingInfoTypeDS")
+  );
+     //call info Type datasource
+        var CallInfoTypeDatasource = model.GenDS(
+ x => x.AllCallInfoType,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("CallInfoTypeDS")
+);
+//Postall Address type Data source
+        var PostalAddressTypeDatasource = model.GenDS(
+ x => x.AllPostalAddressType,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("PostalAddressTypeDS")
+);
+//Messaging info Relation Type
+        var MessagingInfoRelationTypeDatasource = model.GenDS(
+ x => x.AllMessaginRelationTypeType,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("MessagingInfoRelationTypeDS")
+);
+//RolsOfCharacter Data source
+        var AllRolsOfCharacterDatasource = model.GenDS(
+ x => x.SelecteCharacterFilter.RolsOfCharacter,
+  SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_RightFulCharacter,
+ 
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("AllRolsOfCharacterDS")
+);
+        //Character Role Data source
+        var AllCharacterRoleDatasource = model.GenDS(
+ x => x.AllCharacterRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("AllCharacterRoleDS")
+);
+
+        var NationalityDatasource = model.GenDS(
+x => x.allNationality,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("NationalityDS")
+);
+        var IdentificationTypeDataSource = model.GenDS(
+ x => x.allIdentificationType,
+ ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ ID: this.CID("IdentificationTypeDS")
+ );
+
+
+
+        var IdentificationDataSource = model.GenDS(
+          x => x.SelecteCharacterFilter.Identification,
+           SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.B_LegalCharacter,
+
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("IdentificationDS")
+      );
+        //
+        //*************************************************************************adding data sources to pagedataSources
+        PageDataSources.Add(RightFullCharacterDataSource);
+        PageDataSources.Add(GenderDataSource);
+        PageDataSources.Add(BirthPlaceDataSource);
+        PageDataSources.Add(CharacterTypeDatasource);
+        PageDataSources.Add(MessaginInfoDatasource);
+        PageDataSources.Add(CallInfoDatasource);
+        PageDataSources.Add(PostalAddressDatasource);
+        PageDataSources.Add(MessagingInfoTypeDatasource);
+        PageDataSources.Add(CallInfoTypeDatasource);
+        PageDataSources.Add(PostalAddressTypeDatasource);
+        PageDataSources.Add(MessagingInfoRelationTypeDatasource);
+        PageDataSources.Add(AllRolsOfCharacterDatasource);
+        PageDataSources.Add(AllCharacterRoleDatasource);
+        PageDataSources.Add(NationalityDatasource);
+        PageDataSources.Add(IdentificationDataSource);
+        PageDataSources.Add(IdentificationTypeDataSource);
+    
+        //*******************************
+        //**********************************combo boxes definition
+        var GenderItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.RightFulCharacter, IRERP_RestAPI.Models.Bases.Gender>(
+        this.CID("Genderselect"),
+        x => x.Gender.id,
+        ApplicationStatics.T("RighFullCharacterViewGenderItemTitle"),
+        x => x.GenderName,
+        x => x.id,
+        null,
+        this.CID("GenderDS"),
+        true,
+        true,
+      x => x.GenderName,
+      x=>x.Description
+
+      );
+      
+          
+
+        GenderItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/RighFullCharacterViewGenderItem");
+        GenderItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewGenderItemMsdWindowManageTitle"));
+        GenderItem.MsdManageUrl = "/BaseInformation/Bases/Gender";
+        for (int i = 0; i < BirthPlaceDataSource.fields.Count(); i++)
+        {
+            if (
+                BirthPlaceDataSource.fields[i].name.Trim().ToLower() == "Pid".ToLower()
+                )
+            {
+                BirthPlaceDataSource.fields[i].foreignKey = BirthPlaceDataSource.ID + ".id";
+                break;
+            }
+
+        }
+        //places tree 
+        var BirthPlaceDSTree = new IRERP_SM_PickTreeItem()
+        {
+
+
+            title = ApplicationStatics.T("RighFullCharacterViewBirthPlaceDSTreeTitle"),
+            canSelectParentItems = true,
+            dataSource = new IRERP_SM_FromString(this.CID("BirthPlaceDS"), false),
+            emptyMenuMessage = "No Selected Value",
+            displayField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.Places>(x => x.LocationName),
+            valueField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.Places>(x => x.id),
+            name = this.FN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x => x.BirthPlace.id)
+
+        };
+        
+            
+        //character type combo
+        var CharacterTypeItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.RightFulCharacter, IRERP_RestAPI.Models.Bases.Charactertype>(
+     this.CID("CharacterTypeSelect"),
+     x => x.Character.Characterstype.id,
+     ApplicationStatics.T("RighFullCharacterViewCharacterTypeItemTitle"),
+     x => x.Charactertypename,
+     x => x.id,
+     null,
+     this.CID("CharacterTypeDS"),
+     true,
+     true,
+   x => x.Charactertypename,
+   x => x.Description
+
+   );
+
+       
+//messaging info type combo box
+        var MessagingInfoTypeTypeItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.MessagingInfo, IRERP_RestAPI.Models.Bases.MessagingInfoType>(
+  this.CID("MessagingInfoTypeSelect"),
+  x => x.MessagingInfoType.id,
+  "شیوه ی تماس",
+  x => x.MessagingType,
+  x => x.id,
+  null,
+  this.CID("MessagingInfoTypeDS"),
+  true,
+  true,
+x => x.MessagingType,
+   x => x.Description
+
+);
+
+
+        MessagingInfoTypeTypeItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/RighFullCharacterViewMessagingInfoTypeTypeItem");
+        MessagingInfoTypeTypeItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewMessagingInfoTypeTypeItemTitle"));
+        MessagingInfoTypeTypeItem.MsdManageUrl = "/BaseInformation/Bases/MessagingInfoType";
+//mesagging info relation type combo
+        var MessagingInfoRelatinTypeTypeItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.MessagingInfo, IRERP_RestAPI.Models.Bases.MessagingRelationType>(
+     this.CID("MessagingInfoRelatinTypeTypeSelect"),
+     x => x.MessagingRelationType.id,
+     ApplicationStatics.T("RighFullCharacterViewMessagingInfoTypeTypeItemMsdWindowManageTitle"),
+     x => x.RelationName,
+     x => x.id,
+     null,
+     this.CID("MessagingInfoRelationTypeDS"),
+     true,
+     true,
+   x => x.RelationName,
+   x => x.Description
+
+   );
+
+   
+       
+       
+        MessagingInfoRelatinTypeTypeItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/RighFullCharacterViewMessagingInfoRelatinTypeTypeItem");
+        MessagingInfoRelatinTypeTypeItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewMessagingInfoRelatinTypeTypeItemMsdWindowManageTitle"));
+        MessagingInfoRelatinTypeTypeItem.MsdManageUrl = "/BaseInformation/Bases/MessaginRelationType";
+        
+        //cal;l info type combo
+        var CallInfoTypeTypeItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.CallInfo, IRERP_RestAPI.Models.Bases.CallInfoType>(
+     this.CID("CallInfoTypeTypeSelect"),
+     x => x.CallInfoType.id,
+     ApplicationStatics.T("RighFullCharacterViewCallInfoTypeTypeItemTitle"),
+     x => x.TypeName,
+     x => x.id,
+     null,
+     this.CID("CallInfoTypeDS"),
+     true,
+     true,
+   x => x.TypeName
+       ,
+   x => x.Description
+
+   );
+
+   
+       
+       
+        CallInfoTypeTypeItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RighFullCharacter/RighFullCharacterViewCallInfoTypeTypeItem");
+        CallInfoTypeTypeItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewCallInfoTypeTypeItemMsdWindowManageTitle"));
+        CallInfoTypeTypeItem.MsdManageUrl = "/BaseInformation/Bases/CallInfoType";
+        //mpostaladdress type combo
+        var PostalAddressTypeTypeItem = AbbasiAdmin.GGSelectItem<PostalAddress, PostalAddressType>(
+     this.CID("PostalAddressTypeTypeSelect"),
+     x => x.PostalAddressType.id,
+    ApplicationStatics.T("RighFullCharacterViewPostalAddressTypeTypeItemTitle"),
+     x => x.Name,
+     x => x.id,
+     null,
+     this.CID("PostalAddressTypeDS"),
+     true,
+     true,
+   x => x.Name
+       ,
+   x => x.Description
+
+   );
+
+   
+       
+   
+       
+        PostalAddressTypeTypeItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RighFullCharacter/RighFullCharacterViewPostalAddressTypeTypeItem");
+        PostalAddressTypeTypeItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewPostalAddressTypeTypeItemMsdWindowManageTitle"));
+        PostalAddressTypeTypeItem.MsdManageUrl = "/BaseInformation/Bases/PostalAddressType";
+        //Caharacter rol Select
+        var CharacterRoleItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.RolsOfCharacter, IRERP_RestAPI.Models.Bases.CharacterRole>(
+     this.CID("CharacterRoleSelect"),
+     x => x.CharacterRole.id,
+    ApplicationStatics.T("RighFullCharacterViewCharacterRoleItemTitle"),
+     x => x.RoleName,
+     x => x.id,
+     null,
+     this.CID("AllCharacterRoleDS"),
+     true,
+     true,
+   x => x.RoleName,
+   x=>x.Description
+
+   );
+   
+       
+
+        CharacterRoleItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/RighFullCharacterViewCharacterRoleItem");
+        CharacterRoleItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("RighFullCharacterViewCharacterRoleItemMsdWindowManageTitle"));
+        CharacterRoleItem.MsdManageUrl = "/BaseInformation/Bases/CharacterRole";
+   //***********************Messaging info FOrm
+        var MessaginInfoForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmMessaginInfo"), datasource: MessaginInfoDatasource);
+     MessaginInfoForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        MessaginInfoForm.fields = new IRERP_SM_FormItem[]
+      {
+          
+          
+          
+          MessagingInfoRelatinTypeTypeItem,
+          MessagingInfoTypeTypeItem,
+            new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewMessaginInfoFormMessagingAddressFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x=>x.MessagingAddress),type= IRERPControlTypes_FormItemType.text,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RighFullCharacter/MessagingInfoForm/MessagingAddress")}
+       ,new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewMessaginInfoFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+          
+          
+      };
+      //Messaging info Grid
+        var MessaginInfoGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(MessaginInfoDatasource.ID), ID: this.CID("grdMessagingInfo"));
+        MessaginInfoGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x => x.MessagingAddress) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x => x.MessagingRelationType.RelationName) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x => x.MessagingInfoType.MessagingType) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.MessagingInfo>(x => x.Description) }, 
+              new IRERPControlTypes_ListGridFiled() { name = this.FN<MessagingInfo>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<MessagingInfo>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+            
+ };
+ 
+ //***************************Call  info Form
+        var CallInfoForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmCallInfo"), datasource: CallInfoDatasource);
+       CallInfoForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        CallInfoForm.fields = new IRERP_SM_FormItem[]
+      {
+          
+          
+         
+         CallInfoTypeTypeItem,
+                    new IRERP_SM_TextAreaItem(){title= ApplicationStatics.T("RighFullCharacterViewCallInfoFormCallNumberFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.CallInfo>(x=>x.CallNumber),type= IRERPControlTypes_FormItemType.text,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RighFullCharacter/MessagingInfoForm/CallNumber")},
+  
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewCallInfoFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.CallInfo>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+ //*****************Call info DataGrid
+        var CallInfoGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(CallInfoDatasource.ID), ID: this.CID("grdCallInfo"));
+        CallInfoGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.CallInfo>(x => x.CallNumber) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.CallInfo>(x => x.CallInfoType.TypeName) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.CallInfo>(x => x.Description) }, 
+                new IRERPControlTypes_ListGridFiled() { name = this.FN<CallInfo>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<CallInfo>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+            
+ };
+ //************************Postal address Form
+        var PostalAddressForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmPostalAddress"), datasource: PostalAddressDatasource);
+       PostalAddressForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        PostalAddressForm.fields = new IRERP_SM_FormItem[]
+      {
+          
+          
+          
+          
+         PostalAddressTypeTypeItem,
+
+                new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewPostalAddressFormAddressFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.PostalAddress>(x=>x.Address),type= IRERPControlTypes_FormItemType.text},
+
+
+                   new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewPostalAddressFormPostalCodeFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.PostalAddress>(x=>x.PostalCode),type= IRERPControlTypes_FormItemType.text/*,mask="#####-#####"*/},
+
+
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewPostalAddressFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.PostalAddress>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+
+
+    
+          
+      };
+      //*************Postal address Grid
+
+        var PostalAddressGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(PostalAddressDatasource.ID), ID: this.CID("grdPostalAddress"));
+        PostalAddressGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.PostalAddress>(x => x.Address) }, 
+                new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.PostalAddress>(x => x.PostalCode) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.PostalAddress>(x => x.PostalAddressType.Name) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.PostalAddress>(x => x.Description) },
+              new IRERPControlTypes_ListGridFiled() { name = this.FN<PostalAddress>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<PostalAddress>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             
+ };
+        //************************RolsOf character Form
+        var RolsOfCharacterForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmRolsOfCharacter"), datasource: AllRolsOfCharacterDatasource);
+     // RolsOfCharacterForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        RolsOfCharacterForm.fields = new IRERP_SM_FormItem[]
+      {
+          
+          
+         CharacterRoleItem,
+                new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewRolsOfCharacterFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RolsOfCharacter>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea},
+               
+      };
+        //*************RolsOf character Grid
+       
+        var RolsOfCharacterGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(AllRolsOfCharacterDatasource.ID), ID: this.CID("grdRolsOfCharacter"));
+        RolsOfCharacterGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+               new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.RolsOfCharacter>(x => x.CharacterRole.RoleName) }, 
+               new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.RolsOfCharacter>(x => x.Description) }, 
+                  new IRERPControlTypes_ListGridFiled() { name = this.FN<RolsOfCharacter>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RolsOfCharacter>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             
+             
+             
+             
+             
+             
+ };
+        //////////////////Detail  DVS
+        IRERPPageString DetailMessagingInfoDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, MessaginInfoForm, MessaginInfoGrid, formName: ApplicationStatics.T("RighFullCharacterViewDetailMessagingInfoDVSPageTitle"), hasMenu: false, hasFilterBuilder: false);
+        DetailMessagingInfoDVS.PageTitle = ApplicationStatics.T("RighFullCharacterViewDetailMessagingInfoDVSPageTitle");
+        IRERPPageString DetailCallInfoDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, CallInfoForm, CallInfoGrid, formName: ApplicationStatics.T("RighFullCharacterViewDetailCallInfoDVSPageTitle"), hasMenu: false, hasFilterBuilder: false);
+        DetailCallInfoDVS.PageTitle = ApplicationStatics.T("RighFullCharacterViewDetailCallInfoDVSPageTitle");
+        IRERPPageString DetailPostalAddressDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, PostalAddressForm, PostalAddressGrid, formName: ApplicationStatics.T("RighFullCharacterViewDetailPostalAddressDVSPageTitle"), hasMenu: false, hasFilterBuilder: false);
+        DetailPostalAddressDVS.PageTitle = ApplicationStatics.T("RighFullCharacterViewDetailPostalAddressDVSPageTitle");
+        IRERPPageString DetailRolsOfCharacterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, RolsOfCharacterForm, RolsOfCharacterGrid, formName: ApplicationStatics.T("RighFullCharacterViewDetailRolsOfCharacterDVSPageTitle"), hasMenu: false, hasFilterBuilder: false);
+        DetailRolsOfCharacterDVS.PageTitle = ApplicationStatics.T("RighFullCharacterViewDetailRolsOfCharacterDVSPageTitle");
+        //*((((((((((((((((((((((((((((((((((((((((((((((
+    
+
+        
+         
+
+        var NationalitySelectItem = AbbasiAdmin.GGSelectItem<RightFulCharacter, Nationality>(
+  this.CID("selectNationality"),
+  x => x.Character.Nationality.id,
+     ApplicationStatics.T("RighFullCharacterViewNationalitySelectItemTitle"),
+  x => x.Name,
+  x => x.id,
+  null,
+  this.CID("NationalityDS"),
+  true,
+  true,
+   x => x.Name,
+  x => x.Description
+
+);
+
+
+        
+
+        NationalitySelectItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/RighFullCharacterViewNationalitySelectItem");
+    
+        
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("RightFullCharacterForm"), data: new IRERP_SM_FromString(RightFullCharacterDataSource.ID, true));
+        dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+       
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormFnameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.Fname)},
+       new IRERP_SM_TextItem(){title= ApplicationStatics.T("RighFullCharacterViewdyFormLNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.LName)},
+              new IRERP_SM_TextItem(){title= ApplicationStatics.T("RighFullCharacterViewdyFormNationalCodeFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.NationalCode)/*,mask="###-######-#",showHintInField=true*/,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/NationalCode")},
+                            new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormFatherNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.FatherName)},
+                            new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormBirthCertificateNumberFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.BirthCertificateNumber)},
+                             new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormBirthCertificateSerialFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.BirthCertificateSerial),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/BirthCertificateSerial")},
+                             new  IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormBrithDayYearFieldtitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.BrithDayYear)/*,mask="####/##/##",showHintInField=true*/,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/BirthDatel")},
+                             new IRERP_SM_TextItem(){title= ApplicationStatics.T("RighFullCharacterViewdyFormCharacterNickNameFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.Character.NickName).ToClientDsFieldName(),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/CharacterNickName")},
+        new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormCellCharacterCellNumberFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RightFulCharacter>(x=>x.Character.CellNumber).ToClientDsFieldName() ,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/CharacterCellNumber")/*,mask="###########",showHintInField=true*/},
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormCharacterTellNumberFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RightFulCharacter>(x=>x.Character.TellNumber).ToClientDsFieldName()/*,mask="###########",showHintInField=true*/,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/CharacterTellNumber")},
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormCharacterEmailTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RightFulCharacter>(x=>x.Character.Email).ToClientDsFieldName(),MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/CharacterEmail")},
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormCharacterPostalCodeFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RightFulCharacter>(x=>x.Character.PostalCode).ToClientDsFieldName()/*,mask="#####-#####",showHintInField=true*/,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RightFullCharacter/dyForm/CharacterPostalCode")},
+       
+       
+                                  
+                             GenderItem,
+                              BirthPlaceDSTree,
+                              NationalitySelectItem,
+                             new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Bases.RightFulCharacter>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea},
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("RighFullCharacterViewdyFormCharacterAddressFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<RightFulCharacter>(x=>x.Character.Address).ToClientDsFieldName(),type= IRERPControlTypes_FormItemType.textArea},
+                              
+
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("RightFullCharacterGrid"), Datasource: new IRERP_SM_FromString(RightFullCharacterDataSource.ID, true));
+        Grid.fields =
+new IRERPControlTypes_ListGridFiled[] {
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.NickName) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.FatherName) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.NationalCode) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.BirthCertificateNumber) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.Email),title=ApplicationStatics.T("RighFullCharacterViewGridCharacterEmailFieldTitle") }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.CellNumber),title=ApplicationStatics.T("RighFullCharacterViewGridCharacterCellNumberFieldTitle")}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.Address),title=ApplicationStatics.T("RighFullCharacterViewGridCharacterAddressFieldTitle") ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.TellNumber),title=ApplicationStatics.T("RighFullCharacterViewGridCharacterTellNumberFieldTitle") },
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.PostalCode),title=ApplicationStatics.T("RighFullCharacterViewGridCharacterPostalCodeFieldTitle"),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Gender.GenderName) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Fname) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.LName),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)  }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.BirthPlace.LocationName),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) ,title=ApplicationStatics.T("RighFullCharacterViewGridBirthPlaceLocationNameFieldTitle") }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.BirthCertificateSerial) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.BrithDayYear),title=ApplicationStatics.T("RighFullCharacterViewGridBrithDayYearFieldTitle") }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.Character.Nationality.Name) ,title=ApplicationStatics.T("RighFullCharacterViewCharacterNationalityNameFieldTitle"),showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+                 new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<RightFulCharacter>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             
+        };
+
+
+
+        var IdentificationTypeSelectItem = AbbasiAdmin.GGSelectItem<Identification, IdentificationType>(
+        this.CID("IdentificationTypeselect"),
+        x => x.IdentificationType.id,
+        ApplicationStatics.T("IdentificationType"),
+        x => x.Name,
+        x => x.id,
+        null,
+        this.CID("IdentificationTypeDS"),
+        true,
+        true,
+        x => x.Name,
+        x => x.Description
+
+        );
+        IdentificationTypeSelectItem.MsdHelpMessage = InstanceStatics.GetHelpByKey("Base/Character/IdentificationType");
+        IdentificationTypeSelectItem.MsdWindowManageTitle = new IRERPControlTypes_StringMethods(ApplicationStatics.T("return 'IdentificationTypeDDl';"));
+        IdentificationTypeSelectItem.MsdManageUrl = "/BaseInformation/Bases/IdentificationType";
+    
+        var IdentificationCharacterForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmIdentificationCharacter"), datasource: IdentificationDataSource, _numcols: 1);
+        IdentificationCharacterForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        IdentificationCharacterForm.fields = new IRERP_SM_FormItem[]
+      {
+          
+          IdentificationTypeSelectItem,
+       new IRERP_SM_TextItem(){title="تصویر مدرک",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Identification>(x=>x.TestFile.FileName),type= IRERPControlTypes_FormItemType.irerpFile},
+         
+       new IRERP_SM_TextAreaItem(){title= ApplicationStatics.T("IdentificationDesc"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Identification>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+          
+             
+      };
+        var IdentificationCharacterGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(IdentificationDataSource.ID), ID: this.CID("grdIdentificationCharacter"));
+        IdentificationCharacterGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<Identification>(x => x.IdentificationType.Name) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<Identification>(x => x.Description) }, 
+               new IRERPControlTypes_ListGridFiled() { name = this.FN<Identification>(x => x.TestFile.FileName)}, 
+             
+             
+ };
+
+        IRERPPageString DetailIdentificationCharacterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, IdentificationCharacterForm, IdentificationCharacterGrid, formName: ApplicationStatics.T("IdentificationPageTitle"), hasMenu: false, hasFilterBuilder: false);
+        DetailIdentificationCharacterDVS.PageTitle = ApplicationStatics.T("IdentificationPageTitle");
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("RighFullCharacterViewMasterPageTitle"));
+
+        Master.PageTitle = ApplicationStatics.T("RighFullCharacterViewMasterPageTitle");
+
+        CurPage = AbbasiAdmin.GetGeneralMasterDetail(Master, DetailMessagingInfoDVS, DetailCallInfoDVS, DetailPostalAddressDVS, DetailRolsOfCharacterDVS,DetailIdentificationCharacterDVS);
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+        CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.Bases.Character>(
+               Grid, CallInfoGrid, CallInfoForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteCharacterFilter.id, x => x.id
+               );
+        CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.Bases.Character>(
+      Grid, PostalAddressGrid, PostalAddressForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteCharacterFilter.id, x => x.id
+      );
+        CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.Bases.Character>(
+    Grid, MessaginInfoGrid, MessaginInfoForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteCharacterFilter.id, x => x.id
+    );
+        CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.Bases.Character>(
+ Grid, RolsOfCharacterGrid, RolsOfCharacterForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteCharacterFilter.id, x => x.id
+ );
+
+
+
+
+        CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.Bases.Character>(
+    Grid, IdentificationCharacterGrid, IdentificationCharacterForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteCharacterFilter.id, x => x.id
+    );
+
+      
+      
+    
+
+
+        ////////////////////////////// CACHE SECTION
+
+        string content = CurPage.ToString();
+        viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+        IRERP_RestAPI.Bases.ViewCache.CreateCacheForView(viewPath, content, this.CID(""));
+
+
+
+
+    }
+    else { CurPage = new IRERPPageString(cachedView); }
+
+    @Html.Raw(CurPage);
+
+

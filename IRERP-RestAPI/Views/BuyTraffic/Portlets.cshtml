@@ -1,0 +1,90 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Bases;
+@{
+
+     
+
+        var _1GPortlet =
+            Win8Skin.GetGeneralPortlet(LaBEL: Win8Skin.GetTrafficTitle(
+            IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "OneGig")
+            ), _imgsrc: "/Images/1368974793_database.png", click : new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true));
+            
+       
+            
+   
+
+        var _2GPortlet =
+                Win8Skin.GetGeneralPortlet(
+                LaBEL: Win8Skin.GetTrafficTitle(
+                IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ThreeGig")
+                ),
+                _imgsrc: "/Images/1368974183_database-px.png", click : new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true));
+
+        
+   
+
+        var _5GPortlet =
+                    Win8Skin.GetGeneralPortlet(LaBEL: Win8Skin.GetTrafficTitle(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "FiveGig")),
+                    _imgsrc: "/Images/1368974258_basic-data.png", click: new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true));
+
+        
+ 
+
+        var _10GPortlet =
+                    Win8Skin.GetGeneralPortlet(LaBEL: Win8Skin.GetTrafficTitle(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath,
+                    "TenGig")), _imgsrc: "/Images/1368974520_Database_2.png", click: new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true));
+
+                
+  
+        var _20GPortlet =
+                    Win8Skin.GetGeneralPortlet(LaBEL: Win8Skin.GetTrafficTitle(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "TwentyGig")),
+                    _imgsrc: "/Images/1368974387_Database_4.png", click: new IRERPControlTypes_StringMethods(@" ""CereditBank_Click()"" ", true));
+
+
+
+
+        var lbl1 = Win8Skin.GetGeneralPortlet(
+            _backgroundcolor: "#FFFDC5", _heightLabl: "0");
+
+        var _v = ((IRERP_SM_VLayout)lbl1.members[0]);
+       
+        _v.members=new IRERPControlBase[] {
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString( IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "DescForBuyTraffic")),
+                baseStyle="RedlabelTitle" ,align=IRERPControlTypes_Alignment.center,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+           
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel" ,align=IRERPControlTypes_Alignment.right,height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+                        new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel",align=IRERPControlTypes_Alignment.right, height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+            new IRERP_SM_Label(){contents=new IRERPControlTypes_HTMLString("این یک تست است"),baseStyle="Redlabel", height="10",align=IRERPControlTypes_Alignment.right,overflow=IRERPControlTypes_Overflow.visible,width="100%"},
+        
+        };
+
+
+
+        var IMG = Win8Skin.GetGeneralPortlet(_imgsrc: "/Images/1368975222_Redo.png", LaBEL: IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "ReturnToMainPage"));
+    IMG.width = "200px";
+    IMG.click = new IRERPControlTypes_StringMethods("backtomainpage", true);
+
+    var portal = Win8Skin.GetGeneralPortLayout();
+
+    
+    portal.portlets = IRERP_SM_Portlets.GetRow( new IRERP_SM_Portlets()
+    {
+        Portlets = new IRERPControlBase[]{ 
+                
+            IRERP_SM_Portlets.GetRow( _1GPortlet, _2GPortlet,_5GPortlet),
+            IRERP_SM_Portlets.GetRow( _10GPortlet, _20GPortlet),
+             IRERP_SM_Portlets.GetRow( IMG, lbl1)
+            
+          
+           
+                      
+         }
+    });
+    }
+@Html.Raw(
+portal
+)

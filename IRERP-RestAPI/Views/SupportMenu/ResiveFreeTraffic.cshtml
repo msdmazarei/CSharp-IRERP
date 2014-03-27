@@ -1,0 +1,30 @@
+﻿  
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrPetiakChargeDs = model.GenDS(
+           x => x.SelectedUser.AllPetiakCharge,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("UserPetiakChargeDs")
+        );
+
+
+    var datasource = IRERP_RestAPI.Bases.Skins.Win8Skin.GetGeneralListGrid(
+
+     Datasource: new IRERP_SM_FromString(this.CID("UserPetiakChargeDs"), false)
+        );
+    datasource.ID =this.CID( "lstPetiakCharge");
+
+    datasource.showFilterEditor = true;
+    datasource.filterOnKeypress = true;
+    datasource.fetchDelay = 1000;
+    datasource.allowFilterExpressions = true;
+    CurPage.OtherObjects = UsrPetiakChargeDs!=null ?UsrPetiakChargeDs.ToString():"";
+    CurPage.DisplayControls = datasource.ToStringAsMemberOfOther();
+    }
+@Html.Raw(CurPage)

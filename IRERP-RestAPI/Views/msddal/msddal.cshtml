@@ -1,0 +1,269 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models;
+@{
+    ViewBag.Title = "caltest";
+    Layout = "~/Views/Shared/SupportLayout.cshtml";
+}
+
+<script type="text/javascript">
+@{
+    
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    IRERPPageString CurPage = new IRERPPageString();
+    var UsrSupportDs = model.GenDS(
+             x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("UserSupportDs")
+          );
+
+    var UsrSupportDtDs = model.GenDS(
+             x => x.AllUsers, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+          ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+          ID: this.CID("UserSupportDtDs")
+          );
+
+    var UsrRoleSupportDtDs = model.GenDS(
+   x => x.AllUserRole,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("UserRoleSupportDtDs")
+);
+          
+    var UsrAccountDs = model.GenDS(
+    x => x.AllInstaller,
+   ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+   ID: this.CID("UserAccountDs")
+   );
+   
+    var UsrAllService = model.GenDS(x => x.AllServices, SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.SupportUser_Overview,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID:  this.CID("UserAllService")
+);
+    var information = new IRERP_SM_DynamicForm()
+    {
+        dataSource = new IRERP_SM_FromString(this.CID("UserSupportDtDs"), false),
+        width="100%",
+        height="50%",
+        numCols=2,
+        items=new IRERP_SM_FormItem[]{
+        new IRERP_SM_HeaderItem(){defaultValue="بازه زمانی"},
+        new IRERP_SM_TextItem(){title="از"},
+        new IRERP_SM_TextItem(){title="تا"},
+        
+        AbbasiAdmin.GGSelectItem<User,User>(this.CID("cbotest"),x=>x.UserID,"نام مشترک",x=>x.Email,x=>x.UserID,null,this.CID("UserSupportDs"),true,true,x=>x.DisplayName),
+        AbbasiAdmin.GGSelectItem<User,PetiakWifiService>(
+        this.CID("cbotest11112"),
+        null,
+        "نوع سرویس",x=>x.ServiceName
+        ,
+        x=>x.ServiceID,null,this.CID("UserAllService"),true,true,x=>x.ServiceName),
+        AbbasiAdmin.GGSelectItem<User,User>("cbotest13",x=>x.UserID,"نصاب",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserAccountDs"),true,true,x=>x.DisplayName),
+        AbbasiAdmin.GGSelectItem<User,User>("cbotest12",x=>x.UserID,"نام اپراتور",x=>x.DisplayName,x=>x.UserID,null,this.CID("UserRoleSupportDtDs"),true,true,x=>x.DisplayName),
+        new IRERP_SM_ButtonItem(){title="جستجو"}
+        }
+    };
+
+    var InastallationInformation =
+        Win8Skin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(this.CID("UserSupportDtDs")));
+        /*
+        new IRERP_SM_FromString(@"
+                isc.ListGrid.create({
+                    ID: ""countryList1"",
+                    width:""100%"", height:""100%"",
+alternateRecordStyles :false,membersMargin :0,
+    canEdit:false,  showHeader :true, 
+    data: [
+{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},
+{
+    name:""رضا احمدی"",
+    Service:""PNE-3"",
+    instalationName:""افشین صادقی"",
+    Reservtorname:""سعیده عباسی"",
+    date:""1392.2.3"",
+     hours:""22.2.3"",
+   tell:""658982"",  
+mobail:""091254996"",
+state:""فعال"",
+
+
+   
+ 
+},
+    ],
+    fields:[
+{name:""name"",title:""نام مشترک""},
+{name:""Service"",title:""سرویس مورد استفاده""},
+{name:""instalationName"",title:""نام نصاب""},
+
+{name:""Reservtorname"",title:""نام رزروبتور""},
+{name:""date"",title:""تاریخ ایجاد""},
+{name:""hours"",title:""ساعت""},
+{name:""tell"",title:""تلفن""},
+{name:""mobail"",title:""موبایل""},
+{name:""state"",title:""فعال""},
+
+
+
+
+
+
+]
+
+            })
+                   
+               ", false);*/
+
+    var button = new IRERP_SM_Button() { title = new IRERPControlTypes_HTMLString("تبديل به Excell ") };
+
+    var body = new IRERP_SM_VLayout() { members = new IRERPControlBase[] {
+        new IRERP_SM_FromString(@" isc.FilterBuilder.create({
+			        ID: ""advancedFilter"",align:""left"",
+			        dataSource: "+this.CID("UserSupportDtDs")+@",
+			        criteria: {
+			            _constructor: ""AdvancedCriteria""			     }
+			    })",false) ,
+        information, InastallationInformation, button } };
+    CurPage.OtherObjects += UsrAllService.ToString();
+    CurPage.OtherObjects += UsrSupportDs.ToString();
+    CurPage.OtherObjects += UsrAccountDs.ToString();
+    CurPage.OtherObjects += UsrSupportDtDs.ToString();
+    CurPage.OtherObjects += UsrRoleSupportDtDs.ToString();
+    
+    
+    
+ CurPage.DisplayControls = body.ToStringAsMemberOfOther();
+ }
+@Html.Raw(CurPage.OtherObjects)
+    @Html.Raw(CurPage.DisplayControls)
+    @Html.Raw(CurPage.Commands)
+    </script>

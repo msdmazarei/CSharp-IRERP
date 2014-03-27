@@ -1,0 +1,58 @@
+@using IRERP_RestAPI.Models;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+@using IRERP_RestAPI.Models.Bases;
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        //”«Œ  œ? « ”Ê—”
+        var CharacterDataSource = model.GenDS(
+                                x => x.AllCharacter
+,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("AllCharacterDS")
+                            );
+
+        PageDataSources.Add(CharacterDataSource);
+       
+        //”«Œ  ›—„
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("CharacterForm"), data: new IRERP_SM_FromString(CharacterDataSource.ID, true));
+        dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        //”«Œ  ê—?œ
+      var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("CharacterGrid"), Datasource: new IRERP_SM_FromString(CharacterDataSource.ID, true));
+      Grid.fields =
+ new IRERPControlTypes_ListGridFiled[] {
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<Character>(x => x.NickName),title="‰«„ „‘ —ò" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<Character>(x => x.Characterstype.Charactertypename), title="‰Ê⁄ ‘Œ’? "}, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<Character>(x => x.Description) }, 
+              new IRERPControlTypes_ListGridFiled() { name = this.FN<Character>(x => x.PersianAddByDAte) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<Character>(x => x.PersianModifiyDate) ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             
+        };
+        //”«Œ  „” —
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: " ⁄—?› ‘Œ’?  Â« ", hasMenu: false, hasFilterBuilder: false,hasDelete:false,hasEdit:false,hasFormula:false,hasHilit:false,hasInsert:false);
+        // «? · ’›ÕÂ
+        Master.PageTitle = " ⁄—?› ‘Œ’?  Â« ";
+        CurPage = Master;
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);

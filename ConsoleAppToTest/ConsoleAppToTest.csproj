@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3ADF4A6C-EA6A-4029-8F83-F308F26E1515}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConsoleAppToTest</RootNamespace>
+    <AssemblyName>ConsoleAppToTest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generals.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fluent-nhibernate\src\FluentNHibernate\FluentNHibernate.csproj">
+      <Project>{529145d5-6cc3-4016-89b5-826563024af1}</Project>
+      <Name>FluentNHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRERP-RestAPI\IRERP-RestAPI.csproj">
+      <Project>{92265119-31f8-46cc-bcf9-e1b52c39acce}</Project>
+      <Name>IRERP-RestAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRERP_RestAPI_Models\IRERP_RestAPI_Models.csproj">
+      <Project>{c7532037-723e-4e1c-acc4-bf522fe1f614}</Project>
+      <Name>IRERP_RestAPI_Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRERP_REST_API_Bases\IRERP_REST_API_Bases.csproj">
+      <Project>{8c2d1f0e-0117-43e1-8f90-af0238e81ecd}</Project>
+      <Name>IRERP_REST_API_Bases</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MsdLib\MsdLib.csproj">
+      <Project>{42aac68e-5650-4dad-858e-d0f9e9ac563b}</Project>
+      <Name>MsdLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHibernate-3.3.1.GA-src\src\NHibernate\NHibernate.csproj">
+      <Project>{5909bfe7-93cf-4e5f-be22-6293368af01d}</Project>
+      <Name>NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkFlows\IRERP_RestAPI_WorkFlows.csproj">
+      <Project>{98ec024c-6439-44b1-8b1e-29e457b2201f}</Project>
+      <Name>IRERP_RestAPI_WorkFlows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

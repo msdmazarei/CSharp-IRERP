@@ -1,0 +1,102 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERP_RestAPI.MetaModel.Support_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    IRERPPageString CurPage = new IRERPPageString();
+    
+    
+    var UsrMenuDs = model.GenDS(
+        x => x.AllMenu,
+        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+        ID: this.CID("UserMenuDs")
+        );
+
+
+    PageDataSources.Add(UsrMenuDs);
+        
+        //Get Id Of ParentId Field
+        for(int i=0;i<UsrMenuDs.fields.Count();i++)
+        {
+            if(
+                UsrMenuDs.fields[i].name.Trim().ToLower()=="ParentId".ToLower()
+                )
+            {
+                UsrMenuDs.fields[i].foreignKey = UsrMenuDs.ID+".id";
+                break;
+            }
+            
+        }
+        var DyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("MenuForm"), data: new IRERP_SM_FromString(UsrMenuDs.ID));
+
+        DyForm.fields = new IRERP_SM_FormItem[] {   new IRERP_SM_HeaderItem(){ID="Lbl1", defaultValue="شما در حال تعریف منوی جدید می باشید." },
+                     new IRERP_SM_TextItem(){title="نام انگلیسی",name= "EnName"},
+                     new IRERP_SM_TextItem(){title="عنوان",name="Title"},
+                     new IRERP_SM_NativeCheckboxItem(){title="زیر منو",type=IRERPControlTypes_FormItemType.checkbox, 
+                         name=IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.HasChild)},
+                    
+                     new IRERP_SM_TextAreaItem(){title="توضیحات", type=IRERPControlTypes_FormItemType.textArea,name="Description"},
+                     new IRERP_SM_TextItem(){title="URL",name=IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.MenuItem_Url)},
+                     new IRERP_SM_TextItem(){title="MethodToCall",name="MethodToCall"}, 
+                     new IRERP_SM_PickTreeItem(){
+                         canSelectParentItems=true, 
+                         dataSource=new IRERP_SM_FromString(this.CID("UserMenuDs"), false),
+                         name=IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.ParentID),
+                         emptyMenuMessage="No Selected Value",
+                         displayField=IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.Title),
+                         valueField = IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.MenuItem>(x=>x.id),
+                    }
+                     };
+
+
+        var Grid = new IRERP_SM_TreeGrid()
+        {
+            width = "100%",
+            height = "100%",
+            dataSource = new IRERP_SM_FromString(UsrMenuDs.ID),
+            ID=this.CID("MenuGrid"),
+            autoFetchData = true,
+            autoSaveEdits = true,
+            canAcceptDroppedRecords = true,
+            canDragRecordsOut = true,
+            canEdit = true,
+            canReorderRecords = true,
+            canReparentNodes = true,
+            canSort = false,
+            showOpenIcons = false,
+            showDropIcons = true,
+            dropIconSuffix = "into",
+            dragDataAction = IRERPControlTypes_DragDataAction.move,
+            fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() {name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.Title),createDefaultTreeField=true }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.EnName) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.HasChild) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.Description) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.ParentID) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.MethodToCall) }, 
+            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.MenuItem>(x => x.MenuItem_Url) },
+  }
+
+        };
+     //  var Grid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UsrMenuDs.ID), ID: this.CID("MenuGrid"), _CanEdit: false);
+      
+
+
+        var MasterDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, DyForm, Grid);
+
+        MasterDVS.PageTitle = "تعیین منوها";
+
+        CurPage = MasterDVS;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    
+    
+    }
+@Html.Raw(CurPage)

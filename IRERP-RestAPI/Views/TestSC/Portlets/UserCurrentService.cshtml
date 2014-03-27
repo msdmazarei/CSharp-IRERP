@@ -1,0 +1,66 @@
+﻿
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@{
+    string Sabz = "#023080";
+    string portletlabelbackcolor = "#888888";
+    
+    var UserCurrentServicePortlet = new IRERP_SM_Portlets()
+    {
+        ID = "CurrentServiceportlet",
+        click = new IRERPControlTypes_StringMethods("CurentUserService_Click", true),
+        members = new IRERPControlBase[]{
+               new IRERP_SM_VLayout(){
+                     height="100%",width="100%",
+                    members= new IRERPControlBase[]{
+                        
+                        new IRERP_SM_HLayout()
+                        {
+                             height="100%",width="100%",
+                             members= new IRERPControlBase[]{ 
+                                  new IRERP_SM_Img(){src="/Images/globe.png",imageType=IRERPControlTypes_imageType.stretch,height="100%",width="30%",margin=10},
+                                   new IRERP_SM_VLayout(){
+                                       height="100%",width="70%",
+                                      members= new IRERPControlBase[]{
+                         new IRERP_SM_Label(){height="10%"},
+                                          
+                                          new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString("نام طرح:علی و سرعت طرح: 20")
+                            ,baseStyle="whitelabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%",margin=10
+                        },
+                        new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlString(ApplicationStatics.LoggedUser.UserConnectionInfo, x => x.ValidSince, ApplicationStatics.T("StatrService")))
+                            ,baseStyle="whitelabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%",margin=10
+                        },
+                        new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlString(ApplicationStatics.LoggedUser.UserConnectionInfo, x => x.ValidTill, ApplicationStatics.T("EndService")))
+                            ,baseStyle="whitelabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%",margin=10
+                        },
+                                      }}
+                             }
+                        },
+                             new IRERP_SM_Label(){height="20%"},
+                        new IRERP_SM_Label(){
+                            contents = new  IRERPControlTypes_HTMLString(IRERPApplicationUtilities.GetHtmlLabelString(this, @VirtualPath, "TarhJari")),
+                            backgroundColor=portletlabelbackcolor
+                            ,baseStyle="portletlabel",align=IRERPControlTypes_Alignment.center,
+                            height="10",overflow=IRERPControlTypes_Overflow.visible,width="100%"
+                        },
+                    }
+                    
+           }
+        },
+
+        showEdges = false,
+        showHeader = false,
+        //bodyColor = ,
+        backgroundColor = Sabz
+    };
+} 
+
+@Html.Raw(UserCurrentServicePortlet.ToStringAsMemberOfOther())

@@ -1,0 +1,98 @@
+@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if(cachedView==null){
+
+        IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+        List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+        var HelpDataSource = model.GenDS(
+                                x => x.allHelp,
+                                ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                                ID: this.CID("HelpDS")
+                            );
+
+                            
+                                                    
+        var LanguageSource = model.GenDS(
+x => x.AllLanguage,
+ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ID: this.CID("LanguageSourceDS")
+);
+
+
+
+        PageDataSources.Add(HelpDataSource);
+        PageDataSources.Add(LanguageSource);
+
+
+
+        var LanguageItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.Bases.Help, IRERP_RestAPI.Models.Bases.Language>(
+      this.CID("Languageselect"),
+      x => x.Language.id,
+      "ÒÈÇä",
+      x => x.LanguageName,
+      x => x.id,
+      null,
+      this.CID("LanguageSourceDS"),
+      true,
+      true,
+    x => x.LanguageName,
+    x => x.Description
+
+    );
+     
+
+        var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("HelpForm"), data: new IRERP_SM_FromString(HelpDataSource.ID, true), _numcols: 1);
+      dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+        dyForm.fields = new IRERP_SM_FormItem[]
+      {
+       new IRERP_SM_TextItem(){title=ApplicationStatics.T("HelpViewdyFormKeyFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Help>(x=>x.HelpKey),width=300},
+        new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("HelpViewdyFormTextFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Help>(x=>x.HelpText),type= IRERPControlTypes_FormItemType.textArea,width=500},
+        LanguageItem,
+       new IRERP_SM_TextAreaItem(){title=ApplicationStatics.T("HelpViewdyFormDescriptionFieldTitle"),name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<Help>(x=>x.Description),type= IRERPControlTypes_FormItemType.textArea}
+      };
+
+        var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("HelpGrid"), Datasource: new IRERP_SM_FromString(HelpDataSource.ID, true));
+        Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.Help>(x => x.HelpKey) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.Help>(x => x.HelpText),wrap=true }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.Help>(x => x.Language.LanguageName) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Bases.Help>(x => x.Description) ,wrap=true}, 
+
+            
+ };
+
+        var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, formName: ApplicationStatics.T("HelpViewPageTitle"));
+
+
+        Master.PageTitle = ApplicationStatics.T("HelpViewPageTitle");
+
+        CurPage = Master;
+
+        string dses = "";
+        PageDataSources.ForEach(x => dses += x.ToString());
+        CurPage.OtherObjects = dses + CurPage.OtherObjects;
+   
+
+} else { CurPage = new IRERPPageString(cachedView);}
+
+    @Html.Raw(CurPage);
+
+
+

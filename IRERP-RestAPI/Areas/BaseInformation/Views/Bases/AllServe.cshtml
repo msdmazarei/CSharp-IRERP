@@ -1,0 +1,356 @@
+﻿@using IRERP_RestAPI.Models.Bases;
+@using IRERP_RestAPI.Areas.Report.MetaModels;
+@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+@using IRERP_RestAPI.Bases;
+@using IRERP_RestAPI.Bases.Extension.Methods;
+@using MsdLib.ExtentionFuncs.Strings;
+@using IRERP_RestAPI.Bases.Skins;
+
+@{
+    IRERPPageString CurPage = new IRERPPageString();
+    ////////////////////////////// CACHE SECTION
+    string viewPath = ((System.Web.Mvc.RazorView)this.ViewContext.View).ViewPath;//IRERP_RestAPI.Bases.ViewCache.GetCachedView(((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl);
+    string cachedView = IRERP_RestAPI.Bases.ViewCache.GetCachedView(viewPath);
+    cachedView = null;
+   
+}
+
+@if (cachedView == null)
+{
+
+    IRERP_RestAPI.MetaModel.BasesInformation_MetaModel model = Model;
+    List<IRERP_SM_DataSource> PageDataSources = new List<IRERP_SM_DataSource>();
+    var ServeDataSource = model.GenDS(
+                            x => x.AllServe,
+                             SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.AllServe_user,
+                            ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                            ID: this.CID("ServeDS")
+                        );
+    //user data source
+    var ALLUserDataSourceSource = model.GenDS(
+                        x => x.AllUsers,
+                         SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.AllUser_Serve,
+                        ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                        ID: this.CID("ALLUserDS")
+                    );
+    //user note data source
+    var UserNoteDatasource = model.GenDS(
+    x => x.SelecteServe.Petiak_Wifi_ServeNote,
+      SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.Serve_ServeNote,
+ ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ ID: this.CID("UserNoteDS")
+ );
+
+
+ //   var AddDateDatasource = model.GenDS(
+ //   x => x.SelecteServe.Petiak_Wifi_ServeDateSettings,
+ //     SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.AllServe_Date,
+ //ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+ //ID: this.CID("AddDateDS")
+ //);
+
+
+
+    var ALLDamageDataSourceSource = model.GenDS(
+                      x => x.AllDamage,
+                       SpecMetaModelProfile: IRERP_RestAPI.Bases.MetaDataDescriptors.IRERPProfile.General,
+                      ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+                      ID: this.CID("ALLDamageDS")
+                  );
+    PageDataSources.Add(ServeDataSource);
+    PageDataSources.Add(ALLUserDataSourceSource);
+    PageDataSources.Add(UserNoteDatasource);
+ //  PageDataSources.Add(AddDateDatasource);
+
+    PageDataSources.Add(ALLDamageDataSourceSource);
+    
+    //define comboboxes
+
+    var AllUserSelectItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.PetiakWifiServe, IRERP_RestAPI.Models.User>(
+      this.CID("AllUserSelect"),
+      x => x.User.UserID,
+      "کاربر",
+      x => x.DisplayName,
+      x => x.UserID,
+      null,
+      this.CID("ALLUserDS"),
+      true,
+      true,
+     x => x.FirstName,
+     x => x.LastName,
+     x => x.UserID
+
+    );
+
+
+    var TelOperatorSelectItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.PetiakWifiServe, IRERP_RestAPI.Models.User>(
+  this.CID("TelOperatorSelect"),
+  x => x.UserTelOperator.UserID,
+  "مسئول پاسخگویی به تلفن",
+  x => x.DisplayName,
+  x => x.UserID,
+  null,
+  this.CID("ALLUserDS"),
+  true,
+  true,
+ x => x.FirstName,
+ x => x.LastName,
+ x => x.UserID
+
+);
+
+
+    var PersonalOperatorSelectItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.PetiakWifiServe, IRERP_RestAPI.Models.User>(
+  this.CID("PersonalOperatorSelect"),
+  x => x.UserPersonalOperator.UserID,
+  "مسئول رسیدگی به خرابی",
+  x => x.DisplayName,
+  x => x.UserID,
+  null,
+  this.CID("ALLUserDS"),
+  true,
+  true,
+ x => x.FirstName,
+ x => x.LastName,
+ x => x.UserID
+
+);
+
+
+    var AllDamageSelectItem = AbbasiAdmin.GGSelectItem<IRERP_RestAPI.Models.PetiakWifiServe, IRERP_RestAPI.Models.Petiak_Wifi_Damage>(
+      this.CID("AllDamageSelect"),
+      x => x.Petiak_Wifi_Damage.DamageId,
+      "خرابی",
+      x => x.Damage,
+      x => x.DamageId,
+      null,
+      this.CID("ALLDamageDS"),
+      true,
+      true,
+      x => x.Damage,
+      x => x.DamageId
+
+    );
+
+    //****************************
+
+    var dyForm = AbbasiAdmin.GetGenetalDynamicForm(this.CID("ServeForm"), data: new IRERP_SM_FromString(ServeDataSource.ID, true), _numcols: 1);
+    dyForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+    dyForm.fields = new IRERP_SM_FormItem[]
+      {
+     //  new IRERP_SM_TextItem(){title="نام",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Name),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/Name")},
+       //   new IRERP_SM_TextItem(){title="تلفن",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Tel),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/Tel")},
+          //   new IRERP_SM_TextItem(){title="آدرس",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Address),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/Address")},
+             //   new IRERP_SM_TextItem(){title="مشکل",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.ServeDiscription),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/ServeDiscription")},
+              //     new IRERP_SM_TextItem(){title="آدرس ip",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Ipaddress ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyFrom/Ipaddress")},
+                      //new IRERP_SM_TextItem(){title="نام",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Attachment )},
+                    //     new IRERP_SM_NativeCheckboxItem{title="حل شده",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.IsSolved ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/IsSolved"),type= IRERPControlTypes_FormItemType.checkbox},
+                                       //           new IRERP_SM_NativeCheckboxItem{title="مراجعه شده",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.IsAttend ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/IsSolved")},
+                                            //      new IRERP_SM_NativeCheckboxItem{title="فعال",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Enable ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/IsSolved")},
+                                                  
+                       //  new IRERP_SM_TextItem{title="تاریخ رفع خرابی ",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.CorrectDate ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/CorrectedDate")},
+                                          //  new IRERP_SM_TextAreaItem(){title="توضیحات کاربر",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.UserDescription  ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/UserDescription")},
+                                               //   new IRERP_SM_TextItem(){title="هزینه تعمیر",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Upkeep  ),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/Upkeep")},
+                                                              // new IRERP_SM_NativeCheckboxItem(){title="مراجعه شده",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.IsAttend  )},
+                                                        //       new IRERP_SM_TextItem(){title="توضیحات هزینه",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.CostDescription),MsdHelpMessage=InstanceStatics.GetHelpByKey("AllServe/dyForm/CostDescription")},
+                                                         //      AllUserSelectItem,
+                                                              // TelOperatorSelectItem,
+                                                             PersonalOperatorSelectItem,
+                                                     //        AllDamageSelectItem
+                                                               
+      };
+
+    var Grid = AbbasiAdmin.GetGeneralListGrid(ID: this.CID("AllServeGrid"), Datasource: new IRERP_SM_FromString(ServeDataSource.ID, true));
+    Grid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.ServeId),title="شماره" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.User.Email) ,title="ایمیل مشترک"},
+              new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.User.DisplayName) ,title="نام مشترک"}, 
+                 new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Name) ,title="نام درخواست کننده"},
+                 new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Tel) ,title="تلفن"},
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.ServeDiscription),title="مشکل" }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.AddDate),title="تاریخ ثبت", showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+                 
+               //  new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.ActionBy) ,title=" ثبت شده",showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)},
+                 
+                            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.CorrectDate),title="تاریخ رفع" ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+                            new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.ModifiedBy),title="تاریخ تغییر", showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+                                    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.UserTelOperator.DisplayName),title="اپراتور تلفنی"}, 
+
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.ServeDiscription),title="شرح خدمات",showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.UserDescription),title="توضیحات" ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+             new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.UserPersonalOperator.DisplayName),title="اپراتور حضوری" }, 
+                            
+                                    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Ipaddress),title="آدرس ip" ,showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true)}, 
+                                     new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Enable),valueMap=@"{true:""فعال"",false:""غیر فعال ""}",title="فعال" }, 
+                                        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.IsAttend),valueMap=@"{true:""مراجعه شده"",false:""مراجعه نشده ""}",title="مراجعه شده " }, 
+                                                                                new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.IsSolved),valueMap=@"{true:""برطرف شده"",false:""برطرف نشده ""}",title="برطرف شده " },
+                                                                                 new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Petiak_Wifi_ServeDateSettings.PersianAttendDate),title="تاریخ مراجعه" },
+                                                                                  new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Petiak_Wifi_ServeDateSettings.AttendHour),title="ساعت مراجعه"},  
+                                         new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.CostDescription),title="توضیحات هزینه",showIf=new IRERPControlTypes_StringMethods(@"""return false;""",true) }, 
+                                                    //      new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.PetiakWifiServe>(x => x.Petiak_Wifi_ServeNote[0].Note),title="توضیحات کاربر " }, 
+ };
+    
+    
+    //details********************************************
+   
+    
+    //توضیحات
+        var UserNoteForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmUserNote"), datasource: UserNoteDatasource);
+      UserNoteForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+      UserNoteForm.fields = new IRERP_SM_FormItem[]
+      {
+        
+                    new IRERP_SM_TextAreaItem(){title="توضیحات",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Petiak_Wifi_ServeNote>(x=>x.Note).ToClientDsFieldName(),type= IRERPControlTypes_FormItemType.textArea,MsdHelpMessage=""},
+  
+      };
+
+      var UserNoteGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(UserNoteDatasource.ID), ID: this.CID("grdUserNote"));
+        UserNoteGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+        new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Petiak_Wifi_ServeNote>(x => x.Note) ,title="توضیحات"}, 
+             };
+    IRERPPageString DetailUserNoteDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, UserNoteForm, UserNoteGrid, formName:"توضیحات کاربر", hasMenu: false, hasFilterBuilder: false,hasEdit:false,hasDelete:false,hasInsert:false);
+    DetailUserNoteDVS.PageTitle ="توضیحات کاربر";
+    
+ //Add Date
+
+
+    //var AddDateForm = AbbasiAdmin.GetGenetalDynamicForm_Extend(this.CID("frmAddDate"), datasource: AddDateDatasource);
+    //AddDateForm.titleOrientation = IRERPControlTypes_TitleOrientation.top;
+    //AddDateForm.fields = new IRERP_SM_FormItem[]
+    //{
+
+    //  new IRERP_SM_TextAreaItem(){title= "تاریخ",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Petiak_Wifi_ServeDateSettings>(x=>x.PersianAttendDate).ToClientDsFieldName(),type= IRERPControlTypes_FormItemType.text,MsdHelpMessage=InstanceStatics.GetHelpByKey("Bases/RighFullCharacter/MessagingInfoForm/CallNumber")},
+
+    // new IRERP_SM_TextAreaItem(){title="زمان",name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.Petiak_Wifi_ServeDateSettings>(x=>x.AttendHour).ToClientDsFieldName(),type= IRERPControlTypes_FormItemType.text}
+    //};
+
+    //var AddDateGrid = AbbasiAdmin.GetGeneralListGrid(Datasource: new IRERP_SM_FromString(AddDateDatasource.ID), ID: this.CID("grdAddDate"));
+    //AddDateGrid.fields = new IRERPControlTypes_ListGridFiled[] {
+    //    new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Petiak_Wifi_ServeDateSettings>(x => x.PersianAttendDate) }, 
+    //       new IRERPControlTypes_ListGridFiled() { name = this.FN<IRERP_RestAPI.Models.Petiak_Wifi_ServeDateSettings>(x => x.AttendHour) }, 
+    //         };
+    //IRERPPageString DetailAddDateDVS = AbbasiAdmin.GetGeneralDVS(this.ViewContext, AddDateForm, AddDateGrid, formName: "تاریخ مراجعات", hasMenu: false, hasFilterBuilder: false,hasEdit:true,  hasDelete:false);
+    //DetailAddDateDVS.PageTitle = "تاریخ مراجعات";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var SetupDateWindow = AbbasiAdmin.GetGenetalwindow(
+                      this.CID("SetupDateWindow"), "تنظیم زمان", "50%", "30%",
+                      new IRERPControlBase[]{
+                            AbbasiAdmin.GetGenetalDynamicForm(this.CID("SetupDateForm"),"30%","30%",
+                              new IRERP_SM_FormItem[]{
+                             
+                            new IRERP_SM_TextAreaItem(){title="تاریخ ",type= IRERPControlTypes_FormItemType.text,name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Petiak_Wifi_ServeDateSettings.PersianAttendDate) ,ID=this.CID("Date")},
+                           new IRERP_SM_TextAreaItem(){title="ساعت ",type= IRERPControlTypes_FormItemType.text,name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.Petiak_Wifi_ServeDateSettings.AttendHour),ID=this.CID("Hour")},
+                         new IRERP_SM_TextAreaItem(){name=IRERP_RestAPI.Bases.IRERPApplicationUtilities.GPN<IRERP_RestAPI.Models.PetiakWifiServe>(x=>x.ServeId),type= IRERPControlTypes_FormItemType.hidden,ID=this.CID("ServeId")},
+                           
+                            
+                            },2,10,new IRERP_SM_FromString(ServeDataSource.ID,true)),
+                            
+                            new IRERP_SM_HLayout()
+                {
+                    width = "100%",
+                    height = "100%",
+                    members = new IRERPControlBase[]{ 
+                     new IRERP_SM_Label(){width="5%"},
+                     AbbasiAdmin.GetGenetalButton("ارسال", new IRERPControlTypes_StringMethods(
+                         
+                       
+@"callServerMethod('/BaseInformation/Bases/ServeDating',{ServeId:"+this.CID("ServeId")+@".getValue(),AttendDate:"+this.CID("Date")+@".getValue(),AttendHour:"+this.CID("Hour")+@".getValue()} ,function(d,t,jq,addi){
+var msg = FromJson(d);
+if(t=='success')
+{
+
+alert(msg.Error);
+ 
+    
+} else
+{
+alert(msg.Error);
+}
+
+}, 'POST',null);", false)),
+                     new IRERP_SM_Label(){width="0%"},
+                     AbbasiAdmin.GetGenetalButton("بازگشت",new IRERPControlTypes_StringMethods(@" ""GeneralReturn(" +this.CID("SetupDateWindow")+ "," +  this.CID("SetupDateForm")+ ","+ this.CID("AllServeGrid") + @")"" ", true)),
+                     new IRERP_SM_Label(){width="5%"}
+                       }
+                },
+                            }
+                       );
+
+    
+    
+    
+    
+    
+    
+    IRERP_SM_ToolStripButton[] buttons = new IRERP_SM_ToolStripButton[]{
+         AbbasiAdmin.GetGenetalToolStripButton(
+         this.CID("SetupDateButton"), " تنظیم ساعت", 
+         new IRERPControlTypes_StringMethods(@" ""GeneralEditAndSave(" + this.CID("SetupDateWindow")+ "," + this.CID("SetupDateForm") + "," + this.CID("AllServeGrid") + @");new function(){"+this.CID("Date")+@".setValue("+this.CID("AllServeGrid")+@".getSelectedRecord().Petiak_Wifi_ServeDateSettings___PersianAttendDate);"+this.CID("Hour")+@".setValue("+this.CID("AllServeGrid")+@".getSelectedRecord().Petiak_Wifi_ServeDateSettings___AttendHour);}"" ", true)
+)
+     };
+
+    var Master = AbbasiAdmin.GetGeneralDVS(this.ViewContext, dyForm, Grid, buttons, formName: "پشتیبانی فنی 2", hasDelete: false, hasEdit: true, hasInsert: false);
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    Master.PageTitle = "پشتیبانی فنی 2";
+
+
+    
+
+    CurPage = AbbasiAdmin.GetGeneralMasterDetail(Master, DetailUserNoteDVS /*,DetailAddDateDVS*/);
+
+
+    string dses = "";
+    PageDataSources.ForEach(x => dses += x.ToString());
+    CurPage.OtherObjects = dses + CurPage.OtherObjects;
+    CurPage.OtherObjects += SetupDateWindow.ToString();
+    CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.PetiakWifiServe>(
+Grid, UserNoteGrid, UserNoteForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteServe.ServeId, x => x.ServeId
+);
+//    CurPage.Commands += AbbasiAdmin.MasterDetailScript<IRERP_RestAPI.MetaModel.BasesInformation_MetaModel, IRERP_RestAPI.Models.PetiakWifiServe>(
+//Grid, AddDateGrid,AddDateForm, x => ((IRERP_RestAPI.MetaModel.BasesInformation_MetaModel)x).SelecteServe.ServeId, x => x.ServeId
+//);
+    CurPage.Commands += this.CID("SetupDateWindow") + ".hide();" + this.CID("ReferToSectionTicket") + ".hide();";
+}
+else { CurPage = new IRERPPageString(cachedView); }
+
+@Html.Raw(CurPage);
+
+

@@ -1,0 +1,157 @@
+﻿@using IRERP_RestAPI.Bases.Extension.HTML;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls;
+@using IRERP_RestAPI.Bases.Extension.HTML.Controls.Types;
+
+@{
+    ViewBag.Title = "TestSC";
+    Layout = "~/Views/Shared/SupportLayout.cshtml";
+}
+
+<link href="~/css/login-win8skin.css" rel="stylesheet" />    
+
+<script charset="utf8" type="text/javascript" >
+    @{ 
+        IRERP_RestAPI.MetaModel.CustomerPortal_MetaModel model = Model;
+        var UsrAccDs = model.GenDS(
+         x => x.User.ACC,
+         ControllerUrl: ((IRERP_RestAPI.Bases.IRERPController.IRERPController)this.ViewContext.Controller).ControllerUrl,
+         ID: "UserAccDs"
+         );
+         }
+    @Html.Raw(UsrAccDs);
+    @{
+        string[] propnames = new string[] { "a", "b", "c" };
+        var form = Html.DynamicForm("testform");
+        form.IsInInitializeTime = true;
+        List<IRERP_SM_FormItem> fields = new List<IRERP_SM_FormItem>();
+        foreach (var f in propnames)
+        {
+            var i = new IRERP_SM_FormItem();
+            i.IsInInitializeTime = true;
+            i.name = f;
+            fields.Add(i);
+        }
+          
+        form.fields = fields.ToArray();
+        
+        var lbl1 = new IRERP_SM_Label()
+        {
+            contents = new IRERPControlTypes_HTMLString("Message"),
+            align = IRERPControlTypes_Alignment.center,
+            overflow = IRERPControlTypes_Overflow.hidden,
+            height = "30%",
+            showResizeBar = true,
+            border = "1px solid blue"
+        };
+                       
+
+
+        var listGrid = new IRERP_SM_ListGrid()
+        {
+            autoFitData = IRERPControlTypes_Autofit.horizontal,
+            autoFetchData = true
+            
+        };
+
+        var toolStripBUtton = new IRERP_SM_ToolStripButton()
+        {
+            actionType = IRERPControlTypes_SelectionType.button,
+            title = new IRERPControlTypes_HTMLString("test"),
+            click = new IRERPControlTypes_StringMethods("modalWindow.show();")
+        };
+        
+
+
+
+        var DynamicForm = new IRERP_SM_DynamicForm()
+        {
+            numCols=1,
+               fields = new IRERP_SM_FormItem[]{
+                    new IRERP_SM_FormItem(){ 
+                        name="selectZoom",
+                         defaultValue="100%"}
+               }
+        };
+          
+
+
+        var toolStrip = new IRERP_SM_ToolStrip()
+        {
+            members =new IRERPControlBase[] { toolStripBUtton, DynamicForm }
+        };
+                 
+
+                       
+      
+           
+
+        var secction = new IRERP_SM_SectionStack()
+        {
+            ID = "sectionStack",
+            visibilityMode = IRERPControlTypes_visibilityMode.multiple,
+            sections= new IRERP_SM_SectionStackSection[]{
+                new IRERP_SM_SectionStackSection{
+                     title="Section1",
+                            expanded=true,
+                             resizeable=false,
+                             items=new IRERP_SM_Label{
+                                 contents=new IRERPControlTypes_HTMLString("Detail2")
+                             }},
+                             new IRERP_SM_SectionStackSection
+                             {
+                                 title= "Section2",
+                                 expanded= true,
+                                 resizeable= false,
+                                 items=new IRERP_SM_Label{
+                                 contents=new IRERPControlTypes_HTMLString("Detail2")
+                             } 
+            }
+        }};
+         
+
+        var MenuRight = new IRERP_SM_VLayout()
+        {
+            showResizeBar = true,
+            members =new IRERPControlBase[] { lbl1, secction },
+            width = "25%",
+            height = "100%"
+        };
+
+
+        var Center = new IRERP_SM_VLayout()
+        {
+            showResizeBar = true,
+            members = new IRERPControlBase[]{
+            new IRERP_SM_FromString(Html.Partial("ManagerView/Support")
+                 )}
+            //backgroundColor = "#6f9e10"
+        };
+    
+        var main = new IRERP_SM_HLayout()
+        {
+           
+            members = new IRERPControlBase[] { MenuRight, Center },
+            width = "100%",
+            height = "100%",
+           
+        };
+        
+
+
+        var body = new IRERP_SM_VLayout()
+        {
+
+            members = new IRERPControlBase[] {  new IRERP_SM_FromString(Html.Partial("ManagerView/MenuTop")
+                 ), main },
+            width = "100%",
+            height = "100%"
+
+        };
+      
+        
+        var str = body.ToString() ;      
+  }
+    
+    @Html.Raw(str);
+        
+</script>
