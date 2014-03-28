@@ -44,9 +44,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="RouteDebug">
-      <HintPath>..\..\..\RouteDebug.dll</HintPath>
-    </Reference>
     <Reference Include="Stimulsoft.Base, Version=2013.1.1505.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Devmng\Downloads\Compressed\552567.Stimulsoft_Reports_Ultimate_2012.3_build_21_Jan_2013_rasekhoon.net\Stimulsoft Reports Ultimate 2012.3 build 21 Jan 2013_rasekhoon.net\Stimulsoft.Base.dll</HintPath>
